@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="data:,">
+<title>Opmåling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
+<style>
+/* VOICE  felt-notesbog for opmåling: kort, præcis, til brug med kolde fingre
+   IDEA   en landmålers målebog: nummererede punkter, store tal, rød signalfarve for "venter"
+   PICTURE den aktive måling er billedet: stort tal i toppen, rækker der fyldes ud
+   COLOUR hvid/sort, signalrød #e4002b, én grå; nat #0e0e0e
+   TYPE   Archivo bred 800 til tal og titler, Archivo til tekst; LAYOUT én kolonne, faste faner nederst */
+:root{color-scheme:light dark;--bg:light-dark(#fff,#0e0e0e);--ink:light-dark(#111,#f1f1f1);--mut:light-dark(#666,#a3a3a3);--line:light-dark(#d9d9d9,#2c2c2c);--soft:light-dark(#f3f3f3,#1a1a1a);--red:#e4002b;--ok:light-dark(#0a7a3d,#5cd08f);--warn:light-dark(#9a6200,#f0b44c)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Archivo,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:clip;padding-bottom:76px}
+h1,h2,h3{font-stretch:112%;font-weight:800;line-height:1.1;margin:0;text-wrap:balance}
+h1{font-size:20px}h2{font-size:26px}h3{font-size:17px}
+button,input,select,textarea{font:inherit;color:inherit}
+button{min-height:44px;padding:0 14px;border:2px solid var(--ink);background:var(--bg);border-radius:0;font-weight:700;cursor:pointer}
+button.pri{background:var(--ink);color:var(--bg)}
+button.red{background:var(--red);border-color:var(--red);color:#fff}
+button.ghost{border-color:var(--line)}
+button:disabled{opacity:.4}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--red);outline-offset:1px}
+input,select,textarea{min-height:44px;border:1.5px solid var(--line);background:var(--bg);padding:8px 10px;font-size:16px;width:100%;border-radius:0}
+textarea{min-height:88px;resize:vertical}
+label.f{display:block;font-size:13px;color:var(--mut);margin:10px 0 3px}
+.wrap{max-width:760px;margin:0 auto;padding:0 14px}
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:3px solid var(--ink)}
+header.top .wrap{display:flex;gap:10px;align-items:center;min-height:58px}
+.brand{flex:1;line-height:1.15}
+.brand small{display:block;color:var(--mut);font-size:13px}
+.chip{display:flex;align-items:center;gap:8px;border:2px solid var(--line);padding:4px 10px;min-height:44px;background:var(--bg);cursor:pointer}
+.chip .dot{width:10px;height:10px;border-radius:50%;background:var(--line);flex:none}
+.chip.on .dot{background:var(--ok)}.chip.busy .dot{background:var(--warn)}.chip.sim .dot{background:var(--red)}
+.chip b{font-stretch:112%;font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
+nav.tabs{position:fixed;inset:auto 0 0 0;z-index:6;background:var(--bg);border-top:3px solid var(--ink);display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+nav.tabs button{border:0;min-height:62px;font-size:14px;font-weight:700;color:var(--mut)}
+nav.tabs button[aria-current=page]{color:var(--ink);box-shadow:inset 0 4px 0 var(--red)}
+main{padding:16px 0 24px}
+.lead{color:var(--mut);margin:6px 0 0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:14px 0}
+.stats div{padding:8px 4px}.stats b{display:block;font-size:26px;font-stretch:112%;font-weight:800;font-variant-numeric:tabular-nums}.stats span{font-size:13px;color:var(--mut)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:flex;border:2px solid var(--ink)}
+.seg button{border:0;flex:1;min-width:0;padding:0 8px}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.group{margin:18px 0 6px;font-size:13px;font-weight:800;color:var(--mut);border-bottom:1px solid var(--line);padding-bottom:4px}
+.card{display:grid;grid-template-columns:76px minmax(0,1fr);gap:4px 12px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);padding:12px 0;background:none;font-weight:400;min-height:0}
+.card .id{font-stretch:112%;font-weight:800;font-size:15px;font-variant-numeric:tabular-nums}
+.card .t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:600}
+.card .m{grid-column:2;font-size:13px;color:var(--mut);display:flex;gap:6px;flex-wrap:wrap}
+.badge{display:inline-block;font-size:12px;font-weight:800;padding:1px 6px;border:1.5px solid currentColor;white-space:nowrap}
+.b-open{color:var(--mut)}.b-partial{color:var(--warn)}.b-done{color:var(--ok)}.b-conf{color:var(--red)}
+.box{border:1.5px solid var(--line);padding:12px;margin:12px 0}
+.box.red{border-color:var(--red)}
+.why{white-space:pre-wrap}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0 10px}
+.mrow{border:2px solid var(--line);padding:10px;margin:10px 0;position:relative}
+.mrow.armed{border-color:var(--red);box-shadow:0 0 0 2px var(--red)}
+.mrow .lab{font-weight:700}
+.mrow .sub{font-size:13px;color:var(--mut)}
+.mval{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px;align-items:center;margin-top:8px}
+.mval input{font-size:24px;font-stretch:112%;font-weight:800;font-variant-numeric:tabular-nums;text-align:right;min-height:52px}
+.mval .u{font-weight:700;min-width:2em}
+.mmeta{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:6px;margin-top:6px}
+.mmeta select,.mmeta button{min-height:40px;font-size:14px}
+.waiting{position:absolute;top:-11px;right:8px;background:var(--red);color:#fff;font-size:12px;font-weight:800;padding:1px 8px}
+.delta{font-size:13px;font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:8px}
+.photos button{padding:0;border:0;aspect-ratio:1;overflow:hidden;background:var(--soft);min-height:0}
+.photos img{width:100%;height:100%;object-fit:cover;display:block}
+.filebtn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:2px solid var(--ink);font-weight:700;cursor:pointer}
+.filebtn.pri{background:var(--ink);color:var(--bg)}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer;min-height:0}
+.big{font-size:clamp(44px,14vw,84px);font-stretch:125%;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.log{font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;background:var(--soft);padding:8px;max-height:220px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+.note{font-size:13px;color:var(--mut)}
+.chk{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:center;margin-top:12px;min-height:44px}
+.chk input{width:22px;height:22px;min-height:0;margin:0}
+.warnbox{border-left:6px solid var(--red);background:var(--soft);padding:10px 12px;margin:12px 0}
+.list-plain{list-style:none;padding:0;margin:0}
+.list-plain li{border-bottom:1px solid var(--line);padding:10px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.list-plain li .grow{flex:1;min-width:160px}
+.sheet{position:fixed;inset:0;z-index:20;background:rgb(0 0 0/.5);display:none;align-items:flex-end;justify-content:center}
+.sheet.open{display:flex}
+.sheet .in{background:var(--bg);width:100%;max-width:760px;max-height:92vh;overflow:auto;padding:16px;border-top:4px solid var(--red)}
+.sheet img{width:100%;height:auto;display:block;background:var(--soft)}
+.toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;font-weight:700;z-index:30;max-width:92vw;display:none}
+.toast.show{display:block}
+.navrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:18px}
+@media (prefers-reduced-motion:no-preference){.mrow.armed{animation:pulse 1.6s ease-in-out infinite}@keyframes pulse{50%{box-shadow:0 0 0 5px rgb(228 0 43/.25)}}}
+@media (max-width:420px){.stats b{font-size:22px}.card{grid-template-columns:64px minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand"><h1>Opmåling</h1><small id="hdrObj">Ingen pakke valgt</small></div>
+  <div class="chip" id="chip" role="button" tabindex="0" aria-label="Måler"><span class="dot"></span><b id="chipVal">–</b></div>
+</div></header>
+<main><div class="wrap" id="view"></div></main>
+<nav class="tabs" aria-label="Faner">
+  <button data-tab="list">Tjekliste</button>
+  <button data-tab="meter">Måler</button>
+  <button data-tab="pkgs">Pakker</button>
+  <button data-tab="export">Eksport</button>
+</nav>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="in" id="sheetIn"></div></div>
+<div class="toast" id="toast" role="status"></div>
+<script type="application/json" data-pakke="HUS-KLD">{"format":"survey-package/1","package_id":"HUS-KLD","version":"1","created":"2026-11-19","description":"Prøveopmåling af huset som 'skib 0', startende i kælderen. Bruges til at øve arbejdsgangen tegning → model → tjekliste → opmåling → fletning.","object":{"id":"HUS","name":"Huset (skib 0)","kind":"building","model_file":"hus_model.json"},"reference":{"origin":{"id":"CRP","name":"Kælderens nordligste hjørne","description":"Indvendigt hjørne ved gulv. Mærk det fast (fx tape med kryds), så alle mål kan gentages."},"axes":{"x":"langs væggen til venstre, når du står i CRP-hjørnet med ryggen mod hjørnet","y":"langs væggen til højre (y ligger til højre for x – som styrbord på skibet)","z":"op fra kældergulvet ved CRP"},"note":"Samme orientering som skibenes system: x 'fremad', y til højre, z op."},"locator_fields":[{"key":"niveau","label":"Niveau","options":["Kælder","Stue","1. sal","Tagetage","Udenfor"]},{"key":"rum","label":"Rum"},{"key":"flade","label":"Væg/flade"}],"group_by":"niveau","statuses":["bekræftet","aflæst","antaget"],"default_status":"bekræftet","items":[{"id":"H-000","title":"Mærk CRP og akserne","why":"Alle andre mål regnes fra dette punkt. Tag foto af hjørnet med mærket, og ét foto langs hver akse.","locator":{"niveau":"Kælder"},"photos_wanted":3,"measurements":[]},{"id":"H-001","title":"Kælderens indvendige længde langs x-væggen","why":"Grundmål for kælderplanen. Mål ved gulv og ved loft – forskellen viser om væggen hælder.","locator":{"niveau":"Kælder","flade":"x-væg"},"measurements":[{"key":"lx_gulv","label":"Langs x-væg ved gulv","unit":"m","from":"CRP","to":"modsatte hjørne"},{"key":"lx_loft","label":"Langs x-væg ved loft","unit":"m"}]},{"id":"H-002","title":"Kælderens indvendige længde langs y-væggen","why":"Grundmål for kælderplanen.","locator":{"niveau":"Kælder","flade":"y-væg"},"measurements":[{"key":"ly_gulv","label":"Langs y-væg ved gulv","unit":"m","from":"CRP","to":"modsatte hjørne"},{"key":"ly_loft","label":"Langs y-væg ved loft","unit":"m"}]},{"id":"H-003","title":"Diagonal fra CRP til det modsatte hjørne","why":"Kontrollerer om kælderen er retvinklet (Pythagoras mod H-001 og H-002).","locator":{"niveau":"Kælder"},"measurements":[{"key":"diag","label":"Diagonal ved gulv","unit":"m","from":"CRP","to":"modsatte hjørne"}]},{"id":"H-004","title":"Loftshøjde","why":"Svarer til dækshøjde på skibet. Mål ved CRP og midt i rummet.","locator":{"niveau":"Kælder"},"measurements":[{"key":"h_crp","label":"Gulv til loft ved CRP","unit":"m"},{"key":"h_midt","label":"Gulv til loft midt i rummet","unit":"m"}]},{"id":"H-005","title":"Kældertrappen","why":"Svarer til en lejdertrappe mellem dæk: placering, bredde og stigning.","locator":{"niveau":"Kælder","rum":"Trappe"},"photos_wanted":2,"measurements":[{"key":"x_fod","label":"Trappefod: afstand fra y-væggen (x)","unit":"m"},{"key":"y_fod","label":"Trappefod: afstand fra x-væggen (y)","unit":"m"},{"key":"bredde","label":"Trappens bredde","unit":"m"},{"key":"trin","label":"Antal trin","unit":"stk"},{"key":"etage","label":"Kældergulv til stuegulv (etagehøjde)","unit":"m"}]},{"id":"H-006","title":"Kældervinduer","why":"Øvelse i at stedfæste åbninger i en væg – som vinduer i et dækshus. Opret ét punkt pr. vindue, hvis der er flere.","locator":{"niveau":"Kælder"},"photos_wanted":1,"measurements":[{"key":"fra_hjoerne","label":"Fra nærmeste hjørne til vinduets kant","unit":"m"},{"key":"bredde","label":"Lysningens bredde","unit":"m"},{"key":"hoejde","label":"Lysningens højde","unit":"m"},{"key":"brystning","label":"Gulv til underkant lysning","unit":"m"},{"key":"vaeg","label":"Vægtykkelse i lysningen","unit":"mm"}]},{"id":"H-007","title":"Kontrol af måleren mod båndmål","why":"Samme tre afstande med laser og med båndmål. Viser målerens reference (bagkant/forkant) og om vi kan stole på den.","locator":{"niveau":"Kælder"},"measurements":[{"key":"k1_laser","label":"Kort afstand (ca. 1 m) – laser","unit":"m"},{"key":"k1_baand","label":"Kort afstand – båndmål","unit":"m"},{"key":"k2_laser","label":"Mellem afstand (ca. 3 m) – laser","unit":"m"},{"key":"k2_baand","label":"Mellem afstand – båndmål","unit":"m"},{"key":"k3_laser","label":"Lang afstand (hele kælderen) – laser","unit":"m"},{"key":"k3_baand","label":"Lang afstand – båndmål","unit":"m"}]},{"id":"H-008","title":"Fotoserie til 3D-forsøg","why":"Vælg en genstand med kendte mål (fx en reol). Tag 20–40 overlappende fotos hele vejen rundt, og mål én kant med laser som målestok.","locator":{"niveau":"Kælder"},"photos_wanted":20,"measurements":[{"key":"skala","label":"Kendt kant (målestok)","unit":"m"}]}]}</script>
+<script>
+{
+const APP_VERSION = '0.1.0';
+const BOSCH = { svc: '02a6c0d0-0451-4000-b000-fb3210111989', chr: '02a6c0d1-0451-4000-b000-fb3210111989', sync: [0xC0, 0x55, 0x02, 0x01, 0x00, 0x1A] };
+const METHODS = [['laser-ble','Laser (Bluetooth)'],['laser-manuel','Laser, aflæst'],['baand','Båndmål'],['tommestok','Tommestok'],['skoen','Skøn'],['andet','Andet']];
+const UNITS = ['m','mm','deg','stk','tekst'];
+const UNIT_LABEL = { m:'m', mm:'mm', deg:'°', stk:'stk', tekst:'' };
+const STATE_LABEL = { open:'Åben', partial:'Delvis', done:'Udført' };
+const REFS = [['bagkant','Bagkant'],['forkant','Forkant'],['stativ','Stativgevind'],['ukendt','Ukendt']];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nowIso = () => new Date().toISOString();
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const isLen = u => u === 'm' || u === 'mm';
+const hex = u8 => Array.from(u8, b => b.toString(16).padStart(2, '0')).join(' ').toUpperCase();
+function fmtNum(v, unit) {
+  if (v === '' || v === null || v === undefined) return '';
+  if (typeof v !== 'number') return String(v);
+  const d = unit === 'm' ? 3 : unit === 'mm' ? 0 : unit === 'deg' ? 1 : unit === 'stk' ? 0 : 3;
+  return v.toLocaleString('da-DK', { minimumFractionDigits: d, maximumFractionDigits: unit === 'm' ? 4 : d + 1, useGrouping: false });
+}
+function parseNum(s) {
+  const t = String(s).trim().replace(/\s/g, '').replace(',', '.');
+  if (t === '') return '';
+  const n = Number(t);
+  return Number.isFinite(n) ? n : null;
+}
+function ago(t) {
+  const s = Math.round((Date.now() - t) / 1000);
+  if (s < 60) return s + ' s siden';
+  if (s < 3600) return Math.round(s / 60) + ' min siden';
+  return Math.round(s / 3600) + ' t siden';
+}
+
+/* ---------- lager (IndexedDB med hukommelse som reserve) ---------- */
+const STORES = ['packages', 'results', 'photos', 'kv'];
+const DB = { db: null, mem: Object.fromEntries(STORES.map(n => [n, new Map()])) };
+function idbOpen() {
+  return new Promise(res => {
+    try {
+      const r = indexedDB.open('opmaaling', 1);
+      r.onupgradeneeded = () => STORES.forEach(n => r.result.createObjectStore(n));
+      r.onsuccess = () => { DB.db = r.result; res(true); };
+      r.onerror = () => res(false);
+      r.onblocked = () => res(false);
+    } catch (e) { res(false); }
+  });
+}
+function tx(store, mode, fn) {
+  return new Promise((res, rej) => {
+    try {
+      const t = DB.db.transaction(store, mode);
+      const r = fn(t.objectStore(store));
+      t.oncomplete = () => res(r ? r.result : undefined);
+      t.onerror = () => rej(t.error);
+    } catch (e) { rej(e); }
+  });
+}
+async function dbPut(store, key, val) { DB.mem[store].set(key, val); if (DB.db) { try { await tx(store, 'readwrite', s => s.put(val, key)); } catch (e) { warnStorage(e); } } }
+async function dbGet(store, key) { if (DB.db) { try { const v = await tx(store, 'readonly', s => s.get(key)); if (v !== undefined) return v; } catch (e) {} } return DB.mem[store].get(key); }
+async function dbDel(store, key) { DB.mem[store].delete(key); if (DB.db) { try { await tx(store, 'readwrite', s => s.delete(key)); } catch (e) {} } }
+async function dbKeys(store) { if (DB.db) { try { return await tx(store, 'readonly', s => s.getAllKeys()); } catch (e) {} } return [...DB.mem[store].keys()]; }
+let storageWarned = false;
+function warnStorage(e) { if (!storageWarned) { storageWarned = true; toast('Kunne ikke gemme på telefonen – eksportér ofte'); } }
+
+/* ---------- tilstand ---------- */
+const S = {
+  builtin: {}, pkgs: {}, active: null, res: null,
+  tab: 'list', itemId: null, filter: 'aabne', q: '', armed: null,
+  last: null,
+  settings: { surveyor: '', meterRef: 'bagkant', photoMax: 2048, keepAlive: true, showHeartbeat: false },
+  meter: { state: 'off', dev: null, chr: null, want: false, sim: false, log: [], timer: null, bound: new WeakSet() },
+  thumbs: new Map(), downloads: null
+};
+
+function pkg() { return S.pkgs[S.active] || null; }
+function allItems() { const p = pkg(); if (!p) return []; return [...p.items, ...(S.res?.new_items || [])]; }
+function itemById(id) { return allItems().find(i => i.id === id); }
+function entry(id, create) {
+  if (!S.res) return null;
+  let e = S.res.entries[id];
+  if (!e && create) e = S.res.entries[id] = { state: null, note: '', locator: {}, measurements: [], photos: [], updated: nowIso() };
+  return e || null;
+}
+function stateOf(item) { const e = S.res?.entries[item.id]; return (e && e.state) || item.state || 'open'; }
+function locOf(item) { const e = S.res?.entries[item.id]; return Object.assign({}, item.locator || {}, e?.locator || {}); }
+async function saveRes() { if (!S.res) return; S.res.updated = nowIso(); await dbPut('results', S.res.package_id, S.res); }
+async function saveSettings() { await dbPut('kv', 'settings', S.settings); }
+
+function newResult(p) { return { package_id: p.package_id, package_version: p.version || '', entries: {}, new_items: [], created: nowIso(), updated: nowIso() }; }
+async function activate(id) {
+  if (!S.pkgs[id]) return;
+  S.active = id;
+  S.res = (await dbGet('results', id)) || newResult(S.pkgs[id]);
+  S.itemId = null; S.armed = null;
+  await dbPut('kv', 'active', id);
+  render();
+}
+
+/* ---------- visning ---------- */
+const view = $('#view');
+function setTab(t) { S.tab = t; if (t !== 'item') S.armed = null; render(); window.scrollTo(0, 0); }
+function render() {
+  const p = pkg();
+  $('#hdrObj').textContent = p ? p.object.name + ' · ' + p.package_id : 'Ingen pakke valgt';
+  document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-current', (b.dataset.tab === S.tab || (S.tab === 'item' && b.dataset.tab === 'list')) ? 'page' : 'false'));
+  renderChip();
+  if (!p && S.tab !== 'pkgs' && S.tab !== 'meter') { S.tab = 'pkgs'; }
+  ({ list: renderList, item: renderItem, meter: renderMeter, pkgs: renderPkgs, export: renderExport })[S.tab]();
+}
+
+function renderChip() {
+  const c = $('#chip'), m = S.meter;
+  c.className = 'chip' + (m.state === 'on' ? ' on' : m.state === 'connecting' || m.state === 'reconnecting' ? ' busy' : m.sim ? ' sim' : '');
+  $('#chipVal').textContent = S.last ? fmtNum(S.last.m, 'm') + ' m' : (m.state === 'on' ? 'Klar' : m.sim ? 'Simulator' : 'Måler');
+  c.title = S.last ? ago(S.last.t) : '';
+}
+
+function counts() {
+  const items = allItems();
+  let open = 0, partial = 0, done = 0, meas = 0, photos = 0;
+  for (const i of items) {
+    const st = stateOf(i); if (st === 'done') done++; else if (st === 'partial') partial++; else open++;
+    const e = S.res?.entries[i.id]; if (e) { meas += e.measurements.filter(m => m.value !== '' && m.value !== null).length; photos += e.photos.length; }
+  }
+  return { open, partial, done, meas, photos, total: items.length };
+}
+
+function renderList() {
+  const p = pkg(); const c = counts();
+  const q = S.q.trim().toLowerCase();
+  let items = allItems().filter(i => {
+    const st = stateOf(i);
+    if (S.filter === 'aabne' && st === 'done') return false;
+    if (S.filter === 'udfoert' && st !== 'done') return false;
+    if (q && !(i.id + ' ' + i.title + ' ' + (i.why || '') + ' ' + Object.values(locOf(i)).join(' ')).toLowerCase().includes(q)) return false;
+    return true;
+  });
+  const g = p.group_by;
+  let html = `<h2>${esc(p.object.name)}</h2>
+  <p class="lead">Nulpunkt: <b>${esc(p.reference.origin.name)}</b>${p.reference.origin.description ? ' – ' + esc(p.reference.origin.description) : ''}</p>
+  <div class="stats"><div><b>${c.open}</b><span>åbne</span></div><div><b>${c.partial}</b><span>delvise</span></div><div><b>${c.meas}</b><span>mål</span></div><div><b>${c.photos}</b><span>fotos</span></div></div>
+  <div class="row"><input id="q" type="search" placeholder="Søg i punkter" value="${esc(S.q)}" style="flex:1;min-width:160px" aria-label="Søg">
+  <button class="pri" id="newItem">＋ Nyt punkt</button></div>
+  <div class="seg" style="margin-top:8px">${[['aabne','Åbne'],['alle','Alle'],['udfoert','Udført']].map(([k, l]) => `<button data-f="${k}" aria-pressed="${S.filter === k}">${l}</button>`).join('')}</div>`;
+  if (!items.length) html += `<p class="lead" style="margin-top:18px">Ingen punkter her. Skift filter, eller opret et nyt punkt.</p>`;
+  let lastGroup = null;
+  for (const i of items) {
+    if (g) { const gv = locOf(i)[g] || 'Uden ' + g; if (gv !== lastGroup) { html += `<div class="group">${esc(gv)}</div>`; lastGroup = gv; } }
+    const st = stateOf(i), e = S.res.entries[i.id], loc = locOf(i);
+    const nm = e ? e.measurements.filter(m => m.value !== '' && m.value !== null).length : 0, np = e ? e.photos.length : 0;
+    const planned = (i.measurements || []).length;
+    html += `<button class="card" data-item="${esc(i.id)}"><span class="id">${esc(i.id)}</span><span class="t">${esc(i.title)}</span>
+      <span class="m"><span class="badge b-${st}">${STATE_LABEL[st]}</span>${i.conflict ? `<span class="badge b-conf">${esc(i.conflict)}</span>` : ''}${i.new_item ? '<span class="badge b-conf">Nyt</span>' : ''}
+      <span>${Object.entries(loc).filter(([k]) => k !== g).map(([, v]) => esc(v)).join(' · ')}</span>
+      <span>${planned ? `${nm}/${planned} mål` : nm ? nm + ' mål' : ''}${np ? ' · ' + np + ' foto' : ''}</span></span></button>`;
+  }
+  view.innerHTML = html;
+  $('#q').oninput = e => { S.q = e.target.value; const pos = e.target.selectionStart; renderList(); const n = $('#q'); n.focus(); n.setSelectionRange(pos, pos); };
+  view.querySelectorAll('[data-f]').forEach(b => b.onclick = () => { S.filter = b.dataset.f; renderList(); });
+  view.querySelectorAll('[data-item]').forEach(b => b.onclick = () => openItem(b.dataset.item));
+  $('#newItem').onclick = newItemSheet;
+}
+
+function openItem(id) {
+  S.itemId = id; S.tab = 'item'; S.armed = null;
+  autoArm();
+  render(); window.scrollTo(0, 0);
+}
+function rowsFor(item) {
+  const e = S.res.entries[item.id];
+  const ms = e ? e.measurements : [];
+  const rows = (item.measurements || []).map(spec => ({ spec, m: ms.find(x => x.key === spec.key) || null, planned: true }));
+  for (const m of ms) if (!rows.some(r => r.spec.key === m.key)) rows.push({ spec: { key: m.key, label: m.label, unit: m.unit, from: m.from, to: m.to }, m, planned: false });
+  return rows;
+}
+function hasVal(m) { return m && m.value !== '' && m.value !== null && m.value !== undefined; }
+function autoArm() {
+  if (!(S.meter.state === 'on' || S.meter.sim)) return;
+  const item = itemById(S.itemId); if (!item) return;
+  const r = rowsFor(item).find(r => isLen(r.spec.unit) && !hasVal(r.m));
+  S.armed = r ? r.spec.key : null;
+}
+
+function renderItem() {
+  const item = itemById(S.itemId); const p = pkg();
+  if (!item) { setTab('list'); return; }
+  const e = S.res.entries[item.id] || { note: '', photos: [], measurements: [] };
+  const st = stateOf(item), loc = locOf(item);
+  const statuses = p.statuses || ['bekræftet', 'aflæst', 'antaget'];
+  const list = allItems(); const idx = list.findIndex(i => i.id === item.id);
+  const prev = list[idx - 1], next = list[idx + 1];
+  let html = `<button class="ghost" id="back">‹ Tjekliste</button>
+  <p class="note" style="margin:14px 0 2px">${esc(item.id)}${item.conflict ? ` · <span class="badge b-conf">${esc(item.conflict)}</span>` : ''}</p>
+  <h2>${esc(item.title)}</h2>`;
+  if (item.why) html += `<p class="why lead">${esc(item.why)}</p>`;
+  if (item.prior_answer) html += `<div class="box"><b>Tidligere svar</b><div class="why">${esc(item.prior_answer)}</div></div>`;
+  const lf = p.locator_fields || [];
+  if (lf.length) {
+    html += `<div class="kv">` + lf.map(f => `<div><label class="f" for="loc-${f.key}">${esc(f.label)}</label>` + (f.options
+      ? `<select id="loc-${f.key}" data-loc="${f.key}"><option value=""></option>${f.options.map(o => `<option${loc[f.key] === o ? ' selected' : ''}>${esc(o)}</option>`).join('')}</select>`
+      : `<input id="loc-${f.key}" data-loc="${f.key}" value="${esc(loc[f.key] || '')}">`) + `</div>`).join('') + `</div>`;
+  }
+  html += `<h3 style="margin-top:22px">Mål</h3>`;
+  const rows = rowsFor(item);
+  if (!rows.length) html += `<p class="note">Ingen planlagte mål. Tilføj de mål du tager.</p>`;
+  for (const r of rows) {
+    const s = r.spec, m = r.m, k = s.key, armed = S.armed === k;
+    const v = m ? fmtNum(m.value, s.unit) : '';
+    let delta = '';
+    if (m && typeof m.value === 'number' && typeof s.model_value === 'number') {
+      const d = m.value - s.model_value; const dmm = s.unit === 'm' ? d * 1000 : d;
+      delta = `<div class="delta" style="color:${Math.abs(dmm) > 50 ? 'var(--red)' : 'var(--ok)'}">Afvigelse fra model: ${dmm > 0 ? '+' : ''}${fmtNum(Math.round(dmm), 'mm')} mm</div>`;
+    }
+    html += `<div class="mrow${armed ? ' armed' : ''}" data-row="${esc(k)}">${armed ? '<span class="waiting">Venter på laser</span>' : ''}
+      <div class="lab">${esc(s.label)}</div>
+      ${s.from || s.to ? `<div class="sub">${esc(s.from || '?')} → ${esc(s.to || '?')}</div>` : ''}
+      ${s.model_value !== undefined && s.model_value !== null ? `<div class="sub">Model: ${esc(fmtNum(s.model_value, s.unit))} ${UNIT_LABEL[s.unit]}${s.model_status ? ' (' + esc(s.model_status) + ')' : ''}</div>` : ''}
+      <div class="mval"><input data-val="${esc(k)}" ${s.unit === 'tekst' ? '' : 'inputmode="decimal"'} value="${esc(v)}" aria-label="${esc(s.label)}" autocomplete="off">
+        <span class="u">${UNIT_LABEL[s.unit]}</span>
+        ${isLen(s.unit) ? `<button class="ghost" data-last="${esc(k)}" title="Brug seneste laser" ${S.last ? '' : 'disabled'}>⤓</button>` : '<span></span>'}</div>
+      ${delta}
+      ${m ? `<div class="mmeta"><select data-meth="${esc(k)}" aria-label="Metode">${METHODS.map(([mk, ml]) => `<option value="${mk}"${m.method === mk ? ' selected' : ''}>${ml}</option>`).join('')}</select>
+        <select data-stat="${esc(k)}" aria-label="Status">${statuses.map(x => `<option${m.status === x ? ' selected' : ''}>${esc(x)}</option>`).join('')}</select>
+        <button class="ghost" data-clr="${esc(k)}" title="${r.planned ? 'Ryd værdi' : 'Slet mål'}">✕</button></div>
+        <div class="sub">${m.taken ? new Date(m.taken).toLocaleString('da-DK') : ''}${m.method === 'laser-ble' && m.meter_reference ? ' · måler fra ' + esc(m.meter_reference) : ''}</div>` : ''}
+    </div>`;
+  }
+  html += `<button class="ghost" id="addM">＋ Tilføj mål</button>`;
+  if (S.meter.sim) html += ` <button class="red" id="simBtn">Simulér laser</button>`;
+  const want = item.photos_wanted || 0;
+  html += `<h3 style="margin-top:22px">Fotos ${want ? `<span class="note">(${e.photos.length}/${want})</span>` : ''}</h3>
+  <div class="row" style="margin-top:6px"><label class="filebtn pri">Tag foto<input type="file" accept="image/*" capture="environment" id="camIn"></label>
+  <label class="filebtn">Fra galleri<input type="file" accept="image/*" multiple id="galIn"></label></div>
+  <div class="photos" id="ph">${e.photos.map(ph => `<button data-ph="${esc(ph.id)}" aria-label="Foto"><img alt="${esc(ph.caption || 'Foto')}" data-src="${esc(ph.id)}"></button>`).join('')}</div>
+  <h3 style="margin-top:22px">Notat</h3>
+  <textarea id="note" placeholder="Hvad så du? Brug telefonens mikrofon på tastaturet til at diktere.">${esc(e.note || '')}</textarea>
+  <h3 style="margin-top:22px">Punktets status</h3>
+  <div class="seg" style="margin-top:6px">${['open', 'partial', 'done'].map(k => `<button data-st="${k}" aria-pressed="${st === k}">${STATE_LABEL[k]}</button>`).join('')}</div>
+  <div class="navrow"><button class="ghost" id="prev" ${prev ? '' : 'disabled'}>‹ ${prev ? esc(prev.id) : ''}</button><button class="ghost" id="next" ${next ? '' : 'disabled'}>${next ? esc(next.id) : ''} ›</button></div>`;
+  view.innerHTML = html;
+  loadThumbs();
+  $('#back').onclick = () => setTab('list');
+  $('#prev').onclick = () => prev && openItem(prev.id);
+  $('#next').onclick = () => next && openItem(next.id);
+  view.querySelectorAll('[data-loc]').forEach(el => el.onchange = async () => { const en = entry(item.id, true); en.locator[el.dataset.loc] = el.value; en.updated = nowIso(); await saveRes(); });
+  view.querySelectorAll('[data-val]').forEach(el => {
+    el.onfocus = () => { const r = rows.find(x => x.spec.key === el.dataset.val); if (r && isLen(r.spec.unit) && S.armed !== r.spec.key) { S.armed = r.spec.key; markArmed(); } };
+    el.onchange = async () => {
+      const r = rows.find(x => x.spec.key === el.dataset.val); const unit = r.spec.unit;
+      let v = unit === 'tekst' ? el.value.trim() : parseNum(el.value);
+      if (v === null) { toast('Ikke et tal'); el.value = r.m ? fmtNum(r.m.value, unit) : ''; return; }
+      await setMeas(item, r.spec, { value: v, method: r.m?.method === 'laser-ble' && r.m.value === v ? 'laser-ble' : (unit === 'tekst' || unit === 'stk' ? 'andet' : 'laser-manuel'), raw: undefined });
+      renderItem();
+    };
+  });
+  view.querySelectorAll('[data-last]').forEach(b => b.onclick = async () => { if (!S.last) return; const r = rows.find(x => x.spec.key === b.dataset.last); await applyReading(item, r.spec, S.last); renderItem(); });
+  view.querySelectorAll('[data-meth]').forEach(el => el.onchange = async () => { const m = entry(item.id).measurements.find(x => x.key === el.dataset.meth); m.method = el.value; await saveRes(); });
+  view.querySelectorAll('[data-stat]').forEach(el => el.onchange = async () => { const m = entry(item.id).measurements.find(x => x.key === el.dataset.stat); m.status = el.value; await saveRes(); });
+  view.querySelectorAll('[data-clr]').forEach(b => b.onclick = async () => { const en = entry(item.id); en.measurements = en.measurements.filter(x => x.key !== b.dataset.clr); en.updated = nowIso(); await saveRes(); renderItem(); });
+  view.querySelectorAll('[data-st]').forEach(b => b.onclick = async () => { const en = entry(item.id, true); en.state = b.dataset.st; en.updated = nowIso(); await saveRes(); renderItem(); });
+  $('#note').onchange = async ev => { const en = entry(item.id, true); en.note = ev.target.value; en.updated = nowIso(); await saveRes(); };
+  $('#addM').onclick = () => addMeasSheet(item);
+  if ($('#simBtn')) $('#simBtn').onclick = simulate;
+  $('#camIn').onchange = ev => addPhotos(item, ev.target.files);
+  $('#galIn').onchange = ev => addPhotos(item, ev.target.files);
+  view.querySelectorAll('[data-ph]').forEach(b => b.onclick = () => photoSheet(item, b.dataset.ph));
+}
+function markArmed() {
+  view.querySelectorAll('.mrow').forEach(r => { const on = r.dataset.row === S.armed; r.classList.toggle('armed', on); const w = r.querySelector('.waiting'); if (on && !w) r.insertAdjacentHTML('afterbegin', '<span class="waiting">Venter på laser</span>'); if (!on && w) w.remove(); });
+}
+
+async function setMeas(item, spec, patch) {
+  const en = entry(item.id, true);
+  let m = en.measurements.find(x => x.key === spec.key);
+  if (!m) {
+    m = { key: spec.key, label: spec.label, unit: spec.unit, value: '', method: 'laser-manuel', status: pkg().default_status || 'bekræftet', taken: nowIso() };
+    if (spec.from) m.from = spec.from; if (spec.to) m.to = spec.to;
+    en.measurements.push(m);
+  }
+  if ('value' in patch && patch.value !== m.value) m.taken = nowIso();
+  for (const [k, v] of Object.entries(patch)) { if (v === undefined) delete m[k]; else m[k] = v; }
+  if (m.value === '') en.measurements = en.measurements.filter(x => x !== m);
+  if (!en.state && en.measurements.length) en.state = 'partial';
+  en.updated = nowIso();
+  await saveRes();
+}
+async function applyReading(item, spec, rd) {
+  const v = spec.unit === 'mm' ? Math.round(rd.m * 10000) / 10 : Math.round(rd.m * 10000) / 10000;
+  await setMeas(item, spec, { value: v, method: rd.sim ? 'andet' : 'laser-ble', raw: rd.raw, meter_reference: S.settings.meterRef, note: rd.sim ? 'Simuleret måling' : undefined });
+}
+
+/* ---------- laserdata ind ---------- */
+async function onReading(rd) {
+  S.last = rd; renderChip();
+  try { navigator.vibrate && navigator.vibrate(40); } catch (e) {}
+  if (S.tab === 'item' && S.armed) {
+    const item = itemById(S.itemId); const rows = rowsFor(item);
+    const r = rows.find(x => x.spec.key === S.armed);
+    if (r) {
+      await applyReading(item, r.spec, rd);
+      const i = rows.indexOf(r);
+      const nx = rows.slice(i + 1).concat(rows.slice(0, i)).find(x => isLen(x.spec.unit) && !hasVal(x.m) && x.spec.key !== r.spec.key);
+      S.armed = nx ? nx.spec.key : null;
+      const y = window.scrollY; renderItem(); window.scrollTo(0, y);
+      const el = view.querySelector('.mrow.armed'); if (el) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      toast(`${fmtNum(rd.m, 'm')} m → ${r.spec.label}`);
+      return;
+    }
+  }
+  if (S.tab === 'meter') renderMeter();
+  else toast(`${fmtNum(rd.m, 'm')} m – vælg et mål og tryk ⤓`);
+}
+
+function parseBosch(u8) {
+  if (u8.length >= 11 && u8[0] === 0xC0 && u8[1] === 0x55 && u8[2] === 0x10 && u8[3] === 0x06) {
+    const m = new DataView(u8.buffer, u8.byteOffset, u8.byteLength).getFloat32(7, true);
+    if (Number.isFinite(m) && m > 0 && m < 300) return { m };
+  }
+  return null;
+}
+function logLine(s) { S.meter.log.unshift(new Date().toLocaleTimeString('da-DK') + '  ' + s); S.meter.log.length = Math.min(S.meter.log.length, 80); if (S.tab === 'meter') { const l = $('#log'); if (l) l.textContent = S.meter.log.join('\n'); } }
+function onFrame(u8, sim) {
+  const isHeartbeat = u8.length === 4 && u8[0] === 0xC0 && u8[1] === 0x11;
+  if (!isHeartbeat || S.settings.showHeartbeat) logLine((sim ? 'SIM ' : 'RX  ') + hex(u8));
+  const p = parseBosch(u8);
+  if (p) onReading({ m: p.m, raw: hex(u8), t: Date.now(), sim: !!sim });
+}
+function simulate() {
+  const m = Math.round((0.3 + Math.random() * 7.7) * 10000) / 10000;
+  const u8 = new Uint8Array(16); u8.set([0xC0, 0x55, 0x10, 0x06]);
+  new DataView(u8.buffer).setFloat32(7, m, true);
+  onFrame(u8, true);
+}
+
+/* ---------- Bluetooth (Bosch GLM 50-27 C/CG og beslægtede) ---------- */
+function btProblem() {
+  if (!('bluetooth' in navigator)) return 'Denne browser har ikke Web Bluetooth. Brug Chrome på Android.';
+  let framed = false; try { framed = window.self !== window.top; } catch (e) { framed = true; }
+  if (framed) return 'Siden kører inde i en anden side (fx forhåndsvisningen på claude.ai), hvor Bluetooth er spærret. Åbn app\'en fra dens egen adresse i Chrome.';
+  if (!window.isSecureContext) return 'Bluetooth kræver en https-adresse.';
+  return '';
+}
+function setMeter(st) { S.meter.state = st; renderChip(); if (S.tab === 'meter') renderMeter(); }
+async function connectMeter(all) {
+  const prob = btProblem(); if (prob) { toast(prob); return; }
+  try {
+    const opts = all ? { acceptAllDevices: true, optionalServices: [BOSCH.svc] } : { filters: [{ services: [BOSCH.svc] }], optionalServices: [BOSCH.svc] };
+    const dev = await navigator.bluetooth.requestDevice(opts);
+    S.meter.dev = dev; S.meter.want = true;
+    dev.addEventListener('gattserverdisconnected', onDisconnected);
+    await gattSetup();
+  } catch (e) { logLine('Fejl: ' + e.message); if (S.meter.state !== 'on') setMeter('off'); if (e.name !== 'NotFoundError') toast('Forbindelse mislykkedes: ' + e.message); }
+}
+async function gattSetup() {
+  setMeter('connecting');
+  const srv = await S.meter.dev.gatt.connect();
+  logLine('Forbundet til ' + (S.meter.dev.name || 'enhed uden navn'));
+  const svc = await srv.getPrimaryService(BOSCH.svc);
+  const chr = await svc.getCharacteristic(BOSCH.chr);
+  S.meter.chr = chr;
+  if (!S.meter.bound.has(chr)) {
+    S.meter.bound.add(chr);
+    chr.addEventListener('characteristicvaluechanged', ev => { const dv = ev.target.value; onFrame(new Uint8Array(dv.buffer, dv.byteOffset, dv.byteLength).slice()); });
+  }
+  await chr.startNotifications();
+  await sendSync();
+  setMeter('on');
+  startKeepAlive();
+  if (S.tab === 'item') { autoArm(); renderItem(); }
+}
+async function sendSync() {
+  const chr = S.meter.chr; if (!chr) return;
+  const data = new Uint8Array(BOSCH.sync);
+  try {
+    if (chr.properties.write && chr.writeValueWithResponse) await chr.writeValueWithResponse(data);
+    else if (chr.writeValueWithoutResponse) await chr.writeValueWithoutResponse(data);
+    else await chr.writeValue(data);
+    logLine('TX  ' + hex(data));
+  } catch (e) { logLine('Kunne ikke sende sync: ' + e.message); }
+}
+function startKeepAlive() {
+  clearInterval(S.meter.timer);
+  if (S.settings.keepAlive) S.meter.timer = setInterval(() => { if (S.meter.state === 'on') sendSync(); }, 240000);
+}
+async function onDisconnected() {
+  clearInterval(S.meter.timer);
+  logLine('Forbindelsen blev afbrudt');
+  if (!S.meter.want) { setMeter('off'); return; }
+  setMeter('reconnecting');
+  for (const wait of [1000, 3000, 6000]) {
+    await new Promise(r => setTimeout(r, wait));
+    if (!S.meter.want) break;
+    try { await gattSetup(); toast('Måleren er forbundet igen'); return; } catch (e) { logLine('Genforbindelse mislykkedes: ' + e.message); }
+  }
+  setMeter('off'); toast('Måleren er ikke forbundet');
+}
+function disconnectMeter() { S.meter.want = false; clearInterval(S.meter.timer); try { S.meter.dev?.gatt?.disconnect(); } catch (e) {} setMeter('off'); }
+
+function renderMeter() {
+  const m = S.meter, prob = btProblem();
+  const stTxt = { off: 'Ikke forbundet', connecting: 'Forbinder …', reconnecting: 'Genforbinder …', on: 'Forbundet' }[m.state];
+  view.innerHTML = `<h2>Laserafstandsmåler</h2>
+  <p class="lead">${esc(stTxt)}${m.dev ? ' · ' + esc(m.dev.name || 'Bosch GLM') : ''}</p>
+  <div class="box" style="text-align:center"><div class="big">${S.last ? esc(fmtNum(S.last.m, 'm')) : '–'}</div><div class="note">${S.last ? 'm · ' + ago(S.last.t) + (S.last.sim ? ' · simuleret' : '') : 'Seneste måling vises her'}</div></div>
+  ${prob ? `<div class="warnbox">${esc(prob)}</div>` : ''}
+  <div class="row">${m.state === 'off' ? `<button class="pri" id="con" ${prob ? 'disabled' : ''}>Forbind måler</button><button class="ghost" id="conAll" ${prob ? 'disabled' : ''}>Vis alle enheder</button>` : `<button id="dis">Afbryd</button><button class="ghost" id="sync">Send sync igen</button>`}</div>
+  <p class="note">Tænd Bluetooth på måleren (tasten med Bluetooth-symbolet), og tryk så Forbind. Måleren reklamerer ikke med et navn; findes den ikke, så prøv "Vis alle enheder". Den kan kun have én forbindelse ad gangen, så luk Boschs egen app først.</p>
+  <h3 style="margin-top:20px">Indstillinger</h3>
+  <label class="f" for="ref">Målerens referencekant (som den er stillet på måleren)</label>
+  <select id="ref">${REFS.map(([k, l]) => `<option value="${k}"${S.settings.meterRef === k ? ' selected' : ''}>${l}</option>`).join('')}</select>
+  <label class="chk"><input type="checkbox" id="ka" ${S.settings.keepAlive ? 'checked' : ''}> Hold måleren vågen (sender sync hvert 4. minut)</label>
+  <label class="chk"><input type="checkbox" id="sim" ${m.sim ? 'checked' : ''}> Simulator (øv uden måler)</label>
+  ${m.sim ? `<div class="row" style="margin-top:8px"><button class="red" id="simBtn">Simulér måling</button></div>` : ''}
+  <label class="chk"><input type="checkbox" id="hb" ${S.settings.showHeartbeat ? 'checked' : ''}> Vis livstegn i loggen</label>
+  <h3 style="margin-top:20px">Log</h3>
+  <div class="log" id="log">${esc(m.log.join('\n')) || 'Tom'}</div>
+  <p class="note">Loggen viser de rå data fra måleren. Den bruges til at finde fejl og til at afkode flere felter senere (fx hældning).</p>`;
+  if ($('#con')) $('#con').onclick = () => connectMeter(false);
+  if ($('#conAll')) $('#conAll').onclick = () => connectMeter(true);
+  if ($('#dis')) $('#dis').onclick = disconnectMeter;
+  if ($('#sync')) $('#sync').onclick = sendSync;
+  if ($('#simBtn')) $('#simBtn').onclick = simulate;
+  $('#ref').onchange = e => { S.settings.meterRef = e.target.value; saveSettings(); };
+  $('#ka').onchange = e => { S.settings.keepAlive = e.target.checked; saveSettings(); startKeepAlive(); };
+  $('#sim').onchange = e => { S.meter.sim = e.target.checked; dbPut('kv', 'sim', S.meter.sim); renderMeter(); renderChip(); };
+  $('#hb').onchange = e => { S.settings.showHeartbeat = e.target.checked; saveSettings(); };
+}
+
+/* ---------- fotos ---------- */
+async function processPhoto(file) {
+  const max = S.settings.photoMax;
+  if (!max) return { blob: file, w: 0, h: 0 };
+  try {
+    const bmp = await createImageBitmap(file, { imageOrientation: 'from-image' });
+    const k = Math.min(1, max / Math.max(bmp.width, bmp.height));
+    const W = Math.round(bmp.width * k), H = Math.round(bmp.height * k);
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    c.getContext('2d').drawImage(bmp, 0, 0, W, H); if (bmp.close) bmp.close();
+    const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.85));
+    return blob ? { blob, w: W, h: H } : { blob: file, w: 0, h: 0 };
+  } catch (e) { return { blob: file, w: 0, h: 0 }; }
+}
+async function addPhotos(item, files) {
+  if (!files || !files.length) return;
+  toast('Gemmer foto …');
+  const en = entry(item.id, true);
+  for (const f of files) {
+    const { blob, w, h } = await processPhoto(f);
+    const id = uid();
+    await dbPut('photos', id, { blob, type: blob.type || f.type || 'image/jpeg' });
+    en.photos.push({ id, taken: nowIso(), caption: '', width: w, height: h, bytes: blob.size, original_name: f.name || '' });
+  }
+  if (!en.state) en.state = 'partial';
+  en.updated = nowIso(); await saveRes();
+  toast(files.length > 1 ? files.length + ' fotos gemt' : 'Foto gemt');
+  renderItem();
+}
+async function thumbUrl(id) {
+  if (S.thumbs.has(id)) return S.thumbs.get(id);
+  const rec = await dbGet('photos', id); if (!rec) return '';
+  const u = URL.createObjectURL(rec.blob); S.thumbs.set(id, u); return u;
+}
+async function loadThumbs() { for (const img of view.querySelectorAll('img[data-src]')) img.src = await thumbUrl(img.dataset.src); }
+async function photoSheet(item, id) {
+  const en = entry(item.id); const ph = en.photos.find(p => p.id === id); if (!ph) return;
+  openSheet(`<img alt="" id="bigImg"><label class="f" for="cap">Billedtekst</label><input id="cap" value="${esc(ph.caption)}" placeholder="Hvad viser billedet?">
+  <p class="note">${new Date(ph.taken).toLocaleString('da-DK')} · ${ph.width ? ph.width + '×' + ph.height + ' · ' : ''}${Math.round(ph.bytes / 1024)} kB</p>
+  <div class="row"><button class="pri" id="ok">Luk</button><button class="ghost" id="delPh">Slet foto</button></div>`);
+  $('#bigImg').src = await thumbUrl(id);
+  $('#ok').onclick = async () => { ph.caption = $('#cap').value; await saveRes(); closeSheet(); renderItem(); };
+  $('#delPh').onclick = () => confirmSheet('Slet dette foto?', async () => {
+    en.photos = en.photos.filter(p => p.id !== id); await dbDel('photos', id);
+    const u = S.thumbs.get(id); if (u) { URL.revokeObjectURL(u); S.thumbs.delete(id); }
+    await saveRes(); renderItem();
+  });
+}
+
+/* ---------- ark (dialoger) ---------- */
+function openSheet(html) { $('#sheetIn').innerHTML = html; $('#sheet').classList.add('open'); const f = $('#sheetIn').querySelector('input,select,textarea'); if (f) setTimeout(() => f.focus(), 50); }
+function closeSheet() { $('#sheet').classList.remove('open'); $('#sheetIn').innerHTML = ''; }
+$('#sheet').addEventListener('click', e => { if (e.target.id === 'sheet') closeSheet(); });
+function confirmSheet(q, fn) {
+  openSheet(`<h3>${esc(q)}</h3><div class="row" style="margin-top:14px"><button class="red" id="yes">Ja</button><button class="ghost" id="no">Fortryd</button></div>`);
+  $('#yes').onclick = async () => { closeSheet(); await fn(); };
+  $('#no').onclick = closeSheet;
+}
+let toastT = null;
+function toast(s) { const t = $('#toast'); t.textContent = s; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2600); }
+
+function addMeasSheet(item) {
+  openSheet(`<h3>Tilføj mål</h3>
+  <label class="f" for="nl">Hvad måles</label><input id="nl" placeholder="fx Højde over dæk">
+  <div class="kv"><div><label class="f" for="nf">Fra</label><input id="nf" placeholder="fx shelterdæk"></div><div><label class="f" for="nt">Til</label><input id="nt" placeholder="fx overside"></div></div>
+  <label class="f" for="nu">Enhed</label><select id="nu">${UNITS.map(u => `<option value="${u}">${u === 'deg' ? 'grader' : u === 'tekst' ? 'tekst' : u}</option>`).join('')}</select>
+  <div class="row" style="margin-top:14px"><button class="pri" id="ok">Tilføj</button><button class="ghost" id="no">Fortryd</button></div>`);
+  $('#no').onclick = closeSheet;
+  $('#ok').onclick = async () => {
+    const label = $('#nl').value.trim(); if (!label) { toast('Skriv hvad der måles'); return; }
+    const en = entry(item.id, true);
+    let n = 1; const used = new Set([...(item.measurements || []).map(s => s.key), ...en.measurements.map(m => m.key)]); while (used.has('x' + n)) n++;
+    const spec = { key: 'x' + n, label, unit: $('#nu').value, from: $('#nf').value.trim() || undefined, to: $('#nt').value.trim() || undefined };
+    en.measurements.push({ key: spec.key, label, unit: spec.unit, value: '', method: 'laser-manuel', status: pkg().default_status || 'bekræftet', taken: nowIso(), ...(spec.from ? { from: spec.from } : {}), ...(spec.to ? { to: spec.to } : {}) });
+    // et tomt mål gemmes ikke; det holdes som række indtil der kommer en værdi
+    closeSheet(); S.armed = isLen(spec.unit) ? spec.key : S.armed; renderItem();
+    const inp = view.querySelector(`[data-val="${spec.key}"]`); if (inp) inp.focus();
+  };
+}
+function newItemSheet() {
+  const p = pkg(); const lf = p.locator_fields || [];
+  openSheet(`<h3>Nyt punkt</h3><label class="f" for="nt">Titel</label><input id="nt" placeholder="Hvad vil du dokumentere?">
+  <label class="f" for="nw">Hvorfor (valgfrit)</label><input id="nw">
+  ${lf.map(f => `<label class="f" for="nl-${f.key}">${esc(f.label)}</label>` + (f.options ? `<select id="nl-${f.key}" data-nl="${f.key}"><option></option>${f.options.map(o => `<option>${esc(o)}</option>`).join('')}</select>` : `<input id="nl-${f.key}" data-nl="${f.key}">`)).join('')}
+  <div class="row" style="margin-top:14px"><button class="pri" id="ok">Opret</button><button class="ghost" id="no">Fortryd</button></div>`);
+  $('#no').onclick = closeSheet;
+  $('#ok').onclick = async () => {
+    const title = $('#nt').value.trim(); if (!title) { toast('Giv punktet en titel'); return; }
+    const ids = new Set(allItems().map(i => i.id)); let n = 1; while (ids.has('NY-' + String(n).padStart(3, '0'))) n++;
+    const locator = {}; $('#sheetIn').querySelectorAll('[data-nl]').forEach(el => { if (el.value) locator[el.dataset.nl] = el.value; });
+    const item = { id: 'NY-' + String(n).padStart(3, '0'), title, why: $('#nw').value.trim(), state: 'open', locator, measurements: [], new_item: true };
+    S.res.new_items.push(item); await saveRes(); closeSheet(); openItem(item.id);
+  };
+}
+
+/* ---------- pakker ---------- */
+function validPackage(p) {
+  return p && p.format === 'survey-package/1' && typeof p.package_id === 'string' && p.object && p.reference && p.reference.origin && Array.isArray(p.items);
+}
+function renderPkgs() {
+  const ids = Object.keys(S.pkgs);
+  view.innerHTML = `<h2>Opmålingspakker</h2>
+  <p class="lead">En pakke beskriver ét objekt: nulpunkt, akser og de punkter der skal måles. App'en kender intet andet til objektet, så samme app bruges til alle skibe.</p>
+  <ul class="list-plain" style="margin-top:12px">${ids.map(id => { const p = S.pkgs[id]; const n = p.items.length; return `<li><div class="grow"><b>${esc(p.object.name)}</b><div class="note">${esc(id)} · ${n} punkter${S.builtin[id] ? ' · indbygget' : ' · importeret'}</div></div>
+    ${S.active === id ? '<span class="badge b-done">Aktiv</span>' : `<button class="pri" data-act="${esc(id)}">Brug</button>`}
+    ${S.builtin[id] ? '' : `<button class="ghost" data-rm="${esc(id)}">Fjern</button>`}</li>`; }).join('')}</ul>
+  <div class="row" style="margin-top:14px"><label class="filebtn pri">Importér pakke (.json)<input type="file" accept=".json,application/json" id="imp"></label></div>
+  <p class="note" style="margin-top:14px">App ${APP_VERSION} · data gemmes kun på denne telefon${DB.db ? '' : ' (midlertidigt – lageret er ikke tilgængeligt her)'}. Eksportér efter hver arbejdsgang.</p>`;
+  view.querySelectorAll('[data-act]').forEach(b => b.onclick = async () => { await activate(b.dataset.act); setTab('list'); });
+  view.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => confirmSheet('Fjern pakken? Resultaterne bliver liggende og kommer igen, hvis pakken importeres på ny.', async () => {
+    delete S.pkgs[b.dataset.rm]; await dbDel('packages', b.dataset.rm);
+    if (S.active === b.dataset.rm) { S.active = null; S.res = null; }
+    renderPkgs();
+  }));
+  $('#imp').onchange = async ev => {
+    const f = ev.target.files[0]; if (!f) return;
+    try {
+      const p = JSON.parse(await f.text());
+      if (!validPackage(p)) { toast('Filen er ikke en opmålingspakke (survey-package/1)'); return; }
+      S.pkgs[p.package_id] = p; await dbPut('packages', p.package_id, p);
+      await activate(p.package_id); toast('Pakken er importeret'); setTab('list');
+    } catch (e) { toast('Kunne ikke læse filen: ' + e.message); }
+  };
+}
+
+/* ---------- eksport ---------- */
+function safeName(s) { return String(s).replace(/[^A-Za-z0-9_.-]+/g, '_'); }
+function stamp() { const d = new Date(), z = n => String(n).padStart(2, '0'); return `${d.getFullYear()}${z(d.getMonth() + 1)}${z(d.getDate())}-${z(d.getHours())}${z(d.getMinutes())}`; }
+function buildResult() {
+  const p = pkg(); const entries = []; const photoFiles = [];
+  for (const item of allItems()) {
+    const e = S.res.entries[item.id] || (item.new_item ? { state: null, note: '', locator: {}, measurements: [], photos: [] } : null);
+    if (!e) continue;
+    const ms = e.measurements.filter(hasVal).map(m => { const o = { key: m.key, label: m.label, value: m.value, unit: m.unit, method: m.method, status: m.status, taken: m.taken };
+      for (const k of ['from', 'to', 'meter_reference', 'raw', 'note']) if (m[k]) o[k] = m[k]; return o; });
+    const photos = e.photos.map((ph, i) => { const file = `photos/${safeName(item.id)}_${String(i + 1).padStart(2, '0')}.jpg`; photoFiles.push({ id: ph.id, file });
+      const o = { file, taken: ph.taken }; if (ph.caption) o.caption = ph.caption; if (ph.width) { o.width = ph.width; o.height = ph.height; } if (ph.bytes) o.bytes = ph.bytes; if (ph.original_name) o.original_name = ph.original_name; return o; });
+    const loc = Object.fromEntries(Object.entries(e.locator || {}).filter(([, v]) => v));
+    if (!ms.length && !photos.length && !e.note && !e.state && !Object.keys(loc).length && !item.new_item) continue;
+    const o = { item_id: item.id, state: e.state || item.state || 'open', measurements: ms, photos };
+    if (item.new_item) { o.new_item = true; o.title = item.title; }
+    if (e.note) o.note = e.note;
+    const fullLoc = Object.assign({}, item.locator || {}, loc); if (Object.keys(fullLoc).length) o.locator = fullLoc;
+    o.updated = e.updated || nowIso();
+    entries.push(o);
+  }
+  const r = { format: 'survey-result/1', package_id: p.package_id, object_id: p.object.id, exported: nowIso(), app_version: APP_VERSION, meter: { model: 'Bosch GLM 50-27 CG', reference: S.settings.meterRef }, entries };
+  if (p.version) r.package_version = p.version;
+  if (S.settings.surveyor) r.surveyor = S.settings.surveyor;
+  return { result: r, photoFiles };
+}
+function csvOf(r) {
+  const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"';
+  const lines = ['punkt;mål;fra;til;værdi;enhed;metode;status;tidspunkt'];
+  for (const e of r.entries) for (const m of e.measurements) lines.push([e.item_id, m.label, m.from || '', m.to || '', typeof m.value === 'number' ? String(m.value).replace('.', ',') : m.value, m.unit, m.method, m.status, m.taken].map(q).join(';'));
+  return '﻿' + lines.join('\r\n') + '\r\n';
+}
+const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(u8) { let c = 0xFFFFFFFF; for (let i = 0; i < u8.length; i++) c = CRC_T[(c ^ u8[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+async function makeZip(files) {
+  const enc = new TextEncoder(); const parts = [], central = []; let off = 0;
+  const d = new Date(); const dt = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1); const dd = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
+  for (const f of files) {
+    let data = f.data;
+    if (typeof data === 'string') data = enc.encode(data); else if (data instanceof Blob) data = new Uint8Array(await data.arrayBuffer());
+    const name = enc.encode(f.name), crc = crc32(data);
+    const lh = new DataView(new ArrayBuffer(30));
+    lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true); lh.setUint16(8, 0, true); lh.setUint16(10, dt, true); lh.setUint16(12, dd, true);
+    lh.setUint32(14, crc, true); lh.setUint32(18, data.length, true); lh.setUint32(22, data.length, true); lh.setUint16(26, name.length, true); lh.setUint16(28, 0, true);
+    parts.push(lh, name, data);
+    const ch = new DataView(new ArrayBuffer(46));
+    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true); ch.setUint16(10, 0, true); ch.setUint16(12, dt, true); ch.setUint16(14, dd, true);
+    ch.setUint32(16, crc, true); ch.setUint32(20, data.length, true); ch.setUint32(24, data.length, true); ch.setUint16(28, name.length, true); ch.setUint32(42, off, true);
+    central.push(ch, name);
+    off += 30 + name.length + data.length;
+  }
+  const csize = central.reduce((a, p) => a + p.byteLength, 0);
+  const end = new DataView(new ArrayBuffer(22));
+  end.setUint32(0, 0x06054b50, true); end.setUint16(8, files.length, true); end.setUint16(10, files.length, true); end.setUint32(12, csize, true); end.setUint32(16, off, true);
+  return new Blob([...parts, ...central, end], { type: 'application/zip' });
+}
+async function exportFiles(withPhotos) {
+  const p = pkg(); const { result, photoFiles } = buildResult();
+  const json = JSON.stringify(result, null, 1);
+  if (!withPhotos) return { blob: new Blob([json], { type: 'application/json' }), name: `${safeName(p.package_id)}_resultat_${stamp()}.json`, result };
+  const files = [{ name: 'resultat.json', data: json }, { name: 'maalinger.csv', data: csvOf(result) },
+    { name: 'LAESMIG.txt', data: `Opmålingsresultat for ${p.object.name} (${p.package_id})\nEksporteret ${new Date().toLocaleString('da-DK')} af app ${APP_VERSION}.\n\nresultat.json  alle punkter, mål og fotooplysninger (format survey-result/1)\nmaalinger.csv  målene som tabel (semikolon, dansk decimalkomma)\nphotos/        fotos navngivet efter punkt-id\n` }];
+  for (const pf of photoFiles) { const rec = await dbGet('photos', pf.id); if (rec) files.push({ name: pf.file, data: rec.blob }); }
+  return { blob: await makeZip(files), name: `${safeName(p.package_id)}_resultat_${stamp()}.zip`, result };
+}
+async function deliver(blob, name, how) {
+  if (how === 'share') {
+    try {
+      const file = new File([blob], name, { type: blob.type });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: name }); return true; }
+      toast('Deling understøttes ikke her – gemmer i stedet');
+    } catch (e) { if (e.name === 'AbortError') return false; }
+  }
+  if (S.downloads) {
+    try { await S.downloads.save({ filename: name, data: blob }); return true; } catch (e) { if (e.code === 'declined') return false; }
+  }
+  try {
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); return true;
+  } catch (e) { toast('Kunne ikke gemme filen'); return false; }
+}
+function renderExport() {
+  const p = pkg(); const c = counts(); const { result } = buildResult();
+  const photoBytes = Object.values(S.res.entries).reduce((a, e) => a + e.photos.reduce((b, ph) => b + (ph.bytes || 0), 0), 0);
+  view.innerHTML = `<h2>Eksport</h2>
+  <p class="lead">${esc(p.object.name)} · ${result.entries.length} punkter med svar · ${c.meas} mål · ${c.photos} fotos (${(photoBytes / 1048576).toFixed(1)} MB)</p>
+  <label class="f" for="sv">Opmålt af</label><input id="sv" value="${esc(S.settings.surveyor)}" placeholder="Navn eller initialer">
+  <h3 style="margin-top:20px">Kun data</h3>
+  <p class="note">Lille JSON-fil uden fotos. God når nettet er dyrt; fotos kan sendes senere.</p>
+  <div class="row"><button class="pri" data-x="json-share">Del …</button><button class="ghost" data-x="json-save">Gem fil</button><button class="ghost" id="copy">Kopiér</button></div>
+  <h3 style="margin-top:20px">Fuld pakke</h3>
+  <p class="note">ZIP med resultat.json, maalinger.csv og alle fotos.</p>
+  <div class="row"><button class="pri" data-x="zip-share">Del …</button><button class="ghost" data-x="zip-save">Gem fil</button></div>
+  <h3 style="margin-top:20px">Fotostørrelse</h3>
+  <select id="pm"><option value="1600"${S.settings.photoMax === 1600 ? ' selected' : ''}>1600 px (mindst)</option><option value="2048"${S.settings.photoMax === 2048 ? ' selected' : ''}>2048 px (standard)</option><option value="3072"${S.settings.photoMax === 3072 ? ' selected' : ''}>3072 px</option><option value="0"${S.settings.photoMax === 0 ? ' selected' : ''}>Original (største filer)</option></select>
+  <p class="note">Gælder nye fotos. Original beholder kameraets data (fx tidspunkt og kameravinkel), som kan bruges til 3D senere.</p>
+  <h3 style="margin-top:20px">Gendan og nulstil</h3>
+  <div class="row"><label class="filebtn">Gendan fra JSON<input type="file" accept=".json,application/json" id="rest"></label><button class="ghost" id="reset">Nulstil resultater</button></div>
+  <p class="note">Gendan læser mål, notater og status fra en eksporteret JSON-fil (ikke fotos).</p>`;
+  $('#sv').onchange = e => { S.settings.surveyor = e.target.value.trim(); saveSettings(); };
+  $('#pm').onchange = e => { S.settings.photoMax = Number(e.target.value); saveSettings(); };
+  view.querySelectorAll('[data-x]').forEach(b => b.onclick = async () => {
+    const [kind, how] = b.dataset.x.split('-');
+    b.disabled = true; try { const f = await exportFiles(kind === 'zip'); const ok = await deliver(f.blob, f.name, how); if (ok) toast('Eksporteret: ' + f.name); } finally { b.disabled = false; }
+  });
+  $('#copy').onclick = async () => { const { result: r } = buildResult(); try { await navigator.clipboard.writeText(JSON.stringify(r, null, 1)); toast('Kopieret'); } catch (e) { toast('Kopiering blev afvist'); } };
+  $('#reset').onclick = () => confirmSheet('Slet alle mål, notater og fotos for denne pakke på telefonen?', async () => {
+    for (const e of Object.values(S.res.entries)) for (const ph of e.photos) await dbDel('photos', ph.id);
+    S.res = newResult(p); await saveRes(); renderExport(); toast('Nulstillet');
+  });
+  $('#rest').onchange = async ev => {
+    const f = ev.target.files[0]; if (!f) return;
+    try {
+      const r = JSON.parse(await f.text());
+      if (r.format !== 'survey-result/1' || r.package_id !== p.package_id) { toast('Filen hører ikke til den aktive pakke'); return; }
+      let n = 0;
+      for (const e of r.entries) {
+        if (e.new_item && !itemById(e.item_id)) S.res.new_items.push({ id: e.item_id, title: e.title || e.item_id, state: 'open', locator: e.locator || {}, measurements: [], new_item: true });
+        const en = entry(e.item_id, true);
+        en.state = e.state; en.note = e.note || en.note; en.locator = Object.assign(en.locator, e.locator || {});
+        for (const m of e.measurements) { en.measurements = en.measurements.filter(x => x.key !== m.key); en.measurements.push(m); }
+        n++;
+      }
+      await saveRes(); toast(n + ' punkter gendannet'); renderExport();
+    } catch (e) { toast('Kunne ikke læse filen: ' + e.message); }
+  };
+}
+
+/* ---------- start ---------- */
+document.querySelectorAll('nav.tabs button').forEach(b => b.onclick = () => setTab(b.dataset.tab));
+$('#chip').onclick = () => { if (S.meter.sim && S.meter.state !== 'on' && S.tab === 'item') simulate(); else setTab('meter'); };
+$('#chip').onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('#chip').click(); } };
+setInterval(renderChip, 15000);
+
+(async () => {
+  for (const el of document.querySelectorAll('script[type="application/json"][data-pakke]')) {
+    try { const p = JSON.parse(el.textContent); S.builtin[p.package_id] = p; S.pkgs[p.package_id] = p; } catch (e) {}
+  }
+  await idbOpen();
+  try { if (navigator.storage && navigator.storage.persist) await navigator.storage.persist(); } catch (e) {}
+  for (const id of await dbKeys('packages')) { const p = await dbGet('packages', id); if (validPackage(p)) S.pkgs[id] = p; }
+  const st = await dbGet('kv', 'settings'); if (st) Object.assign(S.settings, st);
+  S.meter.sim = !!(await dbGet('kv', 'sim'));
+  const act = await dbGet('kv', 'active');
+  if (act && S.pkgs[act]) await activate(act);
+  else if (Object.keys(S.pkgs).length) await activate(Object.keys(S.pkgs)[0]);
+  else render();
+  try { if (window.claude && window.claude.use) S.downloads = await window.claude.use('downloads'); } catch (e) {}
+})();
+
+window.__opm = { parseBosch, makeZip, crc32, buildResult, simulate, S };
+}
+</script>
+</body>
+</html>
