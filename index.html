@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="data:,">
-<title>Opmåling</title>
+<title>Survey</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
 <style>
-/* VOICE  felt-notesbog for opmåling: kort, præcis, til brug med kolde fingre
-   IDEA   en landmålers målebog: nummererede punkter, store tal, rød signalfarve for "venter"
-   PICTURE den aktive måling er billedet: stort tal i toppen, rækker der fyldes ud
-   COLOUR hvid/sort, signalrød #e4002b, én grå; nat #0e0e0e
-   TYPE   Archivo bred 800 til tal og titler, Archivo til tekst; LAYOUT én kolonne, faste faner nederst */
+/* VOICE  field notebook for surveying: short, precise, usable with cold fingers
+   IDEA   a surveyor's field book: numbered items, big numbers, red signal colour for "waiting"
+   PICTURE the active measurement is the picture: big number on top, rows that fill up
+   COLOUR white/black, signal red #e4002b, one grey; night #0e0e0e
+   TYPE   Archivo wide 800 for numbers and titles, Archivo for text; LAYOUT one column, fixed tabs at the bottom */
 :root{color-scheme:light dark;--bg:light-dark(#fff,#0e0e0e);--ink:light-dark(#111,#f1f1f1);--mut:light-dark(#666,#a3a3a3);--line:light-dark(#d9d9d9,#2c2c2c);--soft:light-dark(#f3f3f3,#1a1a1a);--red:#e4002b;--ok:light-dark(#0a7a3d,#5cd08f);--warn:light-dark(#9a6200,#f0b44c)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
@@ -108,28 +108,28 @@ main{padding:16px 0 24px}
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <div class="brand"><h1>Opmåling</h1><small id="hdrObj">Ingen pakke valgt</small></div>
-  <div class="chip" id="chip" role="button" tabindex="0" aria-label="Måler"><span class="dot"></span><b id="chipVal">–</b></div>
+  <div class="brand"><h1>Survey</h1><small id="hdrObj">No package selected</small></div>
+  <div class="chip" id="chip" role="button" tabindex="0" aria-label="Meter"><span class="dot"></span><b id="chipVal">–</b></div>
 </div></header>
 <main><div class="wrap" id="view"></div></main>
-<nav class="tabs" aria-label="Faner">
-  <button data-tab="list">Tjekliste</button>
-  <button data-tab="meter">Måler</button>
-  <button data-tab="pkgs">Pakker</button>
-  <button data-tab="export">Eksport</button>
+<nav class="tabs" aria-label="Tabs">
+  <button data-tab="list">Checklist</button>
+  <button data-tab="meter">Meter</button>
+  <button data-tab="pkgs">Packages</button>
+  <button data-tab="export">Export</button>
 </nav>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="in" id="sheetIn"></div></div>
 <div class="toast" id="toast" role="status"></div>
-<script type="application/json" data-pakke="HUS-KLD">{"format":"survey-package/1","package_id":"HUS-KLD","version":"4","created":"2026-11-19","description":"Prøveopmåling af huset som 'skib 0', startende i kælderen. Modelværdier er aflæst på byggesagen fra 1954 (tegn. 804/216, maj 1953, mål 1:100). Opmålingen viser, hvad der stemmer, og hvad der er ændret.","object":{"id":"HUS","name":"Huset (skib 0)","kind":"building","model_file":"hus_model.json"},"reference":{"origin":{"id":"CRP","name":"Kælderens nordligste hjørne","description":"Indvendigt hjørne ved gulv i viktualierummet, mellem nordøst- og nordvestvæggen. Bekræftet af ejeren 19-11-2026 (foto med grøn markering). Mærk det fast, fx tape med kryds."},"axes":{"x":"langs nordøstvæggen mod sydøst (mod vejen) – væggen til venstre, når du står i CRP med ryggen mod hjørnet","y":"langs nordvestvæggen mod sydvest – væggen til højre","z":"op fra kældergulvet ved CRP"},"note":"Samme orientering som skibenes system: x 'fremad', y til højre, z op. Huset er 8,40 m langs y og 9,84 m langs x udvendigt; kælderens ydervægge er 31 cm beton (1954)."},"locator_fields":[{"key":"niveau","label":"Niveau","options":["Kælder","Stue","1. sal","Tagetage","Udenfor"]},{"key":"rum","label":"Rum"},{"key":"flade","label":"Væg/flade"}],"group_by":"niveau","statuses":["bekræftet","aflæst","antaget"],"default_status":"bekræftet","items":[{"id":"H-000","title":"Mærk CRP og akserne","why":"Alle andre mål regnes fra dette punkt. Tag foto af hjørnet med mærket, og ét foto langs hver akse. Står der hylder i viktualierummet, så mærk hjørnet så tæt på gulvet som muligt.","locator":{"niveau":"Kælder","rum":"Viktualier"},"photos_wanted":3,"measurements":[]},{"id":"H-001","title":"Viktualierummet (CRP-rummet)","why":"Rummet hvor nulpunktet sidder. x og y er kontrolmålt af ejeren 19-11-2026 og stemmer med tegningen inden for ±2 cm. Mangler: diagonalen og et foto af hjørnet.","locator":{"niveau":"Kælder","rum":"Viktualier"},"measurements":[{"key":"lx","label":"Langs x (nordøstvæggen)","unit":"m","from":"CRP","to":"skillevæg mod gang","model_value":2.49,"model_status":"bekræftet","model_source":"Kælderplan 1954; kontrolmålt 19-11-2026 (±2 cm)","height_m":0.1},{"key":"ly","label":"Langs y (nordvestvæggen)","unit":"m","from":"CRP","to":"skillevæg mod vaskerum","model_value":3.46,"model_status":"bekræftet","model_source":"Kælderplan 1954; kontrolmålt 19-11-2026 (±2 cm)","height_m":0.1},{"key":"diag","label":"Diagonal fra CRP","unit":"m","model_value":4.263,"model_status":"antaget","model_source":"Beregnet af 2,49 og 3,46","height_m":0.1}],"state":"partial"},{"id":"H-002","title":"Vaske- og tørrerummet","why":"Kælderens største rum (vest for viktualierummet).","locator":{"niveau":"Kælder","rum":"Vaske- og tørrerum"},"photos_wanted":1,"measurements":[{"key":"lx","label":"Længde i x-retningen","unit":"m","model_value":5.53,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"ly","label":"Længde i y-retningen","unit":"m","model_value":4.2,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":6.944,"model_status":"antaget","model_source":"Beregnet","height_m":0.1}]},{"id":"H-003","title":"Fyrrummet","why":"Rummet i syd/vest-hjørnet mod vejen.","locator":{"niveau":"Kælder","rum":"Fyrrum"},"photos_wanted":1,"measurements":[{"key":"lx","label":"Længde i x-retningen","unit":"m","model_value":3.57,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"ly","label":"Længde i y-retningen","unit":"m","model_value":4.66,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":5.87,"model_status":"antaget","model_source":"Beregnet","height_m":0.1}]},{"id":"H-004","title":"Disponibelt rum","why":"Rummet i østhjørnet mod vejen.","locator":{"niveau":"Kælder","rum":"Disp."},"photos_wanted":1,"measurements":[{"key":"lx","label":"Længde i x-retningen","unit":"m","model_value":3.57,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"ly","label":"Længde i y-retningen","unit":"m","model_value":3.0,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":4.663,"model_status":"antaget","model_source":"Beregnet","height_m":0.1}]},{"id":"H-005","title":"Loftshøjde","why":"Svarer til dækshøjde på skibet. Mål ved CRP og midt i vaskerummet; mål til loftet, ikke til bjælker eller rør.","locator":{"niveau":"Kælder"},"measurements":[{"key":"h_crp","label":"Gulv til loft ved CRP","unit":"m","model_value":2.2,"model_status":"aflæst","model_source":"Snit 1954"},{"key":"h_vask","label":"Gulv til loft midt i vaskerummet","unit":"m","model_value":2.2,"model_status":"aflæst","model_source":"Snit 1954"}]},{"id":"H-006","title":"Kældertrapperne","why":"Svarer til lejdere mellem dæk. Den indvendige trappe går op til stuen; den udvendige ligger ved nordøstvæggen.","locator":{"niveau":"Kælder","rum":"Gang"},"photos_wanted":2,"measurements":[{"key":"ind_bredde","label":"Indvendig trappe: bredde","unit":"m"},{"key":"ind_trin","label":"Indvendig trappe: antal trin","unit":"stk"},{"key":"etage","label":"Kældergulv til stuegulv (etagehøjde)","unit":"m"},{"key":"udv_bredde","label":"Udvendig trappe: bredde","unit":"m"},{"key":"udv_trin","label":"Udvendig trappe: antal trin","unit":"stk"}]},{"id":"H-007","title":"Kældervinduer","why":"Øvelse i at stedfæste åbninger i en væg – som vinduer i et dækshus. Tegningen har ét vindue mod nordvest (vaskerum) og to lyskasser mod sydøst. Opret ét punkt pr. vindue med afstand fra nærmeste hjørne.","locator":{"niveau":"Kælder"},"photos_wanted":1,"measurements":[{"key":"fra_hjoerne","label":"Fra nærmeste hjørne til vinduets kant","unit":"m"},{"key":"bredde","label":"Lysningens bredde","unit":"m"},{"key":"hoejde","label":"Lysningens højde","unit":"m","model_value":0.5,"model_status":"aflæst","model_source":"Snit 1954"},{"key":"brystning","label":"Gulv til underkant lysning","unit":"m","model_value":1.7,"model_status":"aflæst","model_source":"Snit 1954"},{"key":"vaeg","label":"Vægtykkelse i lysningen","unit":"mm","model_value":310,"model_status":"aflæst","model_source":"Beskrivelse 1954: 31 cm beton"}]},{"id":"H-008","title":"Kontrol af måleren mod båndmål","why":"Samme tre afstande med laser og med båndmål. Viser målerens reference (bagkant/forkant) og om vi kan stole på den.","locator":{"niveau":"Kælder"},"measurements":[{"key":"k1_laser","label":"Kort afstand (ca. 1 m) – laser","unit":"m"},{"key":"k1_baand","label":"Kort afstand – båndmål","unit":"m"},{"key":"k2_laser","label":"Mellem afstand (ca. 3 m) – laser","unit":"m"},{"key":"k2_baand","label":"Mellem afstand – båndmål","unit":"m"},{"key":"k3_laser","label":"Lang afstand (vaskerummets diagonal) – laser","unit":"m"},{"key":"k3_baand","label":"Lang afstand – båndmål","unit":"m"}]},{"id":"H-009","title":"Fotoserie til 3D-forsøg","why":"Vælg en genstand med kendte mål (fx en reol). Tag 20–40 overlappende fotos hele vejen rundt, og mål én kant med laser som målestok.","locator":{"niveau":"Kælder"},"photos_wanted":20,"measurements":[{"key":"skala","label":"Kendt kant (målestok)","unit":"m"}]}],"tolerance_mm":20}</script>
+<script type="application/json" data-package="HOUSE-BSMT">{"format":"survey-package/1","package_id":"HOUSE-BSMT","version":"5","created":"2026-11-20","description":"Trial survey of the house as 'ship 0', starting in the basement. Model values are read from the 1954 building file (dwg. 804/216, May 1953, scale 1:100). The survey shows what matches and what has changed.","object":{"id":"HOUSE","name":"The house (ship 0)","kind":"building","model_file":"house_model.json"},"reference":{"origin":{"id":"CRP","name":"Northernmost corner of the basement","description":"Inside corner at floor level in the pantry, between the north-east and north-west walls. Confirmed by the owner 19-11-2026 (photo with green marking). Mark it permanently, e.g. tape with a cross."},"axes":{"x":"along the north-east wall towards the south-east (towards the road) – the wall on your left when you stand in the CRP with your back to the corner","y":"along the north-west wall towards the south-west – the wall on your right","z":"up from the basement floor at the CRP"},"note":"Same orientation as the ships' system: x 'forward', y to the right, z up. The house is 8.40 m along y and 9.84 m along x outside; the basement outer walls are 31 cm concrete (1954)."},"locator_fields":[{"key":"level","label":"Level","options":["Basement","Ground floor","First floor","Attic","Outside"]},{"key":"room","label":"Room"},{"key":"surface","label":"Wall/surface"}],"group_by":"level","statuses":["confirmed","drawing","assumed"],"default_status":"confirmed","items":[{"id":"H-000","title":"Mark the CRP and the axes","why":"All other measurements are taken from this point. Photograph the corner with the mark, and one photo along each axis. If there are shelves in the pantry, mark the corner as close to the floor as possible.","locator":{"level":"Basement","room":"Pantry"},"photos_wanted":3,"measurements":[]},{"id":"H-001","title":"The pantry (CRP room)","why":"The room where the origin is. x and y were check-measured by the owner 19-11-2026 and match the drawing within ±2 cm. Missing: the diagonal and a photo of the corner.","locator":{"level":"Basement","room":"Pantry"},"measurements":[{"key":"lx","label":"Along x (north-east wall)","unit":"m","from":"CRP","to":"partition wall to corridor","model_value":2.49,"model_status":"confirmed","model_source":"Basement plan 1954; check-measured 19-11-2026 (±2 cm)","height_m":0.1},{"key":"ly","label":"Along y (north-west wall)","unit":"m","from":"CRP","to":"partition wall to laundry","model_value":3.46,"model_status":"confirmed","model_source":"Basement plan 1954; check-measured 19-11-2026 (±2 cm)","height_m":0.1},{"key":"diag","label":"Diagonal from CRP","unit":"m","model_value":4.263,"model_status":"assumed","model_source":"Calculated from 2.49 and 3.46","height_m":0.1}],"state":"partial"},{"id":"H-002","title":"Laundry and drying room","why":"The largest room in the basement (west of the pantry).","locator":{"level":"Basement","room":"Laundry and drying room"},"photos_wanted":1,"measurements":[{"key":"lx","label":"Length in x direction","unit":"m","model_value":5.53,"model_status":"drawing","model_source":"Basement plan 1954","height_m":0.1},{"key":"ly","label":"Length in y direction","unit":"m","model_value":4.2,"model_status":"drawing","model_source":"Basement plan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":6.944,"model_status":"assumed","model_source":"Calculated","height_m":0.1}]},{"id":"H-003","title":"Boiler room","why":"The room in the south/west corner towards the road.","locator":{"level":"Basement","room":"Boiler room"},"photos_wanted":1,"measurements":[{"key":"lx","label":"Length in x direction","unit":"m","model_value":3.57,"model_status":"drawing","model_source":"Basement plan 1954","height_m":0.1},{"key":"ly","label":"Length in y direction","unit":"m","model_value":4.66,"model_status":"drawing","model_source":"Basement plan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":5.87,"model_status":"assumed","model_source":"Calculated","height_m":0.1}]},{"id":"H-004","title":"Spare room","why":"The room in the east corner towards the road.","locator":{"level":"Basement","room":"Spare room"},"photos_wanted":1,"measurements":[{"key":"lx","label":"Length in x direction","unit":"m","model_value":3.57,"model_status":"drawing","model_source":"Basement plan 1954","height_m":0.1},{"key":"ly","label":"Length in y direction","unit":"m","model_value":3.0,"model_status":"drawing","model_source":"Basement plan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":4.663,"model_status":"assumed","model_source":"Calculated","height_m":0.1}]},{"id":"H-005","title":"Ceiling height","why":"Corresponds to deck height on the ship. Measure at the CRP and in the middle of the laundry; measure to the ceiling, not to beams or pipes.","locator":{"level":"Basement"},"measurements":[{"key":"h_crp","label":"Floor to ceiling at CRP","unit":"m","model_value":2.2,"model_status":"drawing","model_source":"Section 1954"},{"key":"h_laundry","label":"Floor to ceiling in the middle of the laundry","unit":"m","model_value":2.2,"model_status":"drawing","model_source":"Section 1954"}]},{"id":"H-006","title":"Basement stairs","why":"Corresponds to ladders between decks. The inside stair goes up to the ground floor; the outside stair is at the north-east wall.","locator":{"level":"Basement","room":"Corridor"},"photos_wanted":2,"measurements":[{"key":"in_width","label":"Inside stair: width","unit":"m"},{"key":"in_steps","label":"Inside stair: number of steps","unit":"pcs"},{"key":"storey","label":"Basement floor to ground floor (storey height)","unit":"m"},{"key":"out_width","label":"Outside stair: width","unit":"m"},{"key":"out_steps","label":"Outside stair: number of steps","unit":"pcs"}]},{"id":"H-007","title":"Basement windows","why":"Practice in locating openings in a wall – like windows in a deckhouse. The drawing has one window to the north-west (laundry) and two light wells to the south-east. Create one item per window with the distance from the nearest corner.","locator":{"level":"Basement"},"photos_wanted":1,"measurements":[{"key":"from_corner","label":"Nearest corner to window edge","unit":"m"},{"key":"width","label":"Opening width","unit":"m"},{"key":"height","label":"Opening height","unit":"m","model_value":0.5,"model_status":"drawing","model_source":"Section 1954"},{"key":"sill","label":"Floor to bottom of opening","unit":"m","model_value":1.7,"model_status":"drawing","model_source":"Section 1954"},{"key":"wall","label":"Wall thickness at the opening","unit":"mm","model_value":310,"model_status":"drawing","model_source":"Specification 1954: 31 cm concrete"}]},{"id":"H-008","title":"Check the meter against a tape measure","why":"The same three distances with laser and with tape. Shows the meter reference (rear/front edge) and whether we can trust it.","locator":{"level":"Basement"},"measurements":[{"key":"k1_laser","label":"Short distance (approx. 1 m) – laser","unit":"m"},{"key":"k1_tape","label":"Short distance – tape","unit":"m"},{"key":"k2_laser","label":"Medium distance (approx. 3 m) – laser","unit":"m"},{"key":"k2_tape","label":"Medium distance – tape","unit":"m"},{"key":"k3_laser","label":"Long distance (laundry diagonal) – laser","unit":"m"},{"key":"k3_tape","label":"Long distance – tape","unit":"m"}]},{"id":"H-009","title":"Photo series for 3D trial","why":"Choose an object with known dimensions (e.g. a bookcase). Take 20–40 overlapping photos all the way round, and measure one edge with the laser as scale.","locator":{"level":"Basement"},"photos_wanted":20,"measurements":[{"key":"scale","label":"Known edge (scale)","unit":"m"}]}],"tolerance_mm":20}</script>
 <script>
 {
-const APP_VERSION = '0.2.2';
+const APP_VERSION = '0.3.0';
 const BOSCH = { svc: '02a6c0d0-0451-4000-b000-fb3210111989', chr: '02a6c0d1-0451-4000-b000-fb3210111989', sync: [0xC0, 0x55, 0x02, 0x01, 0x00, 0x1A] };
-const METHODS = [['laser-ble','Laser (Bluetooth)'],['laser-manuel','Laser, aflæst'],['baand','Båndmål'],['tommestok','Tommestok'],['skoen','Skøn'],['andet','Andet']];
-const UNITS = ['m','mm','deg','stk','tekst'];
-const UNIT_LABEL = { m:'m', mm:'mm', deg:'°', stk:'stk', tekst:'' };
-const STATE_LABEL = { open:'Åben', partial:'Delvis', done:'Udført' };
-const REFS = [['bagkant','Bagkant'],['forkant','Forkant'],['stativ','Stativgevind'],['ukendt','Ukendt']];
+const METHODS = [['laser-ble','Laser (Bluetooth)'],['laser-manual','Laser, read off'],['tape','Tape measure'],['folding-rule','Folding rule'],['estimate','Estimate'],['other','Other']];
+const UNITS = ['m','mm','deg','pcs','text'];
+const UNIT_LABEL = { m:'m', mm:'mm', deg:'°', pcs:'pcs', text:'' };
+const STATE_LABEL = { open:'Open', partial:'Partial', done:'Done' };
+const REFS = [['rear','Rear edge'],['front','Front edge'],['tripod','Tripod thread'],['unknown','Unknown']];
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -140,8 +140,8 @@ const hex = u8 => Array.from(u8, b => b.toString(16).padStart(2, '0')).join(' ')
 function fmtNum(v, unit) {
   if (v === '' || v === null || v === undefined) return '';
   if (typeof v !== 'number') return String(v);
-  const d = unit === 'm' ? 3 : unit === 'mm' ? 0 : unit === 'deg' ? 1 : unit === 'stk' ? 0 : 3;
-  return v.toLocaleString('da-DK', { minimumFractionDigits: d, maximumFractionDigits: unit === 'm' ? 4 : d + 1, useGrouping: false });
+  const d = unit === 'm' ? 3 : unit === 'mm' ? 0 : unit === 'deg' ? 1 : unit === 'pcs' ? 0 : 3;
+  return v.toLocaleString('en-GB', { minimumFractionDigits: d, maximumFractionDigits: unit === 'm' ? 4 : d + 1, useGrouping: false });
 }
 function parseNum(s) {
   const t = String(s).trim().replace(/\s/g, '').replace(',', '.');
@@ -151,18 +151,18 @@ function parseNum(s) {
 }
 function ago(t) {
   const s = Math.round((Date.now() - t) / 1000);
-  if (s < 60) return s + ' s siden';
-  if (s < 3600) return Math.round(s / 60) + ' min siden';
-  return Math.round(s / 3600) + ' t siden';
+  if (s < 60) return s + ' s ago';
+  if (s < 3600) return Math.round(s / 60) + ' min ago';
+  return Math.round(s / 3600) + ' h ago';
 }
 
-/* ---------- lager (IndexedDB med hukommelse som reserve) ---------- */
+/* ---------- storage (IndexedDB with in-memory fallback) ---------- */
 const STORES = ['packages', 'results', 'photos', 'kv'];
 const DB = { db: null, mem: Object.fromEntries(STORES.map(n => [n, new Map()])) };
 function idbOpen() {
   return new Promise(res => {
     try {
-      const r = indexedDB.open('opmaaling', 1);
+      const r = indexedDB.open('survey', 1);
       r.onupgradeneeded = () => STORES.forEach(n => r.result.createObjectStore(n));
       r.onsuccess = () => { DB.db = r.result; res(true); };
       r.onerror = () => res(false);
@@ -185,14 +185,14 @@ async function dbGet(store, key) { if (DB.db) { try { const v = await tx(store, 
 async function dbDel(store, key) { DB.mem[store].delete(key); if (DB.db) { try { await tx(store, 'readwrite', s => s.delete(key)); } catch (e) {} } }
 async function dbKeys(store) { if (DB.db) { try { return await tx(store, 'readonly', s => s.getAllKeys()); } catch (e) {} } return [...DB.mem[store].keys()]; }
 let storageWarned = false;
-function warnStorage(e) { if (!storageWarned) { storageWarned = true; toast('Kunne ikke gemme på telefonen – eksportér ofte'); } }
+function warnStorage(e) { if (!storageWarned) { storageWarned = true; toast('Could not save on the phone – export often'); } }
 
-/* ---------- tilstand ---------- */
+/* ---------- state ---------- */
 const S = {
   builtin: {}, pkgs: {}, active: null, res: null,
-  tab: 'list', itemId: null, filter: 'aabne', q: '', armed: null,
+  tab: 'list', itemId: null, filter: 'open', q: '', armed: null,
   last: null,
-  settings: { surveyor: '', meterRef: 'bagkant', photoMax: 2048, keepAlive: true, showHeartbeat: false, heightDefault: '', camOnReading: false, laserColor: 'groen' },
+  settings: { surveyor: '', meterRef: 'rear', photoMax: 2048, keepAlive: true, showHeartbeat: false, heightDefault: '', camOnReading: false, laserColor: 'green' },
   meter: { state: 'off', dev: null, chr: null, want: false, sim: false, log: [], timer: null, bound: new WeakSet() },
   thumbs: new Map(), downloads: null
 };
@@ -221,12 +221,12 @@ async function activate(id) {
   render();
 }
 
-/* ---------- visning ---------- */
+/* ---------- views ---------- */
 const view = $('#view');
 function setTab(t) { S.tab = t; if (t !== 'item') { S.armed = null; camStop(); } render(); window.scrollTo(0, 0); }
 function render() {
   const p = pkg();
-  $('#hdrObj').textContent = p ? p.object.name + ' · ' + p.package_id : 'Ingen pakke valgt';
+  $('#hdrObj').textContent = p ? p.object.name + ' · ' + p.package_id : 'No package selected';
   document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-current', (b.dataset.tab === S.tab || (S.tab === 'item' && b.dataset.tab === 'list')) ? 'page' : 'false'));
   renderChip();
   if (!p && S.tab !== 'pkgs' && S.tab !== 'meter') { S.tab = 'pkgs'; }
@@ -236,7 +236,7 @@ function render() {
 function renderChip() {
   const c = $('#chip'), m = S.meter;
   c.className = 'chip' + (m.state === 'on' ? ' on' : m.state === 'connecting' || m.state === 'reconnecting' ? ' busy' : m.sim ? ' sim' : '');
-  $('#chipVal').textContent = S.last ? fmtNum(S.last.m, 'm') + ' m' : (m.state === 'on' ? 'Klar' : m.sim ? 'Simulator' : 'Måler');
+  $('#chipVal').textContent = S.last ? fmtNum(S.last.m, 'm') + ' m' : (m.state === 'on' ? 'Ready' : m.sim ? 'Simulator' : 'Meter');
   c.title = S.last ? ago(S.last.t) : '';
 }
 
@@ -255,29 +255,29 @@ function renderList() {
   const q = S.q.trim().toLowerCase();
   let items = allItems().filter(i => {
     const st = stateOf(i);
-    if (S.filter === 'aabne' && st === 'done') return false;
-    if (S.filter === 'udfoert' && st !== 'done') return false;
+    if (S.filter === 'open' && st === 'done') return false;
+    if (S.filter === 'done' && st !== 'done') return false;
     if (q && !(i.id + ' ' + i.title + ' ' + (i.why || '') + ' ' + Object.values(locOf(i)).join(' ')).toLowerCase().includes(q)) return false;
     return true;
   });
   const g = p.group_by;
   let html = `<h2>${esc(p.object.name)}</h2>
-  <p class="lead">Nulpunkt: <b>${esc(p.reference.origin.name)}</b>${p.reference.origin.description ? ' – ' + esc(p.reference.origin.description) : ''}</p>
-  <div class="stats"><div><b>${c.open}</b><span>åbne</span></div><div><b>${c.partial}</b><span>delvise</span></div><div><b>${c.meas}</b><span>mål</span></div><div><b>${c.photos}</b><span>fotos</span></div></div>
-  <div class="row"><input id="q" type="search" placeholder="Søg i punkter" value="${esc(S.q)}" style="flex:1;min-width:160px" aria-label="Søg">
-  <button class="pri" id="newItem">＋ Nyt punkt</button></div>
-  <div class="seg" style="margin-top:8px">${[['aabne','Åbne'],['alle','Alle'],['udfoert','Udført']].map(([k, l]) => `<button data-f="${k}" aria-pressed="${S.filter === k}">${l}</button>`).join('')}</div>`;
-  if (!items.length) html += `<p class="lead" style="margin-top:18px">Ingen punkter her. Skift filter, eller opret et nyt punkt.</p>`;
+  <p class="lead">Origin: <b>${esc(p.reference.origin.name)}</b>${p.reference.origin.description ? ' – ' + esc(p.reference.origin.description) : ''}</p>
+  <div class="stats"><div><b>${c.open}</b><span>open</span></div><div><b>${c.partial}</b><span>partial</span></div><div><b>${c.meas}</b><span>meas.</span></div><div><b>${c.photos}</b><span>photos</span></div></div>
+  <div class="row"><input id="q" type="search" placeholder="Search items" value="${esc(S.q)}" style="flex:1;min-width:160px" aria-label="Search">
+  <button class="pri" id="newItem">＋ New item</button></div>
+  <div class="seg" style="margin-top:8px">${[['open','Open'],['all','All'],['done','Done']].map(([k, l]) => `<button data-f="${k}" aria-pressed="${S.filter === k}">${l}</button>`).join('')}</div>`;
+  if (!items.length) html += `<p class="lead" style="margin-top:18px">No items here. Change the filter or create a new item.</p>`;
   let lastGroup = null;
   for (const i of items) {
-    if (g) { const gv = locOf(i)[g] || 'Uden ' + g; if (gv !== lastGroup) { html += `<div class="group">${esc(gv)}</div>`; lastGroup = gv; } }
+    if (g) { const gv = locOf(i)[g] || 'No ' + g; if (gv !== lastGroup) { html += `<div class="group">${esc(gv)}</div>`; lastGroup = gv; } }
     const st = stateOf(i), e = S.res.entries[i.id], loc = locOf(i);
     const nm = e ? e.measurements.filter(m => m.value !== '' && m.value !== null).length : 0, np = e ? e.photos.length : 0;
     const planned = (i.measurements || []).length;
     html += `<button class="card" data-item="${esc(i.id)}"><span class="id">${esc(i.id)}</span><span class="t">${esc(i.title)}</span>
-      <span class="m"><span class="badge b-${st}">${STATE_LABEL[st]}</span>${i.conflict ? `<span class="badge b-conf">${esc(i.conflict)}</span>` : ''}${i.new_item ? '<span class="badge b-conf">Nyt</span>' : ''}
+      <span class="m"><span class="badge b-${st}">${STATE_LABEL[st]}</span>${i.conflict ? `<span class="badge b-conf">${esc(i.conflict)}</span>` : ''}${i.new_item ? '<span class="badge b-conf">New</span>' : ''}
       <span>${Object.entries(loc).filter(([k]) => k !== g).map(([, v]) => esc(v)).join(' · ')}</span>
-      <span>${planned ? `${nm}/${planned} mål` : nm ? nm + ' mål' : ''}${np ? ' · ' + np + ' foto' : ''}</span></span></button>`;
+      <span>${planned ? `${nm}/${planned} meas.` : nm ? nm + ' meas.' : ''}${np ? ' · ' + np + (np === 1 ? ' photo' : ' photos') : ''}</span></span></button>`;
   }
   view.innerHTML = html;
   $('#q').oninput = e => { S.q = e.target.value; const pos = e.target.selectionStart; renderList(); const n = $('#q'); n.focus(); n.setSelectionRange(pos, pos); };
@@ -311,59 +311,59 @@ function renderItem() {
   if (!item) { setTab('list'); return; }
   const e = S.res.entries[item.id] || { note: '', photos: [], measurements: [] };
   const st = stateOf(item), loc = locOf(item);
-  const statuses = p.statuses || ['bekræftet', 'aflæst', 'antaget'];
+  const statuses = p.statuses || ['confirmed', 'drawing', 'assumed'];
   const list = allItems(); const idx = list.findIndex(i => i.id === item.id);
   const prev = list[idx - 1], next = list[idx + 1];
-  let html = `<button class="ghost" id="back">‹ Tjekliste</button>
+  let html = `<button class="ghost" id="back">‹ Checklist</button>
   <p class="note" style="margin:14px 0 2px">${esc(item.id)}${item.conflict ? ` · <span class="badge b-conf">${esc(item.conflict)}</span>` : ''}</p>
   <h2>${esc(item.title)}</h2>`;
   if (item.why) html += `<p class="why lead">${esc(item.why)}</p>`;
-  if (item.prior_answer) html += `<div class="box"><b>Tidligere svar</b><div class="why">${esc(item.prior_answer)}</div></div>`;
+  if (item.prior_answer) html += `<div class="box"><b>Previous answer</b><div class="why">${esc(item.prior_answer)}</div></div>`;
   const lf = p.locator_fields || [];
   if (lf.length) {
     html += `<div class="kv">` + lf.map(f => `<div><label class="f" for="loc-${f.key}">${esc(f.label)}</label>` + (f.options
       ? `<select id="loc-${f.key}" data-loc="${f.key}"><option value=""></option>${f.options.map(o => `<option${loc[f.key] === o ? ' selected' : ''}>${esc(o)}</option>`).join('')}</select>`
       : `<input id="loc-${f.key}" data-loc="${f.key}" value="${esc(loc[f.key] || '')}">`) + `</div>`).join('') + `</div>`;
   }
-  html += `<h3 style="margin-top:22px">Mål</h3>
-  <label class="chk"><input type="checkbox" id="camTg" ${S.settings.camOnReading ? 'checked' : ''}> Foto med telefonens kamera ved hver måling</label>`;
+  html += `<h3 style="margin-top:22px">Measurements</h3>
+  <label class="chk"><input type="checkbox" id="camTg" ${S.settings.camOnReading ? 'checked' : ''}> Photo with the phone camera on every reading</label>`;
   if (S.settings.camOnReading) html += `<div id="camSlot"></div>`;
   const rows = rowsFor(item);
-  if (!rows.length) html += `<p class="note">Ingen planlagte mål. Tilføj de mål du tager.</p>`;
+  if (!rows.length) html += `<p class="note">No planned measurements. Add the ones you take.</p>`;
   for (const r of rows) {
     const s = r.spec, m = r.m, k = s.key, armed = S.armed === k;
     const v = m ? fmtNum(m.value, s.unit) : '';
     let delta = '';
     if (m && typeof m.value === 'number' && typeof s.model_value === 'number') {
       const d = m.value - s.model_value; const dmm = s.unit === 'm' ? d * 1000 : d;
-      delta = `<div class="delta" style="color:${Math.abs(dmm) > (p.tolerance_mm ?? 50) ? 'var(--red)' : 'var(--ok)'}">Afvigelse fra model: ${dmm > 0 ? '+' : ''}${fmtNum(Math.round(dmm), 'mm')} mm${Math.abs(dmm) > (p.tolerance_mm ?? 50) ? ' (over tolerancen ±' + (p.tolerance_mm ?? 50) + ' mm)' : ''}</div>`;
+      delta = `<div class="delta" style="color:${Math.abs(dmm) > (p.tolerance_mm ?? 50) ? 'var(--red)' : 'var(--ok)'}">Deviation from model: ${dmm > 0 ? '+' : ''}${fmtNum(Math.round(dmm), 'mm')} mm${Math.abs(dmm) > (p.tolerance_mm ?? 50) ? ' (outside tolerance ±' + (p.tolerance_mm ?? 50) + ' mm)' : ''}</div>`;
     }
-    html += `<div class="mrow${armed ? ' armed' : ''}" data-row="${esc(k)}">${armed ? '<span class="waiting">Venter på laser</span>' : ''}
+    html += `<div class="mrow${armed ? ' armed' : ''}" data-row="${esc(k)}">${armed ? '<span class="waiting">Waiting for laser</span>' : ''}
       <div class="lab">${esc(s.label)}</div>
       ${s.from || s.to ? `<div class="sub">${esc(s.from || '?')} → ${esc(s.to || '?')}</div>` : ''}
-      ${typeof s.height_m === 'number' ? `<div class="sub">Mål i ${esc(fmtNum(s.height_m, 'm'))} m højde</div>` : ''}
+      ${typeof s.height_m === 'number' ? `<div class="sub">Measure at ${esc(fmtNum(s.height_m, 'm'))} m height</div>` : ''}
       ${s.model_value !== undefined && s.model_value !== null ? `<div class="sub">Model: ${esc(fmtNum(s.model_value, s.unit))} ${UNIT_LABEL[s.unit]}${s.model_status ? ' (' + esc(s.model_status) + ')' : ''}${s.model_source ? ' · ' + esc(s.model_source) : ''}</div>` : ''}
-      <div class="mval"><input data-val="${esc(k)}" ${s.unit === 'tekst' ? '' : 'inputmode="decimal"'} value="${esc(v)}" aria-label="${esc(s.label)}" autocomplete="off">
+      <div class="mval"><input data-val="${esc(k)}" ${s.unit === 'text' ? '' : 'inputmode="decimal"'} value="${esc(v)}" aria-label="${esc(s.label)}" autocomplete="off">
         <span class="u">${UNIT_LABEL[s.unit]}</span>
-        ${isLen(s.unit) ? `<button class="ghost" data-last="${esc(k)}" title="Brug seneste laser" ${S.last ? '' : 'disabled'}>⤓</button>` : '<span></span>'}</div>
+        ${isLen(s.unit) ? `<button class="ghost" data-last="${esc(k)}" title="Use latest laser reading" ${S.last ? '' : 'disabled'}>⤓</button>` : '<span></span>'}</div>
       ${delta}
-      ${m ? `<div class="mmeta"><select data-meth="${esc(k)}" aria-label="Metode">${METHODS.map(([mk, ml]) => `<option value="${mk}"${m.method === mk ? ' selected' : ''}>${ml}</option>`).join('')}</select>
+      ${m ? `<div class="mmeta"><select data-meth="${esc(k)}" aria-label="Method">${METHODS.map(([mk, ml]) => `<option value="${mk}"${m.method === mk ? ' selected' : ''}>${ml}</option>`).join('')}</select>
         <select data-stat="${esc(k)}" aria-label="Status">${statuses.map(x => `<option${m.status === x ? ' selected' : ''}>${esc(x)}</option>`).join('')}</select>
-        <input data-h="${esc(k)}" inputmode="decimal" placeholder="højde m" title="Målehøjde over gulv/dæk (m)" aria-label="Målehøjde i meter" class="${m.height_m === undefined || m.height_m === '' ? 'miss' : ''}" value="${m.height_m === undefined ? '' : esc(fmtNum(m.height_m, 'm'))}">
-        <button class="ghost" data-clr="${esc(k)}" title="${r.planned ? 'Ryd værdi' : 'Slet mål'}">✕</button></div>
-        <div class="sub">${m.height_m !== undefined && m.height_m !== '' ? 'målt ' + esc(fmtNum(m.height_m, 'm')) + ' m over gulv/dæk · ' : ''}${m.taken ? new Date(m.taken).toLocaleString('da-DK') : ''}${m.method === 'laser-ble' && m.meter_reference ? ' · måler fra ' + esc(m.meter_reference) : ''}</div>` : ''}
+        <input data-h="${esc(k)}" inputmode="decimal" placeholder="height m" title="Measuring height above floor/deck (m)" aria-label="Measuring height in metres" class="${m.height_m === undefined || m.height_m === '' ? 'miss' : ''}" value="${m.height_m === undefined ? '' : esc(fmtNum(m.height_m, 'm'))}">
+        <button class="ghost" data-clr="${esc(k)}" title="${r.planned ? 'Clear value' : 'Delete measurement'}">✕</button></div>
+        <div class="sub">${m.height_m !== undefined && m.height_m !== '' ? 'measured ' + esc(fmtNum(m.height_m, 'm')) + ' m above floor/deck · ' : ''}${m.taken ? new Date(m.taken).toLocaleString('en-GB') : ''}${m.method === 'laser-ble' && m.meter_reference ? ' · meter from ' + esc(m.meter_reference) : ''}</div>` : ''}
     </div>`;
   }
-  html += `<button class="ghost" id="addM">＋ Tilføj mål</button>`;
-  if (S.meter.sim) html += ` <button class="red" id="simBtn">Simulér laser</button>`;
+  html += `<button class="ghost" id="addM">＋ Add measurement</button>`;
+  if (S.meter.sim) html += ` <button class="red" id="simBtn">Simulate laser</button>`;
   const want = item.photos_wanted || 0;
-  html += `<h3 style="margin-top:22px">Fotos ${want ? `<span class="note">(${e.photos.length}/${want})</span>` : ''}</h3>
-  <div class="row" style="margin-top:6px"><label class="filebtn pri">Tag foto<input type="file" accept="image/*" capture="environment" id="camIn"></label>
-  <label class="filebtn">Fra galleri<input type="file" accept="image/*" multiple id="galIn"></label></div>
-  <div class="photos" id="ph">${e.photos.map(ph => `<button data-ph="${esc(ph.id)}" aria-label="Foto"><img alt="${esc(ph.caption || 'Foto')}" data-src="${esc(ph.id)}">${ph.source === 'maaling' ? `<span class="tag">${ph.spot ? '◎ ' : ''}${esc(ph.caption || '')}</span>` : ''}</button>`).join('')}</div>
-  <h3 style="margin-top:22px">Notat</h3>
-  <textarea id="note" placeholder="Hvad så du? Brug telefonens mikrofon på tastaturet til at diktere.">${esc(e.note || '')}</textarea>
-  <h3 style="margin-top:22px">Punktets status</h3>
+  html += `<h3 style="margin-top:22px">Photos ${want ? `<span class="note">(${e.photos.length}/${want})</span>` : ''}</h3>
+  <div class="row" style="margin-top:6px"><label class="filebtn pri">Take photo<input type="file" accept="image/*" capture="environment" id="camIn"></label>
+  <label class="filebtn">From gallery<input type="file" accept="image/*" multiple id="galIn"></label></div>
+  <div class="photos" id="ph">${e.photos.map(ph => `<button data-ph="${esc(ph.id)}" aria-label="Photo"><img alt="${esc(ph.caption || 'Photo')}" data-src="${esc(ph.id)}">${ph.source === 'reading' ? `<span class="tag">${ph.spot ? '◎ ' : ''}${esc(ph.caption || '')}</span>` : ''}</button>`).join('')}</div>
+  <h3 style="margin-top:22px">Note</h3>
+  <textarea id="note" placeholder="What did you see? Use the microphone on the keyboard to dictate.">${esc(e.note || '')}</textarea>
+  <h3 style="margin-top:22px">Item status</h3>
   <div class="seg" style="margin-top:6px">${['open', 'partial', 'done'].map(k => `<button data-st="${k}" aria-pressed="${st === k}">${STATE_LABEL[k]}</button>`).join('')}</div>
   <div class="navrow"><button class="ghost" id="prev" ${prev ? '' : 'disabled'}>‹ ${prev ? esc(prev.id) : ''}</button><button class="ghost" id="next" ${next ? '' : 'disabled'}>${next ? esc(next.id) : ''} ›</button></div>`;
   view.innerHTML = html;
@@ -378,9 +378,9 @@ function renderItem() {
     el.onfocus = () => { const r = rows.find(x => x.spec.key === el.dataset.val); if (r && isLen(r.spec.unit) && S.armed !== r.spec.key) { S.armed = r.spec.key; markArmed(); } };
     el.onchange = async () => {
       const r = rows.find(x => x.spec.key === el.dataset.val); const unit = r.spec.unit;
-      let v = unit === 'tekst' ? el.value.trim() : parseNum(el.value);
-      if (v === null) { toast('Ikke et tal'); el.value = r.m ? fmtNum(r.m.value, unit) : ''; return; }
-      await setMeas(item, r.spec, { value: v, method: r.m?.method === 'laser-ble' && r.m.value === v ? 'laser-ble' : (unit === 'tekst' || unit === 'stk' ? 'andet' : 'laser-manuel'), raw: undefined });
+      let v = unit === 'text' ? el.value.trim() : parseNum(el.value);
+      if (v === null) { toast('Not a number'); el.value = r.m ? fmtNum(r.m.value, unit) : ''; return; }
+      await setMeas(item, r.spec, { value: v, method: r.m?.method === 'laser-ble' && r.m.value === v ? 'laser-ble' : (unit === 'text' || unit === 'pcs' ? 'other' : 'laser-manual'), raw: undefined });
       renderItem();
     };
   });
@@ -389,7 +389,7 @@ function renderItem() {
   view.querySelectorAll('[data-stat]').forEach(el => el.onchange = async () => { const m = entry(item.id).measurements.find(x => x.key === el.dataset.stat); m.status = el.value; await saveRes(); });
   view.querySelectorAll('[data-h]').forEach(el => el.onchange = async () => {
     const m = entry(item.id).measurements.find(x => x.key === el.dataset.h); const v = parseNum(el.value);
-    if (v === null) { toast('Højden skal være et tal i meter'); return; }
+    if (v === null) { toast('Height must be a number in metres'); return; }
     if (v === '') delete m.height_m; else m.height_m = v;
     await saveRes(); renderItem();
   });
@@ -403,14 +403,14 @@ function renderItem() {
   view.querySelectorAll('[data-ph]').forEach(b => b.onclick = () => photoSheet(item, b.dataset.ph));
 }
 function markArmed() {
-  view.querySelectorAll('.mrow').forEach(r => { const on = r.dataset.row === S.armed; r.classList.toggle('armed', on); const w = r.querySelector('.waiting'); if (on && !w) r.insertAdjacentHTML('afterbegin', '<span class="waiting">Venter på laser</span>'); if (!on && w) w.remove(); });
+  view.querySelectorAll('.mrow').forEach(r => { const on = r.dataset.row === S.armed; r.classList.toggle('armed', on); const w = r.querySelector('.waiting'); if (on && !w) r.insertAdjacentHTML('afterbegin', '<span class="waiting">Waiting for laser</span>'); if (!on && w) w.remove(); });
 }
 
 async function setMeas(item, spec, patch) {
   const en = entry(item.id, true);
   let m = en.measurements.find(x => x.key === spec.key);
   if (!m) {
-    m = { key: spec.key, label: spec.label, unit: spec.unit, value: '', method: 'laser-manuel', status: pkg().default_status || 'bekræftet', taken: nowIso() };
+    m = { key: spec.key, label: spec.label, unit: spec.unit, value: '', method: 'laser-manual', status: pkg().default_status || 'confirmed', taken: nowIso() };
     if (spec.from) m.from = spec.from; if (spec.to) m.to = spec.to;
     const hd = typeof spec.height_m === 'number' ? spec.height_m : parseNum(S.settings.heightDefault ?? '');
     if (typeof hd === 'number') m.height_m = hd;
@@ -425,10 +425,10 @@ async function setMeas(item, spec, patch) {
 }
 async function applyReading(item, spec, rd) {
   const v = spec.unit === 'mm' ? Math.round(rd.m * 10000) / 10 : Math.round(rd.m * 10000) / 10000;
-  await setMeas(item, spec, { value: v, method: rd.sim ? 'andet' : 'laser-ble', raw: rd.raw, meter_reference: S.settings.meterRef, note: rd.sim ? 'Simuleret måling' : undefined });
+  await setMeas(item, spec, { value: v, method: rd.sim ? 'other' : 'laser-ble', raw: rd.raw, meter_reference: S.settings.meterRef, note: rd.sim ? 'Simulated reading' : undefined });
 }
 
-/* ---------- laserdata ind ---------- */
+/* ---------- incoming laser data ---------- */
 async function onReading(rd) {
   S.last = rd; renderChip();
   try { navigator.vibrate && navigator.vibrate(40); } catch (e) {}
@@ -449,7 +449,7 @@ async function onReading(rd) {
     }
   }
   if (S.tab === 'meter') renderMeter();
-  else toast(`${fmtNum(rd.m, 'm')} m – vælg et mål og tryk ⤓`);
+  else toast(`${fmtNum(rd.m, 'm')} m – choose a measurement and tap ⤓`);
 }
 
 function parseBosch(u8) {
@@ -459,7 +459,7 @@ function parseBosch(u8) {
   }
   return null;
 }
-function logLine(s) { S.meter.log.unshift(new Date().toLocaleTimeString('da-DK') + '  ' + s); S.meter.log.length = Math.min(S.meter.log.length, 80); if (S.tab === 'meter') { const l = $('#log'); if (l) l.textContent = S.meter.log.join('\n'); } }
+function logLine(s) { S.meter.log.unshift(new Date().toLocaleTimeString('en-GB') + '  ' + s); S.meter.log.length = Math.min(S.meter.log.length, 80); if (S.tab === 'meter') { const l = $('#log'); if (l) l.textContent = S.meter.log.join('\n'); } }
 function onFrame(u8, sim) {
   const isHeartbeat = u8.length === 4 && u8[0] === 0xC0 && u8[1] === 0x11;
   if (!isHeartbeat || S.settings.showHeartbeat) logLine((sim ? 'SIM ' : 'RX  ') + hex(u8));
@@ -473,12 +473,12 @@ function simulate() {
   onFrame(u8, true);
 }
 
-/* ---------- Bluetooth (Bosch GLM 50-27 C/CG og beslægtede) ---------- */
+/* ---------- Bluetooth (Bosch GLM 50-27 C/CG and related) ---------- */
 function btProblem() {
-  if (!('bluetooth' in navigator)) return 'Denne browser har ikke Web Bluetooth. Brug Chrome på Android.';
+  if (!('bluetooth' in navigator)) return 'This browser has no Web Bluetooth. Use Chrome on Android.';
   let framed = false; try { framed = window.self !== window.top; } catch (e) { framed = true; }
-  if (framed) return 'Siden kører inde i en anden side (fx forhåndsvisningen på claude.ai), hvor Bluetooth er spærret. Åbn app\'en fra dens egen adresse i Chrome.';
-  if (!window.isSecureContext) return 'Bluetooth kræver en https-adresse.';
+  if (framed) return 'The page is running inside another page (e.g. the preview on claude.ai), where Bluetooth is blocked. Open the app from its own address in Chrome.';
+  if (!window.isSecureContext) return 'Bluetooth requires an https address.';
   return '';
 }
 function setMeter(st) { S.meter.state = st; renderChip(); if (S.tab === 'meter') renderMeter(); }
@@ -490,12 +490,12 @@ async function connectMeter(all) {
     S.meter.dev = dev; S.meter.want = true;
     dev.addEventListener('gattserverdisconnected', onDisconnected);
     await gattSetup();
-  } catch (e) { logLine('Fejl: ' + e.message); if (S.meter.state !== 'on') setMeter('off'); if (e.name !== 'NotFoundError') toast('Forbindelse mislykkedes: ' + e.message); }
+  } catch (e) { logLine('Error: ' + e.message); if (S.meter.state !== 'on') setMeter('off'); if (e.name !== 'NotFoundError') toast('Connection failed: ' + e.message); }
 }
 async function gattSetup() {
   setMeter('connecting');
   const srv = await S.meter.dev.gatt.connect();
-  logLine('Forbundet til ' + (S.meter.dev.name || 'enhed uden navn'));
+  logLine('Connected to ' + (S.meter.dev.name || 'unnamed device'));
   const svc = await srv.getPrimaryService(BOSCH.svc);
   const chr = await svc.getCharacteristic(BOSCH.chr);
   S.meter.chr = chr;
@@ -517,7 +517,7 @@ async function sendSync() {
     else if (chr.writeValueWithoutResponse) await chr.writeValueWithoutResponse(data);
     else await chr.writeValue(data);
     logLine('TX  ' + hex(data));
-  } catch (e) { logLine('Kunne ikke sende sync: ' + e.message); }
+  } catch (e) { logLine('Could not send sync: ' + e.message); }
 }
 function startKeepAlive() {
   clearInterval(S.meter.timer);
@@ -525,52 +525,52 @@ function startKeepAlive() {
 }
 async function onDisconnected() {
   clearInterval(S.meter.timer);
-  logLine('Forbindelsen blev afbrudt');
+  logLine('Connection lost');
   if (!S.meter.want) { setMeter('off'); return; }
   setMeter('reconnecting');
   for (const wait of [1000, 3000, 6000]) {
     await new Promise(r => setTimeout(r, wait));
     if (!S.meter.want) break;
-    try { await gattSetup(); toast('Måleren er forbundet igen'); return; } catch (e) { logLine('Genforbindelse mislykkedes: ' + e.message); }
+    try { await gattSetup(); toast('Meter reconnected'); return; } catch (e) { logLine('Reconnect failed: ' + e.message); }
   }
-  setMeter('off'); toast('Måleren er ikke forbundet');
+  setMeter('off'); toast('Meter not connected');
 }
 function disconnectMeter() { S.meter.want = false; clearInterval(S.meter.timer); try { S.meter.dev?.gatt?.disconnect(); } catch (e) {} setMeter('off'); }
 
 function renderMeter() {
   const m = S.meter, prob = btProblem();
-  const stTxt = { off: 'Ikke forbundet', connecting: 'Forbinder …', reconnecting: 'Genforbinder …', on: 'Forbundet' }[m.state];
-  view.innerHTML = `<h2>Laserafstandsmåler</h2>
+  const stTxt = { off: 'Not connected', connecting: 'Connecting …', reconnecting: 'Reconnecting …', on: 'Connected' }[m.state];
+  view.innerHTML = `<h2>Laser distance meter</h2>
   <p class="lead">${esc(stTxt)}${m.dev ? ' · ' + esc(m.dev.name || 'Bosch GLM') : ''}</p>
-  <div class="box" style="text-align:center"><div class="big">${S.last ? esc(fmtNum(S.last.m, 'm')) : '–'}</div><div class="note">${S.last ? 'm · ' + ago(S.last.t) + (S.last.sim ? ' · simuleret' : '') : 'Seneste måling vises her'}</div></div>
+  <div class="box" style="text-align:center"><div class="big">${S.last ? esc(fmtNum(S.last.m, 'm')) : '–'}</div><div class="note">${S.last ? 'm · ' + ago(S.last.t) + (S.last.sim ? ' · simulated' : '') : 'Latest reading shows here'}</div></div>
   ${prob ? `<div class="warnbox">${esc(prob)}</div>` : ''}
-  <div class="row">${m.state === 'off' ? `<button class="pri" id="con" ${prob ? 'disabled' : ''}>Forbind måler</button><button class="ghost" id="conAll" ${prob ? 'disabled' : ''}>Vis alle enheder</button>` : `<button id="dis">Afbryd</button><button class="ghost" id="sync">Send sync igen</button>`}</div>
-  <p class="note">Tænd Bluetooth på måleren (tasten med Bluetooth-symbolet), og tryk så Forbind. Måleren reklamerer ikke med et navn; findes den ikke, så prøv "Vis alle enheder". Den kan kun have én forbindelse ad gangen, så luk Boschs egen app først.</p>
-  <h3 style="margin-top:20px">Indstillinger</h3>
-  <label class="f" for="hdef">Målehøjde over gulv/dæk for nye mål (m)</label>
-  <input id="hdef" inputmode="decimal" placeholder="fx 0,10" value="${esc(S.settings.heightDefault === '' || S.settings.heightDefault === undefined ? '' : fmtNum(Number(S.settings.heightDefault), 'm'))}">
-  <p class="note">Bruges når pakken ikke angiver en højde. Kan rettes ved hvert mål. Tomt felt = højden noteres ikke (vises med gul ramme).</p>
-  <h3 style="margin-top:20px">Foto ved måling</h3>
-  <label class="chk"><input type="checkbox" id="camOn" ${S.settings.camOnReading ? 'checked' : ''}> Tag foto med telefonens kamera, når en måling kommer ind</label>
-  <label class="f" for="lcol">Laserfarve (bruges til at finde prikken i billedet)</label>
-  <select id="lcol"><option value="groen"${S.settings.laserColor !== 'roed' ? ' selected' : ''}>Grøn (GLM 50-27 CG)</option><option value="roed"${S.settings.laserColor === 'roed' ? ' selected' : ''}>Rød</option></select>
-  <p class="note">Hold telefonen fast sammen med måleren, så kameraet ser det, laseren rammer. Prikken findes bedst indendørs og på kort afstand. Fotoet gemmes også, når prikken ikke findes.</p>
-  <label class="f" for="ref">Målerens referencekant (som den er stillet på måleren)</label>
+  <div class="row">${m.state === 'off' ? `<button class="pri" id="con" ${prob ? 'disabled' : ''}>Connect meter</button><button class="ghost" id="conAll" ${prob ? 'disabled' : ''}>Show all devices</button>` : `<button id="dis">Disconnect</button><button class="ghost" id="sync">Resend sync</button>`}</div>
+  <p class="note">Turn on Bluetooth on the meter (the key with the Bluetooth symbol), then tap Connect meter. The meter does not advertise a name; if it is not found, try "Show all devices". It can only hold one connection at a time, so close Bosch's own app first.</p>
+  <h3 style="margin-top:20px">Settings</h3>
+  <label class="f" for="hdef">Measuring height above floor/deck for new measurements (m)</label>
+  <input id="hdef" inputmode="decimal" placeholder="e.g. 0.10" value="${esc(S.settings.heightDefault === '' || S.settings.heightDefault === undefined ? '' : fmtNum(Number(S.settings.heightDefault), 'm'))}">
+  <p class="note">Used when the package gives no height. Can be changed for each measurement. Empty = height not recorded (shown with a yellow border).</p>
+  <h3 style="margin-top:20px">Photo on reading</h3>
+  <label class="chk"><input type="checkbox" id="camOn" ${S.settings.camOnReading ? 'checked' : ''}> Take a photo with the phone camera when a reading arrives</label>
+  <label class="f" for="lcol">Laser colour (used to find the dot in the image)</label>
+  <select id="lcol"><option value="green"${S.settings.laserColor !== 'red' ? ' selected' : ''}>Green (GLM 50-27 CG)</option><option value="red"${S.settings.laserColor === 'red' ? ' selected' : ''}>Red</option></select>
+  <p class="note">Hold the phone firmly together with the meter so the camera sees what the laser hits. The dot is found best indoors at short range. The photo is saved even when the dot is not found.</p>
+  <label class="f" for="ref">Meter reference edge (as set on the meter)</label>
   <select id="ref">${REFS.map(([k, l]) => `<option value="${k}"${S.settings.meterRef === k ? ' selected' : ''}>${l}</option>`).join('')}</select>
-  <label class="chk"><input type="checkbox" id="ka" ${S.settings.keepAlive ? 'checked' : ''}> Hold måleren vågen (sender sync hvert 4. minut)</label>
-  <label class="chk"><input type="checkbox" id="sim" ${m.sim ? 'checked' : ''}> Simulator (øv uden måler)</label>
-  ${m.sim ? `<div class="row" style="margin-top:8px"><button class="red" id="simBtn">Simulér måling</button></div>` : ''}
-  <label class="chk"><input type="checkbox" id="hb" ${S.settings.showHeartbeat ? 'checked' : ''}> Vis livstegn i loggen</label>
+  <label class="chk"><input type="checkbox" id="ka" ${S.settings.keepAlive ? 'checked' : ''}> Keep the meter awake (sends sync every 4 minutes)</label>
+  <label class="chk"><input type="checkbox" id="sim" ${m.sim ? 'checked' : ''}> Simulator (practise without a meter)</label>
+  ${m.sim ? `<div class="row" style="margin-top:8px"><button class="red" id="simBtn">Simulate reading</button></div>` : ''}
+  <label class="chk"><input type="checkbox" id="hb" ${S.settings.showHeartbeat ? 'checked' : ''}> Show heartbeats in the log</label>
   <h3 style="margin-top:20px">Log</h3>
-  <div class="log" id="log">${esc(m.log.join('\n')) || 'Tom'}</div>
-  <p class="note">Loggen viser de rå data fra måleren. Den bruges til at finde fejl og til at afkode flere felter senere (fx hældning).</p>`;
+  <div class="log" id="log">${esc(m.log.join('\n')) || 'Empty'}</div>
+  <p class="note">The log shows the raw data from the meter. It is used for troubleshooting and for decoding more fields later (e.g. tilt).</p>`;
   if ($('#con')) $('#con').onclick = () => connectMeter(false);
   if ($('#conAll')) $('#conAll').onclick = () => connectMeter(true);
   if ($('#dis')) $('#dis').onclick = disconnectMeter;
   if ($('#sync')) $('#sync').onclick = sendSync;
   if ($('#simBtn')) $('#simBtn').onclick = simulate;
   $('#ref').onchange = e => { S.settings.meterRef = e.target.value; saveSettings(); };
-  $('#hdef').onchange = e => { const v = parseNum(e.target.value); if (v === null) { toast('Skriv højden i meter, fx 0,10'); return; } S.settings.heightDefault = v; saveSettings(); };
+  $('#hdef').onchange = e => { const v = parseNum(e.target.value); if (v === null) { toast('Enter the height in metres, e.g. 0.10'); return; } S.settings.heightDefault = v; saveSettings(); };
   $('#camOn').onchange = e => { S.settings.camOnReading = e.target.checked; saveSettings(); };
   $('#lcol').onchange = e => { S.settings.laserColor = e.target.value; saveSettings(); };
   $('#ka').onchange = e => { S.settings.keepAlive = e.target.checked; saveSettings(); startKeepAlive(); };
@@ -578,13 +578,13 @@ function renderMeter() {
   $('#hb').onchange = e => { S.settings.showHeartbeat = e.target.checked; saveSettings(); };
 }
 
-/* ---------- foto ved måling (telefonens kamera) ---------- */
+/* ---------- photo on reading (phone camera) ---------- */
 const CAM = { stream: null, box: null, video: null, ov: null, small: null, timer: null, buf: [], err: '', starting: null };
 function camWanted() { return !!S.settings.camOnReading && S.tab === 'item'; }
-/* Finder en laserprik: den mest mættede grønne (eller røde) plet. Kernen i prikken er ofte overstyret hvid,
-   så tyngdepunktet regnes af den farvede kant omkring. Mange lignende pletter (fx grøn maling) = ingen prik. */
+/* Finds a laser dot: the most saturated green (or red) spot. The core of the dot is often blown out to white,
+   so the centroid is computed from the coloured rim around it. Many similar spots (e.g. green paint) = no dot. */
 function findLaserSpot(d, w, h, color) {
-  const red = color === 'roed'; const sc = new Float32Array(w * h); let best = 0, bi = -1;
+  const red = color === 'red'; const sc = new Float32Array(w * h); let best = 0, bi = -1;
   for (let i = 0, p = 0; i < w * h; i++, p += 4) {
     const r = d[p], g = d[p + 1], b = d[p + 2];
     const dom = red ? r - Math.max(g, b) : g - Math.max(r, b);
@@ -612,13 +612,13 @@ async function camStart() {
   if (CAM.stream) return true;
   if (CAM.starting) return CAM.starting;
   CAM.starting = (async () => {
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { CAM.err = 'Kameraet kan ikke bruges i denne browser. Brug Chrome på telefonen og app\'ens egen adresse (https).'; return false; }
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { CAM.err = 'The camera cannot be used in this browser. Use Chrome on the phone and the app\'s own address (https).'; return false; }
     try {
       const st = await navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } } });
       if (!camWanted()) { st.getTracks().forEach(t => t.stop()); return false; }
       if (!CAM.box) {
         CAM.box = document.createElement('div'); CAM.box.className = 'cam';
-        CAM.box.innerHTML = '<video muted playsinline autoplay></video><canvas aria-hidden="true"></canvas><div class="camst" aria-live="polite">Starter kamera …</div>';
+        CAM.box.innerHTML = '<video muted playsinline autoplay></video><canvas aria-hidden="true"></canvas><div class="camst" aria-live="polite">Starting camera …</div>';
         CAM.video = CAM.box.querySelector('video'); CAM.ov = CAM.box.querySelector('canvas');
       }
       CAM.stream = st; CAM.err = ''; CAM.buf = [];
@@ -626,7 +626,7 @@ async function camStart() {
       clearInterval(CAM.timer); CAM.timer = setInterval(camSample, 150);
       return true;
     } catch (e) {
-      CAM.err = e.name === 'NotAllowedError' ? 'App\'en har ikke adgang til kameraet. Tillad kamera for siden i Chrome (låsen ved adressen) og prøv igen.' : 'Kameraet kunne ikke startes: ' + e.message;
+      CAM.err = e.name === 'NotAllowedError' ? 'The app has no access to the camera. Allow the camera for this site in Chrome (the lock next to the address) and try again.' : 'The camera could not be started: ' + e.message;
       return false;
     } finally { CAM.starting = null; }
   })();
@@ -639,7 +639,7 @@ function camStop() {
 }
 function camMount() {
   const slot = $('#camSlot'); if (!slot) return;
-  if (CAM.err) { slot.innerHTML = `<div class="warnbox">${esc(CAM.err)}</div><button class="ghost" id="camRetry">Prøv kameraet igen</button>`; $('#camRetry').onclick = () => { CAM.err = ''; renderItem(); }; return; }
+  if (CAM.err) { slot.innerHTML = `<div class="warnbox">${esc(CAM.err)}</div><button class="ghost" id="camRetry">Retry camera</button>`; $('#camRetry').onclick = () => { CAM.err = ''; renderItem(); }; return; }
   if (CAM.box) { slot.appendChild(CAM.box); if (CAM.stream) CAM.video.play().catch(() => {}); }
   if (!CAM.stream) camStart().then(ok => { if (S.tab !== 'item') return; if (ok) camMount(); else if (CAM.err) renderItem(); });
 }
@@ -650,11 +650,11 @@ function camSample() {
   const o = CAM.ov; if (o.width !== w || o.height !== h) { o.width = w; o.height = h; }
   const og = o.getContext('2d'); og.clearRect(0, 0, w, h);
   if (spot) { og.lineWidth = 2; og.strokeStyle = 'rgba(0,0,0,.6)'; og.beginPath(); og.arc(spot.x * w, spot.y * h, 11, 0, 7); og.stroke(); og.strokeStyle = '#7CFC8A'; og.beginPath(); og.arc(spot.x * w, spot.y * h, 9, 0, 7); og.stroke(); }
-  const st = CAM.box.querySelector('.camst'); const txt = spot ? '<b>Laserprik fundet</b> · foto tages ved næste måling' : 'Ingen laserprik i billedet · foto tages ved næste måling';
+  const st = CAM.box.querySelector('.camst'); const txt = spot ? '<b>Laser dot found</b> · photo taken on next reading' : 'No laser dot in view · photo taken on next reading';
   if (st.innerHTML !== txt) st.innerHTML = txt;
 }
-/* Tager billedet i samme øjeblik som målingen kommer. Prikken søges først i selve billedet;
-   er laseren slukket efter målingen, bruges den bedste prik fra de sidste 2 sekunder før. */
+/* Takes the photo the moment the reading arrives. The dot is searched for in the photo itself first;
+   if the laser switched off after the reading, the best dot from the last 2 seconds before is used. */
 async function camCapture() {
   const v = CAM.video; if (!CAM.stream || !v || !v.videoWidth) return null;
   const vw = v.videoWidth, vh = v.videoHeight, max = S.settings.photoMax || 4096;
@@ -662,10 +662,10 @@ async function camCapture() {
   const c = document.createElement('canvas'); c.width = W; c.height = H; c.getContext('2d').drawImage(v, 0, 0, W, H);
   const t0 = Date.now();
   let { spot } = spotIn(c, W, H);
-  if (spot) spot.from = 'billede';
+  if (spot) spot.from = 'image';
   else {
     const prev = CAM.buf.filter(b => b.spot && b.t > t0 - 2000).sort((a, b) => b.spot.score - a.spot.score)[0];
-    if (prev) spot = Object.assign({}, prev.spot, { from: 'foer_maaling' });
+    if (prev) spot = Object.assign({}, prev.spot, { from: 'before' });
   }
   const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.85)); if (!blob) return null;
   return { blob, W, H, spot };
@@ -673,7 +673,7 @@ async function camCapture() {
 async function addShot(item, spec, rd, shot) {
   const en = entry(item.id, true); const id = uid();
   await dbPut('photos', id, { blob: shot.blob, type: 'image/jpeg' });
-  const ph = { id, taken: nowIso(), caption: `${spec.label}: ${fmtNum(rd.m, 'm')} m`, width: shot.W, height: shot.H, bytes: shot.blob.size, source: 'maaling', meas_key: spec.key };
+  const ph = { id, taken: nowIso(), caption: `${spec.label}: ${fmtNum(rd.m, 'm')} m`, width: shot.W, height: shot.H, bytes: shot.blob.size, source: 'reading', meas_key: spec.key };
   if (shot.spot) ph.spot = shot.spot;
   en.photos.push(ph);
   const m = en.measurements.find(x => x.key === spec.key); if (m) m.photo_id = id;
@@ -681,7 +681,7 @@ async function addShot(item, spec, rd, shot) {
 }
 document.addEventListener('visibilitychange', () => { if (document.hidden) camStop(); else if (camWanted()) renderItem(); });
 
-/* ---------- fotos ---------- */
+/* ---------- photos ---------- */
 async function processPhoto(file) {
   const max = S.settings.photoMax;
   if (!max) return { blob: file, w: 0, h: 0 };
@@ -697,7 +697,7 @@ async function processPhoto(file) {
 }
 async function addPhotos(item, files) {
   if (!files || !files.length) return;
-  toast('Gemmer foto …');
+  toast('Saving photo …');
   const en = entry(item.id, true);
   for (const f of files) {
     const { blob, w, h } = await processPhoto(f);
@@ -707,7 +707,7 @@ async function addPhotos(item, files) {
   }
   if (!en.state) en.state = 'partial';
   en.updated = nowIso(); await saveRes();
-  toast(files.length > 1 ? files.length + ' fotos gemt' : 'Foto gemt');
+  toast(files.length > 1 ? files.length + ' photos saved' : 'Photo saved');
   renderItem();
 }
 async function thumbUrl(id) {
@@ -720,25 +720,25 @@ async function photoSheet(item, id) {
   const en = entry(item.id); const ph = en.photos.find(p => p.id === id); if (!ph) return;
   const sp = ph.spot;
   openSheet(`<div class="phwrap"><img alt="" id="bigImg">${sp ? `<span class="ring" style="left:${sp.x * 100}%;top:${sp.y * 100}%"></span>` : ''}</div>
-  ${ph.source === 'maaling' ? `<p class="note">${sp ? (sp.from === 'billede' ? 'Laserprikken er fundet i billedet og markeret med en ring.' : 'Laserprikken blev fundet lige før målingen og er markeret med en ring.') : 'Taget ved målingen. Laserprikken blev ikke fundet i billedet.'}</p>` : ''}
-  <label class="f" for="cap">Billedtekst</label><input id="cap" value="${esc(ph.caption)}" placeholder="Hvad viser billedet?">
-  <p class="note">${new Date(ph.taken).toLocaleString('da-DK')} · ${ph.width ? ph.width + '×' + ph.height + ' · ' : ''}${Math.round(ph.bytes / 1024)} kB</p>
-  <div class="row"><button class="pri" id="ok">Luk</button><button class="ghost" id="delPh">Slet foto</button></div>`);
+  ${ph.source === 'reading' ? `<p class="note">${sp ? (sp.from === 'image' ? 'The laser dot was found in the image and is marked with a ring.' : 'The laser dot was found just before the reading and is marked with a ring.') : 'Taken at the reading. The laser dot was not found in the image.'}</p>` : ''}
+  <label class="f" for="cap">Caption</label><input id="cap" value="${esc(ph.caption)}" placeholder="What does the photo show?">
+  <p class="note">${new Date(ph.taken).toLocaleString('en-GB')} · ${ph.width ? ph.width + '×' + ph.height + ' · ' : ''}${Math.round(ph.bytes / 1024)} kB</p>
+  <div class="row"><button class="pri" id="ok">Close</button><button class="ghost" id="delPh">Delete photo</button></div>`);
   $('#bigImg').src = await thumbUrl(id);
   $('#ok').onclick = async () => { ph.caption = $('#cap').value; await saveRes(); closeSheet(); renderItem(); };
-  $('#delPh').onclick = () => confirmSheet('Slet dette foto?', async () => {
+  $('#delPh').onclick = () => confirmSheet('Delete this photo?', async () => {
     en.photos = en.photos.filter(p => p.id !== id); await dbDel('photos', id);
     const u = S.thumbs.get(id); if (u) { URL.revokeObjectURL(u); S.thumbs.delete(id); }
     await saveRes(); renderItem();
   });
 }
 
-/* ---------- ark (dialoger) ---------- */
+/* ---------- sheets (dialogs) ---------- */
 function openSheet(html) { $('#sheetIn').innerHTML = html; $('#sheet').classList.add('open'); const f = $('#sheetIn').querySelector('input,select,textarea'); if (f) setTimeout(() => f.focus(), 50); }
 function closeSheet() { $('#sheet').classList.remove('open'); $('#sheetIn').innerHTML = ''; }
 $('#sheet').addEventListener('click', e => { if (e.target.id === 'sheet') closeSheet(); });
 function confirmSheet(q, fn) {
-  openSheet(`<h3>${esc(q)}</h3><div class="row" style="margin-top:14px"><button class="red" id="yes">Ja</button><button class="ghost" id="no">Fortryd</button></div>`);
+  openSheet(`<h3>${esc(q)}</h3><div class="row" style="margin-top:14px"><button class="red" id="yes">Yes</button><button class="ghost" id="no">Cancel</button></div>`);
   $('#yes').onclick = async () => { closeSheet(); await fn(); };
   $('#no').onclick = closeSheet;
 }
@@ -746,54 +746,54 @@ let toastT = null;
 function toast(s) { const t = $('#toast'); t.textContent = s; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2600); }
 
 function addMeasSheet(item) {
-  openSheet(`<h3>Tilføj mål</h3>
-  <label class="f" for="nl">Hvad måles</label><input id="nl" placeholder="fx Højde over dæk">
-  <div class="kv"><div><label class="f" for="nf">Fra</label><input id="nf" placeholder="fx shelterdæk"></div><div><label class="f" for="nt">Til</label><input id="nt" placeholder="fx overside"></div></div>
-  <label class="f" for="nu">Enhed</label><select id="nu">${UNITS.map(u => `<option value="${u}">${u === 'deg' ? 'grader' : u === 'tekst' ? 'tekst' : u}</option>`).join('')}</select>
-  <div class="row" style="margin-top:14px"><button class="pri" id="ok">Tilføj</button><button class="ghost" id="no">Fortryd</button></div>`);
+  openSheet(`<h3>Add measurement</h3>
+  <label class="f" for="nl">What is measured</label><input id="nl" placeholder="e.g. Height above deck">
+  <div class="kv"><div><label class="f" for="nf">From</label><input id="nf" placeholder="e.g. shelter deck"></div><div><label class="f" for="nt">To</label><input id="nt" placeholder="e.g. top side"></div></div>
+  <label class="f" for="nu">Unit</label><select id="nu">${UNITS.map(u => `<option value="${u}">${u === 'deg' ? 'degrees' : u}</option>`).join('')}</select>
+  <div class="row" style="margin-top:14px"><button class="pri" id="ok">Add</button><button class="ghost" id="no">Cancel</button></div>`);
   $('#no').onclick = closeSheet;
   $('#ok').onclick = async () => {
-    const label = $('#nl').value.trim(); if (!label) { toast('Skriv hvad der måles'); return; }
+    const label = $('#nl').value.trim(); if (!label) { toast('Enter what is measured'); return; }
     const en = entry(item.id, true);
     let n = 1; const used = new Set([...(item.measurements || []).map(s => s.key), ...en.measurements.map(m => m.key)]); while (used.has('x' + n)) n++;
     const spec = { key: 'x' + n, label, unit: $('#nu').value, from: $('#nf').value.trim() || undefined, to: $('#nt').value.trim() || undefined };
-    en.measurements.push({ key: spec.key, label, unit: spec.unit, value: '', method: 'laser-manuel', status: pkg().default_status || 'bekræftet', taken: nowIso(), ...(spec.from ? { from: spec.from } : {}), ...(spec.to ? { to: spec.to } : {}) });
-    // et tomt mål gemmes ikke; det holdes som række indtil der kommer en værdi
+    en.measurements.push({ key: spec.key, label, unit: spec.unit, value: '', method: 'laser-manual', status: pkg().default_status || 'confirmed', taken: nowIso(), ...(spec.from ? { from: spec.from } : {}), ...(spec.to ? { to: spec.to } : {}) });
+    // an empty measurement is not saved; it is kept as a row until a value arrives
     closeSheet(); S.armed = isLen(spec.unit) ? spec.key : S.armed; renderItem();
     const inp = view.querySelector(`[data-val="${spec.key}"]`); if (inp) inp.focus();
   };
 }
 function newItemSheet() {
   const p = pkg(); const lf = p.locator_fields || [];
-  openSheet(`<h3>Nyt punkt</h3><label class="f" for="nt">Titel</label><input id="nt" placeholder="Hvad vil du dokumentere?">
-  <label class="f" for="nw">Hvorfor (valgfrit)</label><input id="nw">
+  openSheet(`<h3>New item</h3><label class="f" for="nt">Title</label><input id="nt" placeholder="What do you want to document?">
+  <label class="f" for="nw">Why (optional)</label><input id="nw">
   ${lf.map(f => `<label class="f" for="nl-${f.key}">${esc(f.label)}</label>` + (f.options ? `<select id="nl-${f.key}" data-nl="${f.key}"><option></option>${f.options.map(o => `<option>${esc(o)}</option>`).join('')}</select>` : `<input id="nl-${f.key}" data-nl="${f.key}">`)).join('')}
-  <div class="row" style="margin-top:14px"><button class="pri" id="ok">Opret</button><button class="ghost" id="no">Fortryd</button></div>`);
+  <div class="row" style="margin-top:14px"><button class="pri" id="ok">Create</button><button class="ghost" id="no">Cancel</button></div>`);
   $('#no').onclick = closeSheet;
   $('#ok').onclick = async () => {
-    const title = $('#nt').value.trim(); if (!title) { toast('Giv punktet en titel'); return; }
-    const ids = new Set(allItems().map(i => i.id)); let n = 1; while (ids.has('NY-' + String(n).padStart(3, '0'))) n++;
+    const title = $('#nt').value.trim(); if (!title) { toast('Give the item a title'); return; }
+    const ids = new Set(allItems().map(i => i.id)); let n = 1; while (ids.has('NEW-' + String(n).padStart(3, '0'))) n++;
     const locator = {}; $('#sheetIn').querySelectorAll('[data-nl]').forEach(el => { if (el.value) locator[el.dataset.nl] = el.value; });
-    const item = { id: 'NY-' + String(n).padStart(3, '0'), title, why: $('#nw').value.trim(), state: 'open', locator, measurements: [], new_item: true };
+    const item = { id: 'NEW-' + String(n).padStart(3, '0'), title, why: $('#nw').value.trim(), state: 'open', locator, measurements: [], new_item: true };
     S.res.new_items.push(item); await saveRes(); closeSheet(); openItem(item.id);
   };
 }
 
-/* ---------- pakker ---------- */
+/* ---------- packages ---------- */
 function validPackage(p) {
   return p && p.format === 'survey-package/1' && typeof p.package_id === 'string' && p.object && p.reference && p.reference.origin && Array.isArray(p.items);
 }
 function renderPkgs() {
   const ids = Object.keys(S.pkgs);
-  view.innerHTML = `<h2>Opmålingspakker</h2>
-  <p class="lead">En pakke beskriver ét objekt: nulpunkt, akser og de punkter der skal måles. App'en kender intet andet til objektet, så samme app bruges til alle skibe.</p>
-  <ul class="list-plain" style="margin-top:12px">${ids.map(id => { const p = S.pkgs[id]; const n = p.items.length; return `<li><div class="grow"><b>${esc(p.object.name)}</b><div class="note">${esc(id)} · ${n} punkter${S.builtin[id] ? ' · indbygget' : ' · importeret'}</div></div>
-    ${S.active === id ? '<span class="badge b-done">Aktiv</span>' : `<button class="pri" data-act="${esc(id)}">Brug</button>`}
-    ${S.builtin[id] ? '' : `<button class="ghost" data-rm="${esc(id)}">Fjern</button>`}</li>`; }).join('')}</ul>
-  <div class="row" style="margin-top:14px"><label class="filebtn pri">Importér pakke (.json)<input type="file" accept=".json,application/json" id="imp"></label></div>
-  <p class="note" style="margin-top:14px">App ${APP_VERSION} · data gemmes kun på denne telefon${DB.db ? '' : ' (midlertidigt – lageret er ikke tilgængeligt her)'}. Eksportér efter hver arbejdsgang.</p>`;
+  view.innerHTML = `<h2>Survey packages</h2>
+  <p class="lead">A package describes one object: origin, axes and the items to be measured. The app knows nothing else about the object, so the same app is used for every ship.</p>
+  <ul class="list-plain" style="margin-top:12px">${ids.map(id => { const p = S.pkgs[id]; const n = p.items.length; return `<li><div class="grow"><b>${esc(p.object.name)}</b><div class="note">${esc(id)} · ${n} items${S.builtin[id] ? ' · built-in' : ' · imported'}</div></div>
+    ${S.active === id ? '<span class="badge b-done">Active</span>' : `<button class="pri" data-act="${esc(id)}">Use</button>`}
+    ${S.builtin[id] ? '' : `<button class="ghost" data-rm="${esc(id)}">Remove</button>`}</li>`; }).join('')}</ul>
+  <div class="row" style="margin-top:14px"><label class="filebtn pri">Import package (.json)<input type="file" accept=".json,application/json" id="imp"></label></div>
+  <p class="note" style="margin-top:14px">App ${APP_VERSION} · data is stored only on this phone${DB.db ? '' : ' (temporarily – storage is not available here)'}. Export after every session.</p>`;
   view.querySelectorAll('[data-act]').forEach(b => b.onclick = async () => { await activate(b.dataset.act); setTab('list'); });
-  view.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => confirmSheet('Fjern pakken? Resultaterne bliver liggende og kommer igen, hvis pakken importeres på ny.', async () => {
+  view.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => confirmSheet('Remove the package? The results are kept and come back if the package is imported again.', async () => {
     delete S.pkgs[b.dataset.rm]; await dbDel('packages', b.dataset.rm);
     if (S.active === b.dataset.rm) { S.active = null; S.res = null; }
     renderPkgs();
@@ -802,14 +802,14 @@ function renderPkgs() {
     const f = ev.target.files[0]; if (!f) return;
     try {
       const p = JSON.parse(await f.text());
-      if (!validPackage(p)) { toast('Filen er ikke en opmålingspakke (survey-package/1)'); return; }
+      if (!validPackage(p)) { toast('The file is not a survey package (survey-package/1)'); return; }
       S.pkgs[p.package_id] = p; await dbPut('packages', p.package_id, p);
-      await activate(p.package_id); toast('Pakken er importeret'); setTab('list');
-    } catch (e) { toast('Kunne ikke læse filen: ' + e.message); }
+      await activate(p.package_id); toast('Package imported'); setTab('list');
+    } catch (e) { toast('Could not read the file: ' + e.message); }
   };
 }
 
-/* ---------- eksport ---------- */
+/* ---------- export ---------- */
 function safeName(s) { return String(s).replace(/[^A-Za-z0-9_.-]+/g, '_'); }
 function stamp() { const d = new Date(), z = n => String(n).padStart(2, '0'); return `${d.getFullYear()}${z(d.getMonth() + 1)}${z(d.getDate())}-${z(d.getHours())}${z(d.getMinutes())}`; }
 function buildResult() {
@@ -839,8 +839,8 @@ function buildResult() {
 }
 function csvOf(r) {
   const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"';
-  const lines = ['punkt;mål;fra;til;værdi;enhed;højde_m;metode;status;tidspunkt;foto'];
-  for (const e of r.entries) for (const m of e.measurements) lines.push([e.item_id, m.label, m.from || '', m.to || '', typeof m.value === 'number' ? String(m.value).replace('.', ',') : m.value, m.unit, typeof m.height_m === 'number' ? String(m.height_m).replace('.', ',') : '', m.method, m.status, m.taken, m.photo || ''].map(q).join(';'));
+  const lines = ['item,measurement,from,to,value,unit,height_m,method,status,taken,photo'];
+  for (const e of r.entries) for (const m of e.measurements) lines.push([e.item_id, m.label, m.from || '', m.to || '', m.value, m.unit, typeof m.height_m === 'number' ? m.height_m : '', m.method, m.status, m.taken, m.photo || ''].map(q).join(','));
   return '﻿' + lines.join('\r\n') + '\r\n';
 }
 const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
@@ -870,18 +870,18 @@ async function makeZip(files) {
 async function exportFiles(withPhotos) {
   const p = pkg(); const { result, photoFiles } = buildResult();
   const json = JSON.stringify(result, null, 1);
-  if (!withPhotos) return { blob: new Blob([json], { type: 'application/json' }), name: `${safeName(p.package_id)}_resultat_${stamp()}.json`, result };
-  const files = [{ name: 'resultat.json', data: json }, { name: 'maalinger.csv', data: csvOf(result) },
-    { name: 'LAESMIG.txt', data: `Opmålingsresultat for ${p.object.name} (${p.package_id})\nEksporteret ${new Date().toLocaleString('da-DK')} af app ${APP_VERSION}.\n\nresultat.json  alle punkter, mål og fotooplysninger (format survey-result/1)\nmaalinger.csv  målene som tabel (semikolon, dansk decimalkomma)\nphotos/        fotos navngivet efter punkt-id. Fotos taget ved en måling har målets nøgle og laserprikkens placering (0-1 fra øverste venstre hjørne) i resultat.json\n` }];
+  if (!withPhotos) return { blob: new Blob([json], { type: 'application/json' }), name: `${safeName(p.package_id)}_result_${stamp()}.json`, result };
+  const files = [{ name: 'result.json', data: json }, { name: 'measurements.csv', data: csvOf(result) },
+    { name: 'README.txt', data: `Survey result for ${p.object.name} (${p.package_id})\nExported ${new Date().toLocaleString('en-GB')} by app ${APP_VERSION}.\n\nresult.json        all items, measurements and photo details (format survey-result/1)\nmeasurements.csv   the measurements as a table (comma-separated, decimal point)\nphotos/            photos named by item ID. Photos taken at a reading carry the measurement key and the laser dot position (0-1 from the top-left corner) in result.json\n` }];
   for (const pf of photoFiles) { const rec = await dbGet('photos', pf.id); if (rec) files.push({ name: pf.file, data: rec.blob }); }
-  return { blob: await makeZip(files), name: `${safeName(p.package_id)}_resultat_${stamp()}.zip`, result };
+  return { blob: await makeZip(files), name: `${safeName(p.package_id)}_result_${stamp()}.zip`, result };
 }
 async function deliver(blob, name, how) {
   if (how === 'share') {
     try {
       const file = new File([blob], name, { type: blob.type });
       if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: name }); return true; }
-      toast('Deling understøttes ikke her – gemmer i stedet');
+      toast('Sharing is not supported here – saving instead');
     } catch (e) { if (e.name === 'AbortError') return false; }
   }
   if (S.downloads) {
@@ -890,42 +890,42 @@ async function deliver(blob, name, how) {
   try {
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
     document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); return true;
-  } catch (e) { toast('Kunne ikke gemme filen'); return false; }
+  } catch (e) { toast('Could not save the file'); return false; }
 }
 function renderExport() {
   const p = pkg(); const c = counts(); const { result } = buildResult();
   const photoBytes = Object.values(S.res.entries).reduce((a, e) => a + e.photos.reduce((b, ph) => b + (ph.bytes || 0), 0), 0);
-  view.innerHTML = `<h2>Eksport</h2>
-  <p class="lead">${esc(p.object.name)} · ${result.entries.length} punkter med svar · ${c.meas} mål · ${c.photos} fotos (${(photoBytes / 1048576).toFixed(1)} MB)</p>
-  <label class="f" for="sv">Opmålt af</label><input id="sv" value="${esc(S.settings.surveyor)}" placeholder="Navn eller initialer">
-  <h3 style="margin-top:20px">Kun data</h3>
-  <p class="note">Lille JSON-fil uden fotos. God når nettet er dyrt; fotos kan sendes senere.</p>
-  <div class="row"><button class="pri" data-x="json-share">Del …</button><button class="ghost" data-x="json-save">Gem fil</button><button class="ghost" id="copy">Kopiér</button></div>
-  <h3 style="margin-top:20px">Fuld pakke</h3>
-  <p class="note">ZIP med resultat.json, maalinger.csv og alle fotos.</p>
-  <div class="row"><button class="pri" data-x="zip-share">Del …</button><button class="ghost" data-x="zip-save">Gem fil</button></div>
-  <h3 style="margin-top:20px">Fotostørrelse</h3>
-  <select id="pm"><option value="1600"${S.settings.photoMax === 1600 ? ' selected' : ''}>1600 px (mindst)</option><option value="2048"${S.settings.photoMax === 2048 ? ' selected' : ''}>2048 px (standard)</option><option value="3072"${S.settings.photoMax === 3072 ? ' selected' : ''}>3072 px</option><option value="0"${S.settings.photoMax === 0 ? ' selected' : ''}>Original (største filer)</option></select>
-  <p class="note">Gælder nye fotos. Original beholder kameraets data (fx tidspunkt og kameravinkel), som kan bruges til 3D senere.</p>
-  <h3 style="margin-top:20px">Gendan og nulstil</h3>
-  <div class="row"><label class="filebtn">Gendan fra JSON<input type="file" accept=".json,application/json" id="rest"></label><button class="ghost" id="reset">Nulstil resultater</button></div>
-  <p class="note">Gendan læser mål, notater og status fra en eksporteret JSON-fil (ikke fotos).</p>`;
+  view.innerHTML = `<h2>Export</h2>
+  <p class="lead">${esc(p.object.name)} · ${result.entries.length} items with answers · ${c.meas} measurements · ${c.photos} photos (${(photoBytes / 1048576).toFixed(1)} MB)</p>
+  <label class="f" for="sv">Surveyed by</label><input id="sv" value="${esc(S.settings.surveyor)}" placeholder="Name or initials">
+  <h3 style="margin-top:20px">Data only</h3>
+  <p class="note">Small JSON file without photos. Good when data is expensive; photos can be sent later.</p>
+  <div class="row"><button class="pri" data-x="json-share">Share …</button><button class="ghost" data-x="json-save">Save file</button><button class="ghost" id="copy">Copy</button></div>
+  <h3 style="margin-top:20px">Full package</h3>
+  <p class="note">ZIP with result.json, measurements.csv and all photos.</p>
+  <div class="row"><button class="pri" data-x="zip-share">Share …</button><button class="ghost" data-x="zip-save">Save file</button></div>
+  <h3 style="margin-top:20px">Photo size</h3>
+  <select id="pm"><option value="1600"${S.settings.photoMax === 1600 ? ' selected' : ''}>1600 px (smallest)</option><option value="2048"${S.settings.photoMax === 2048 ? ' selected' : ''}>2048 px (default)</option><option value="3072"${S.settings.photoMax === 3072 ? ' selected' : ''}>3072 px</option><option value="0"${S.settings.photoMax === 0 ? ' selected' : ''}>Original (largest files)</option></select>
+  <p class="note">Applies to new photos. Original keeps the camera data (e.g. time and camera angle), which can be used for 3D later.</p>
+  <h3 style="margin-top:20px">Restore and reset</h3>
+  <div class="row"><label class="filebtn">Restore from JSON<input type="file" accept=".json,application/json" id="rest"></label><button class="ghost" id="reset">Reset results</button></div>
+  <p class="note">Restore reads measurements, notes and status from an exported JSON file (not photos).</p>`;
   $('#sv').onchange = e => { S.settings.surveyor = e.target.value.trim(); saveSettings(); };
   $('#pm').onchange = e => { S.settings.photoMax = Number(e.target.value); saveSettings(); };
   view.querySelectorAll('[data-x]').forEach(b => b.onclick = async () => {
     const [kind, how] = b.dataset.x.split('-');
-    b.disabled = true; try { const f = await exportFiles(kind === 'zip'); const ok = await deliver(f.blob, f.name, how); if (ok) toast('Eksporteret: ' + f.name); } finally { b.disabled = false; }
+    b.disabled = true; try { const f = await exportFiles(kind === 'zip'); const ok = await deliver(f.blob, f.name, how); if (ok) toast('Exported: ' + f.name); } finally { b.disabled = false; }
   });
-  $('#copy').onclick = async () => { const { result: r } = buildResult(); try { await navigator.clipboard.writeText(JSON.stringify(r, null, 1)); toast('Kopieret'); } catch (e) { toast('Kopiering blev afvist'); } };
-  $('#reset').onclick = () => confirmSheet('Slet alle mål, notater og fotos for denne pakke på telefonen?', async () => {
+  $('#copy').onclick = async () => { const { result: r } = buildResult(); try { await navigator.clipboard.writeText(JSON.stringify(r, null, 1)); toast('Copied'); } catch (e) { toast('Copy was refused'); } };
+  $('#reset').onclick = () => confirmSheet('Delete all measurements, notes and photos for this package on the phone?', async () => {
     for (const e of Object.values(S.res.entries)) for (const ph of e.photos) await dbDel('photos', ph.id);
-    S.res = newResult(p); await saveRes(); renderExport(); toast('Nulstillet');
+    S.res = newResult(p); await saveRes(); renderExport(); toast('Results reset');
   });
   $('#rest').onchange = async ev => {
     const f = ev.target.files[0]; if (!f) return;
     try {
       const r = JSON.parse(await f.text());
-      if (r.format !== 'survey-result/1' || r.package_id !== p.package_id) { toast('Filen hører ikke til den aktive pakke'); return; }
+      if (r.format !== 'survey-result/1' || r.package_id !== p.package_id) { toast('The file does not belong to the active package'); return; }
       let n = 0;
       for (const e of r.entries) {
         if (e.new_item && !itemById(e.item_id)) S.res.new_items.push({ id: e.item_id, title: e.title || e.item_id, state: 'open', locator: e.locator || {}, measurements: [], new_item: true });
@@ -934,8 +934,8 @@ function renderExport() {
         for (const m of e.measurements) { en.measurements = en.measurements.filter(x => x.key !== m.key); en.measurements.push(m); }
         n++;
       }
-      await saveRes(); toast(n + ' punkter gendannet'); renderExport();
-    } catch (e) { toast('Kunne ikke læse filen: ' + e.message); }
+      await saveRes(); toast(n + ' items restored'); renderExport();
+    } catch (e) { toast('Could not read the file: ' + e.message); }
   };
 }
 
@@ -946,7 +946,7 @@ $('#chip').onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preven
 setInterval(renderChip, 15000);
 
 (async () => {
-  for (const el of document.querySelectorAll('script[type="application/json"][data-pakke]')) {
+  for (const el of document.querySelectorAll('script[type="application/json"][data-package]')) {
     try { const p = JSON.parse(el.textContent); S.builtin[p.package_id] = p; S.pkgs[p.package_id] = p; } catch (e) {}
   }
   await idbOpen();
