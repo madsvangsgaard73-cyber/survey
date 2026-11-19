@@ -78,6 +78,11 @@ main{padding:16px 0 24px}
 .photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:8px}
 .photos button{padding:0;border:0;aspect-ratio:1;overflow:hidden;background:var(--soft);min-height:0}
 .photos img{width:100%;height:100%;object-fit:cover;display:block}
+.photos button{position:relative}.photos .tag{position:absolute;left:0;right:0;bottom:0;font-size:11px;line-height:1.3;background:rgba(0,0,0,.62);color:#fff;padding:2px 4px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cam{position:relative;margin:10px 0;background:#000;aspect-ratio:16/9;overflow:hidden}
+.cam video,.cam canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cam .camst{position:absolute;left:0;right:0;bottom:0;padding:6px 10px;font-size:13px;color:#fff;background:rgba(0,0,0,.55)}.cam .camst b{color:#7CFC8A}
+.phwrap{position:relative}.phwrap img{display:block;width:100%}.ring{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border:2px solid #7CFC8A;border-radius:50%;box-shadow:0 0 0 2px rgba(0,0,0,.6);pointer-events:none}
 .filebtn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:2px solid var(--ink);font-weight:700;cursor:pointer}
 .filebtn.pri{background:var(--ink);color:var(--bg)}
 .filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer;min-height:0}
@@ -118,7 +123,7 @@ main{padding:16px 0 24px}
 <script type="application/json" data-pakke="HUS-KLD">{"format":"survey-package/1","package_id":"HUS-KLD","version":"4","created":"2026-11-19","description":"Prøveopmåling af huset som 'skib 0', startende i kælderen. Modelværdier er aflæst på byggesagen fra 1954 (tegn. 804/216, maj 1953, mål 1:100). Opmålingen viser, hvad der stemmer, og hvad der er ændret.","object":{"id":"HUS","name":"Huset (skib 0)","kind":"building","model_file":"hus_model.json"},"reference":{"origin":{"id":"CRP","name":"Kælderens nordligste hjørne","description":"Indvendigt hjørne ved gulv i viktualierummet, mellem nordøst- og nordvestvæggen. Bekræftet af ejeren 19-11-2026 (foto med grøn markering). Mærk det fast, fx tape med kryds."},"axes":{"x":"langs nordøstvæggen mod sydøst (mod vejen) – væggen til venstre, når du står i CRP med ryggen mod hjørnet","y":"langs nordvestvæggen mod sydvest – væggen til højre","z":"op fra kældergulvet ved CRP"},"note":"Samme orientering som skibenes system: x 'fremad', y til højre, z op. Huset er 8,40 m langs y og 9,84 m langs x udvendigt; kælderens ydervægge er 31 cm beton (1954)."},"locator_fields":[{"key":"niveau","label":"Niveau","options":["Kælder","Stue","1. sal","Tagetage","Udenfor"]},{"key":"rum","label":"Rum"},{"key":"flade","label":"Væg/flade"}],"group_by":"niveau","statuses":["bekræftet","aflæst","antaget"],"default_status":"bekræftet","items":[{"id":"H-000","title":"Mærk CRP og akserne","why":"Alle andre mål regnes fra dette punkt. Tag foto af hjørnet med mærket, og ét foto langs hver akse. Står der hylder i viktualierummet, så mærk hjørnet så tæt på gulvet som muligt.","locator":{"niveau":"Kælder","rum":"Viktualier"},"photos_wanted":3,"measurements":[]},{"id":"H-001","title":"Viktualierummet (CRP-rummet)","why":"Rummet hvor nulpunktet sidder. x og y er kontrolmålt af ejeren 19-11-2026 og stemmer med tegningen inden for ±2 cm. Mangler: diagonalen og et foto af hjørnet.","locator":{"niveau":"Kælder","rum":"Viktualier"},"measurements":[{"key":"lx","label":"Langs x (nordøstvæggen)","unit":"m","from":"CRP","to":"skillevæg mod gang","model_value":2.49,"model_status":"bekræftet","model_source":"Kælderplan 1954; kontrolmålt 19-11-2026 (±2 cm)","height_m":0.1},{"key":"ly","label":"Langs y (nordvestvæggen)","unit":"m","from":"CRP","to":"skillevæg mod vaskerum","model_value":3.46,"model_status":"bekræftet","model_source":"Kælderplan 1954; kontrolmålt 19-11-2026 (±2 cm)","height_m":0.1},{"key":"diag","label":"Diagonal fra CRP","unit":"m","model_value":4.263,"model_status":"antaget","model_source":"Beregnet af 2,49 og 3,46","height_m":0.1}],"state":"partial"},{"id":"H-002","title":"Vaske- og tørrerummet","why":"Kælderens største rum (vest for viktualierummet).","locator":{"niveau":"Kælder","rum":"Vaske- og tørrerum"},"photos_wanted":1,"measurements":[{"key":"lx","label":"Længde i x-retningen","unit":"m","model_value":5.53,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"ly","label":"Længde i y-retningen","unit":"m","model_value":4.2,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":6.944,"model_status":"antaget","model_source":"Beregnet","height_m":0.1}]},{"id":"H-003","title":"Fyrrummet","why":"Rummet i syd/vest-hjørnet mod vejen.","locator":{"niveau":"Kælder","rum":"Fyrrum"},"photos_wanted":1,"measurements":[{"key":"lx","label":"Længde i x-retningen","unit":"m","model_value":3.57,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"ly","label":"Længde i y-retningen","unit":"m","model_value":4.66,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":5.87,"model_status":"antaget","model_source":"Beregnet","height_m":0.1}]},{"id":"H-004","title":"Disponibelt rum","why":"Rummet i østhjørnet mod vejen.","locator":{"niveau":"Kælder","rum":"Disp."},"photos_wanted":1,"measurements":[{"key":"lx","label":"Længde i x-retningen","unit":"m","model_value":3.57,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"ly","label":"Længde i y-retningen","unit":"m","model_value":3.0,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":4.663,"model_status":"antaget","model_source":"Beregnet","height_m":0.1}]},{"id":"H-005","title":"Loftshøjde","why":"Svarer til dækshøjde på skibet. Mål ved CRP og midt i vaskerummet; mål til loftet, ikke til bjælker eller rør.","locator":{"niveau":"Kælder"},"measurements":[{"key":"h_crp","label":"Gulv til loft ved CRP","unit":"m","model_value":2.2,"model_status":"aflæst","model_source":"Snit 1954"},{"key":"h_vask","label":"Gulv til loft midt i vaskerummet","unit":"m","model_value":2.2,"model_status":"aflæst","model_source":"Snit 1954"}]},{"id":"H-006","title":"Kældertrapperne","why":"Svarer til lejdere mellem dæk. Den indvendige trappe går op til stuen; den udvendige ligger ved nordøstvæggen.","locator":{"niveau":"Kælder","rum":"Gang"},"photos_wanted":2,"measurements":[{"key":"ind_bredde","label":"Indvendig trappe: bredde","unit":"m"},{"key":"ind_trin","label":"Indvendig trappe: antal trin","unit":"stk"},{"key":"etage","label":"Kældergulv til stuegulv (etagehøjde)","unit":"m"},{"key":"udv_bredde","label":"Udvendig trappe: bredde","unit":"m"},{"key":"udv_trin","label":"Udvendig trappe: antal trin","unit":"stk"}]},{"id":"H-007","title":"Kældervinduer","why":"Øvelse i at stedfæste åbninger i en væg – som vinduer i et dækshus. Tegningen har ét vindue mod nordvest (vaskerum) og to lyskasser mod sydøst. Opret ét punkt pr. vindue med afstand fra nærmeste hjørne.","locator":{"niveau":"Kælder"},"photos_wanted":1,"measurements":[{"key":"fra_hjoerne","label":"Fra nærmeste hjørne til vinduets kant","unit":"m"},{"key":"bredde","label":"Lysningens bredde","unit":"m"},{"key":"hoejde","label":"Lysningens højde","unit":"m","model_value":0.5,"model_status":"aflæst","model_source":"Snit 1954"},{"key":"brystning","label":"Gulv til underkant lysning","unit":"m","model_value":1.7,"model_status":"aflæst","model_source":"Snit 1954"},{"key":"vaeg","label":"Vægtykkelse i lysningen","unit":"mm","model_value":310,"model_status":"aflæst","model_source":"Beskrivelse 1954: 31 cm beton"}]},{"id":"H-008","title":"Kontrol af måleren mod båndmål","why":"Samme tre afstande med laser og med båndmål. Viser målerens reference (bagkant/forkant) og om vi kan stole på den.","locator":{"niveau":"Kælder"},"measurements":[{"key":"k1_laser","label":"Kort afstand (ca. 1 m) – laser","unit":"m"},{"key":"k1_baand","label":"Kort afstand – båndmål","unit":"m"},{"key":"k2_laser","label":"Mellem afstand (ca. 3 m) – laser","unit":"m"},{"key":"k2_baand","label":"Mellem afstand – båndmål","unit":"m"},{"key":"k3_laser","label":"Lang afstand (vaskerummets diagonal) – laser","unit":"m"},{"key":"k3_baand","label":"Lang afstand – båndmål","unit":"m"}]},{"id":"H-009","title":"Fotoserie til 3D-forsøg","why":"Vælg en genstand med kendte mål (fx en reol). Tag 20–40 overlappende fotos hele vejen rundt, og mål én kant med laser som målestok.","locator":{"niveau":"Kælder"},"photos_wanted":20,"measurements":[{"key":"skala","label":"Kendt kant (målestok)","unit":"m"}]}],"tolerance_mm":20}</script>
 <script>
 {
-const APP_VERSION = '0.1.3';
+const APP_VERSION = '0.2.0';
 const BOSCH = { svc: '02a6c0d0-0451-4000-b000-fb3210111989', chr: '02a6c0d1-0451-4000-b000-fb3210111989', sync: [0xC0, 0x55, 0x02, 0x01, 0x00, 0x1A] };
 const METHODS = [['laser-ble','Laser (Bluetooth)'],['laser-manuel','Laser, aflæst'],['baand','Båndmål'],['tommestok','Tommestok'],['skoen','Skøn'],['andet','Andet']];
 const UNITS = ['m','mm','deg','stk','tekst'];
@@ -187,7 +192,7 @@ const S = {
   builtin: {}, pkgs: {}, active: null, res: null,
   tab: 'list', itemId: null, filter: 'aabne', q: '', armed: null,
   last: null,
-  settings: { surveyor: '', meterRef: 'bagkant', photoMax: 2048, keepAlive: true, showHeartbeat: false, heightDefault: '' },
+  settings: { surveyor: '', meterRef: 'bagkant', photoMax: 2048, keepAlive: true, showHeartbeat: false, heightDefault: '', camOnReading: false, laserColor: 'groen' },
   meter: { state: 'off', dev: null, chr: null, want: false, sim: false, log: [], timer: null, bound: new WeakSet() },
   thumbs: new Map(), downloads: null
 };
@@ -218,7 +223,7 @@ async function activate(id) {
 
 /* ---------- visning ---------- */
 const view = $('#view');
-function setTab(t) { S.tab = t; if (t !== 'item') S.armed = null; render(); window.scrollTo(0, 0); }
+function setTab(t) { S.tab = t; if (t !== 'item') { S.armed = null; camStop(); } render(); window.scrollTo(0, 0); }
 function render() {
   const p = pkg();
   $('#hdrObj').textContent = p ? p.object.name + ' · ' + p.package_id : 'Ingen pakke valgt';
@@ -320,7 +325,9 @@ function renderItem() {
       ? `<select id="loc-${f.key}" data-loc="${f.key}"><option value=""></option>${f.options.map(o => `<option${loc[f.key] === o ? ' selected' : ''}>${esc(o)}</option>`).join('')}</select>`
       : `<input id="loc-${f.key}" data-loc="${f.key}" value="${esc(loc[f.key] || '')}">`) + `</div>`).join('') + `</div>`;
   }
-  html += `<h3 style="margin-top:22px">Mål</h3>`;
+  html += `<h3 style="margin-top:22px">Mål</h3>
+  <label class="chk"><input type="checkbox" id="camTg" ${S.settings.camOnReading ? 'checked' : ''}> Foto med telefonens kamera ved hver måling</label>`;
+  if (S.settings.camOnReading) html += `<div id="camSlot"></div>`;
   const rows = rowsFor(item);
   if (!rows.length) html += `<p class="note">Ingen planlagte mål. Tilføj de mål du tager.</p>`;
   for (const r of rows) {
@@ -353,7 +360,7 @@ function renderItem() {
   html += `<h3 style="margin-top:22px">Fotos ${want ? `<span class="note">(${e.photos.length}/${want})</span>` : ''}</h3>
   <div class="row" style="margin-top:6px"><label class="filebtn pri">Tag foto<input type="file" accept="image/*" capture="environment" id="camIn"></label>
   <label class="filebtn">Fra galleri<input type="file" accept="image/*" multiple id="galIn"></label></div>
-  <div class="photos" id="ph">${e.photos.map(ph => `<button data-ph="${esc(ph.id)}" aria-label="Foto"><img alt="${esc(ph.caption || 'Foto')}" data-src="${esc(ph.id)}"></button>`).join('')}</div>
+  <div class="photos" id="ph">${e.photos.map(ph => `<button data-ph="${esc(ph.id)}" aria-label="Foto"><img alt="${esc(ph.caption || 'Foto')}" data-src="${esc(ph.id)}">${ph.source === 'maaling' ? `<span class="tag">${ph.spot ? '◎ ' : ''}${esc(ph.caption || '')}</span>` : ''}</button>`).join('')}</div>
   <h3 style="margin-top:22px">Notat</h3>
   <textarea id="note" placeholder="Hvad så du? Brug telefonens mikrofon på tastaturet til at diktere.">${esc(e.note || '')}</textarea>
   <h3 style="margin-top:22px">Punktets status</h3>
@@ -361,6 +368,8 @@ function renderItem() {
   <div class="navrow"><button class="ghost" id="prev" ${prev ? '' : 'disabled'}>‹ ${prev ? esc(prev.id) : ''}</button><button class="ghost" id="next" ${next ? '' : 'disabled'}>${next ? esc(next.id) : ''} ›</button></div>`;
   view.innerHTML = html;
   loadThumbs();
+  camMount();
+  $('#camTg').onchange = async ev => { S.settings.camOnReading = ev.target.checked; await saveSettings(); if (!ev.target.checked) camStop(); CAM.err = ''; renderItem(); };
   $('#back').onclick = () => setTab('list');
   $('#prev').onclick = () => prev && openItem(prev.id);
   $('#next').onclick = () => next && openItem(next.id);
@@ -407,7 +416,7 @@ async function setMeas(item, spec, patch) {
     if (typeof hd === 'number') m.height_m = hd;
     en.measurements.push(m);
   }
-  if ('value' in patch && patch.value !== m.value) m.taken = nowIso();
+  if ('value' in patch && patch.value !== m.value) { m.taken = nowIso(); delete m.photo_id; }
   for (const [k, v] of Object.entries(patch)) { if (v === undefined) delete m[k]; else m[k] = v; }
   if (m.value === '') en.measurements = en.measurements.filter(x => x !== m);
   if (!en.state && en.measurements.length) en.state = 'partial';
@@ -427,7 +436,9 @@ async function onReading(rd) {
     const item = itemById(S.itemId); const rows = rowsFor(item);
     const r = rows.find(x => x.spec.key === S.armed);
     if (r) {
+      const shot = CAM.stream ? await camCapture() : null;
       await applyReading(item, r.spec, rd);
+      if (shot) await addShot(item, r.spec, rd, shot);
       const i = rows.indexOf(r);
       const nx = rows.slice(i + 1).concat(rows.slice(0, i)).find(x => isLen(x.spec.unit) && !hasVal(x.m) && x.spec.key !== r.spec.key);
       S.armed = nx ? nx.spec.key : null;
@@ -539,6 +550,11 @@ function renderMeter() {
   <label class="f" for="hdef">Målehøjde over gulv/dæk for nye mål (m)</label>
   <input id="hdef" inputmode="decimal" placeholder="fx 0,10" value="${esc(S.settings.heightDefault === '' || S.settings.heightDefault === undefined ? '' : fmtNum(Number(S.settings.heightDefault), 'm'))}">
   <p class="note">Bruges når pakken ikke angiver en højde. Kan rettes ved hvert mål. Tomt felt = højden noteres ikke (vises med gul ramme).</p>
+  <h3 style="margin-top:20px">Foto ved måling</h3>
+  <label class="chk"><input type="checkbox" id="camOn" ${S.settings.camOnReading ? 'checked' : ''}> Tag foto med telefonens kamera, når en måling kommer ind</label>
+  <label class="f" for="lcol">Laserfarve (bruges til at finde prikken i billedet)</label>
+  <select id="lcol"><option value="groen"${S.settings.laserColor !== 'roed' ? ' selected' : ''}>Grøn (GLM 50-27 CG)</option><option value="roed"${S.settings.laserColor === 'roed' ? ' selected' : ''}>Rød</option></select>
+  <p class="note">Hold telefonen fast sammen med måleren, så kameraet ser det, laseren rammer. Prikken findes bedst indendørs og på kort afstand. Fotoet gemmes også, når prikken ikke findes.</p>
   <label class="f" for="ref">Målerens referencekant (som den er stillet på måleren)</label>
   <select id="ref">${REFS.map(([k, l]) => `<option value="${k}"${S.settings.meterRef === k ? ' selected' : ''}>${l}</option>`).join('')}</select>
   <label class="chk"><input type="checkbox" id="ka" ${S.settings.keepAlive ? 'checked' : ''}> Hold måleren vågen (sender sync hvert 4. minut)</label>
@@ -555,10 +571,115 @@ function renderMeter() {
   if ($('#simBtn')) $('#simBtn').onclick = simulate;
   $('#ref').onchange = e => { S.settings.meterRef = e.target.value; saveSettings(); };
   $('#hdef').onchange = e => { const v = parseNum(e.target.value); if (v === null) { toast('Skriv højden i meter, fx 0,10'); return; } S.settings.heightDefault = v; saveSettings(); };
+  $('#camOn').onchange = e => { S.settings.camOnReading = e.target.checked; saveSettings(); };
+  $('#lcol').onchange = e => { S.settings.laserColor = e.target.value; saveSettings(); };
   $('#ka').onchange = e => { S.settings.keepAlive = e.target.checked; saveSettings(); startKeepAlive(); };
   $('#sim').onchange = e => { S.meter.sim = e.target.checked; dbPut('kv', 'sim', S.meter.sim); renderMeter(); renderChip(); };
   $('#hb').onchange = e => { S.settings.showHeartbeat = e.target.checked; saveSettings(); };
 }
+
+/* ---------- foto ved måling (telefonens kamera) ---------- */
+const CAM = { stream: null, box: null, video: null, ov: null, small: null, timer: null, buf: [], err: '', starting: null };
+function camWanted() { return !!S.settings.camOnReading && S.tab === 'item'; }
+/* Finder en laserprik: den mest mættede grønne (eller røde) plet. Kernen i prikken er ofte overstyret hvid,
+   så tyngdepunktet regnes af den farvede kant omkring. Mange lignende pletter (fx grøn maling) = ingen prik. */
+function findLaserSpot(d, w, h, color) {
+  const red = color === 'roed'; const sc = new Float32Array(w * h); let best = 0, bi = -1;
+  for (let i = 0, p = 0; i < w * h; i++, p += 4) {
+    const r = d[p], g = d[p + 1], b = d[p + 2];
+    const dom = red ? r - Math.max(g, b) : g - Math.max(r, b);
+    const v = dom > 0 ? dom * (red ? r : g) / 255 : 0;
+    sc[i] = v; if (v > best) { best = v; bi = i; }
+  }
+  if (best < 40) return null;
+  const bx = bi % w, by = (bi / w) | 0, R = Math.max(6, Math.round(w / 40)), lim = best * 0.5;
+  let sx = 0, sy = 0, sw = 0, inside = 0, outside = 0;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const v = sc[y * w + x]; if (v < lim) continue;
+    if (Math.abs(x - bx) <= R && Math.abs(y - by) <= R) { sx += x * v; sy += y * v; sw += v; inside++; } else outside++;
+  }
+  if (outside > inside * 2 + 4) return null;
+  return { x: Math.round((sx / sw + 0.5) / w * 10000) / 10000, y: Math.round((sy / sw + 0.5) / h * 10000) / 10000, score: Math.round(best) };
+}
+function spotIn(src, W, H) {
+  const w = 320, h = Math.max(1, Math.round(320 * H / W));
+  const c = CAM.small || (CAM.small = document.createElement('canvas'));
+  if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+  const g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(src, 0, 0, w, h);
+  return { spot: findLaserSpot(g.getImageData(0, 0, w, h).data, w, h, S.settings.laserColor), w, h };
+}
+async function camStart() {
+  if (CAM.stream) return true;
+  if (CAM.starting) return CAM.starting;
+  CAM.starting = (async () => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { CAM.err = 'Kameraet kan ikke bruges i denne browser. Brug Chrome på telefonen og app\'ens egen adresse (https).'; return false; }
+    try {
+      const st = await navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } } });
+      if (!camWanted()) { st.getTracks().forEach(t => t.stop()); return false; }
+      if (!CAM.box) {
+        CAM.box = document.createElement('div'); CAM.box.className = 'cam';
+        CAM.box.innerHTML = '<video muted playsinline autoplay></video><canvas aria-hidden="true"></canvas><div class="camst" aria-live="polite">Starter kamera …</div>';
+        CAM.video = CAM.box.querySelector('video'); CAM.ov = CAM.box.querySelector('canvas');
+      }
+      CAM.stream = st; CAM.err = ''; CAM.buf = [];
+      CAM.video.srcObject = st; await CAM.video.play().catch(() => {});
+      clearInterval(CAM.timer); CAM.timer = setInterval(camSample, 150);
+      return true;
+    } catch (e) {
+      CAM.err = e.name === 'NotAllowedError' ? 'App\'en har ikke adgang til kameraet. Tillad kamera for siden i Chrome (låsen ved adressen) og prøv igen.' : 'Kameraet kunne ikke startes: ' + e.message;
+      return false;
+    } finally { CAM.starting = null; }
+  })();
+  return CAM.starting;
+}
+function camStop() {
+  clearInterval(CAM.timer); CAM.timer = null; CAM.buf = [];
+  if (CAM.stream) CAM.stream.getTracks().forEach(t => t.stop());
+  CAM.stream = null; if (CAM.video) CAM.video.srcObject = null; if (CAM.box) CAM.box.remove();
+}
+function camMount() {
+  const slot = $('#camSlot'); if (!slot) return;
+  if (CAM.err) { slot.innerHTML = `<div class="warnbox">${esc(CAM.err)}</div><button class="ghost" id="camRetry">Prøv kameraet igen</button>`; $('#camRetry').onclick = () => { CAM.err = ''; renderItem(); }; return; }
+  if (CAM.box) { slot.appendChild(CAM.box); if (CAM.stream) CAM.video.play().catch(() => {}); }
+  if (!CAM.stream) camStart().then(ok => { if (S.tab !== 'item') return; if (ok) camMount(); else if (CAM.err) renderItem(); });
+}
+function camSample() {
+  const v = CAM.video; if (!CAM.stream || !v || !v.videoWidth) return;
+  const { spot, w, h } = spotIn(v, v.videoWidth, v.videoHeight);
+  const t = Date.now(); CAM.buf.push({ t, spot }); while (CAM.buf.length && CAM.buf[0].t < t - 2500) CAM.buf.shift();
+  const o = CAM.ov; if (o.width !== w || o.height !== h) { o.width = w; o.height = h; }
+  const og = o.getContext('2d'); og.clearRect(0, 0, w, h);
+  if (spot) { og.lineWidth = 2; og.strokeStyle = 'rgba(0,0,0,.6)'; og.beginPath(); og.arc(spot.x * w, spot.y * h, 11, 0, 7); og.stroke(); og.strokeStyle = '#7CFC8A'; og.beginPath(); og.arc(spot.x * w, spot.y * h, 9, 0, 7); og.stroke(); }
+  const st = CAM.box.querySelector('.camst'); const txt = spot ? '<b>Laserprik fundet</b> · foto tages ved næste måling' : 'Ingen laserprik i billedet · foto tages ved næste måling';
+  if (st.innerHTML !== txt) st.innerHTML = txt;
+}
+/* Tager billedet i samme øjeblik som målingen kommer. Prikken søges først i selve billedet;
+   er laseren slukket efter målingen, bruges den bedste prik fra de sidste 2 sekunder før. */
+async function camCapture() {
+  const v = CAM.video; if (!CAM.stream || !v || !v.videoWidth) return null;
+  const vw = v.videoWidth, vh = v.videoHeight, max = S.settings.photoMax || 4096;
+  const k = Math.min(1, max / Math.max(vw, vh)), W = Math.round(vw * k), H = Math.round(vh * k);
+  const c = document.createElement('canvas'); c.width = W; c.height = H; c.getContext('2d').drawImage(v, 0, 0, W, H);
+  const t0 = Date.now();
+  let { spot } = spotIn(c, W, H);
+  if (spot) spot.from = 'billede';
+  else {
+    const prev = CAM.buf.filter(b => b.spot && b.t > t0 - 2000).sort((a, b) => b.spot.score - a.spot.score)[0];
+    if (prev) spot = Object.assign({}, prev.spot, { from: 'foer_maaling' });
+  }
+  const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.85)); if (!blob) return null;
+  return { blob, W, H, spot };
+}
+async function addShot(item, spec, rd, shot) {
+  const en = entry(item.id, true); const id = uid();
+  await dbPut('photos', id, { blob: shot.blob, type: 'image/jpeg' });
+  const ph = { id, taken: nowIso(), caption: `${spec.label}: ${fmtNum(rd.m, 'm')} m`, width: shot.W, height: shot.H, bytes: shot.blob.size, source: 'maaling', meas_key: spec.key };
+  if (shot.spot) ph.spot = shot.spot;
+  en.photos.push(ph);
+  const m = en.measurements.find(x => x.key === spec.key); if (m) m.photo_id = id;
+  en.updated = nowIso(); await saveRes();
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden) camStop(); else if (camWanted()) renderItem(); });
 
 /* ---------- fotos ---------- */
 async function processPhoto(file) {
@@ -597,7 +718,10 @@ async function thumbUrl(id) {
 async function loadThumbs() { for (const img of view.querySelectorAll('img[data-src]')) img.src = await thumbUrl(img.dataset.src); }
 async function photoSheet(item, id) {
   const en = entry(item.id); const ph = en.photos.find(p => p.id === id); if (!ph) return;
-  openSheet(`<img alt="" id="bigImg"><label class="f" for="cap">Billedtekst</label><input id="cap" value="${esc(ph.caption)}" placeholder="Hvad viser billedet?">
+  const sp = ph.spot;
+  openSheet(`<div class="phwrap"><img alt="" id="bigImg">${sp ? `<span class="ring" style="left:${sp.x * 100}%;top:${sp.y * 100}%"></span>` : ''}</div>
+  ${ph.source === 'maaling' ? `<p class="note">${sp ? (sp.from === 'billede' ? 'Laserprikken er fundet i billedet og markeret med en ring.' : 'Laserprikken blev fundet lige før målingen og er markeret med en ring.') : 'Taget ved målingen. Laserprikken blev ikke fundet i billedet.'}</p>` : ''}
+  <label class="f" for="cap">Billedtekst</label><input id="cap" value="${esc(ph.caption)}" placeholder="Hvad viser billedet?">
   <p class="note">${new Date(ph.taken).toLocaleString('da-DK')} · ${ph.width ? ph.width + '×' + ph.height + ' · ' : ''}${Math.round(ph.bytes / 1024)} kB</p>
   <div class="row"><button class="pri" id="ok">Luk</button><button class="ghost" id="delPh">Slet foto</button></div>`);
   $('#bigImg').src = await thumbUrl(id);
@@ -693,10 +817,12 @@ function buildResult() {
   for (const item of allItems()) {
     const e = S.res.entries[item.id] || (item.new_item ? { state: null, note: '', locator: {}, measurements: [], photos: [] } : null);
     if (!e) continue;
+    const fileOf = {};
+    const photos = e.photos.map((ph, i) => { const file = `photos/${safeName(item.id)}_${String(i + 1).padStart(2, '0')}.jpg`; photoFiles.push({ id: ph.id, file }); fileOf[ph.id] = file;
+      const o = { file, taken: ph.taken }; if (ph.caption) o.caption = ph.caption; if (ph.width) { o.width = ph.width; o.height = ph.height; } if (ph.bytes) o.bytes = ph.bytes; if (ph.original_name) o.original_name = ph.original_name;
+      if (ph.source) o.source = ph.source; if (ph.meas_key) o.measurement_key = ph.meas_key; if (ph.spot) o.laser_spot = { x: ph.spot.x, y: ph.spot.y, score: ph.spot.score, from: ph.spot.from }; return o; });
     const ms = e.measurements.filter(hasVal).map(m => { const o = { key: m.key, label: m.label, value: m.value, unit: m.unit, method: m.method, status: m.status, taken: m.taken };
-      for (const k of ['from', 'to', 'meter_reference', 'raw', 'note']) if (m[k]) o[k] = m[k]; if (typeof m.height_m === 'number') o.height_m = m.height_m; return o; });
-    const photos = e.photos.map((ph, i) => { const file = `photos/${safeName(item.id)}_${String(i + 1).padStart(2, '0')}.jpg`; photoFiles.push({ id: ph.id, file });
-      const o = { file, taken: ph.taken }; if (ph.caption) o.caption = ph.caption; if (ph.width) { o.width = ph.width; o.height = ph.height; } if (ph.bytes) o.bytes = ph.bytes; if (ph.original_name) o.original_name = ph.original_name; return o; });
+      for (const k of ['from', 'to', 'meter_reference', 'raw', 'note']) if (m[k]) o[k] = m[k]; if (typeof m.height_m === 'number') o.height_m = m.height_m; if (m.photo_id && fileOf[m.photo_id]) o.photo = fileOf[m.photo_id]; return o; });
     const loc = Object.fromEntries(Object.entries(e.locator || {}).filter(([, v]) => v));
     if (!ms.length && !photos.length && !e.note && !e.state && !Object.keys(loc).length && !item.new_item) continue;
     const o = { item_id: item.id, state: e.state || item.state || 'open', measurements: ms, photos };
@@ -713,8 +839,8 @@ function buildResult() {
 }
 function csvOf(r) {
   const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"';
-  const lines = ['punkt;mål;fra;til;værdi;enhed;højde_m;metode;status;tidspunkt'];
-  for (const e of r.entries) for (const m of e.measurements) lines.push([e.item_id, m.label, m.from || '', m.to || '', typeof m.value === 'number' ? String(m.value).replace('.', ',') : m.value, m.unit, typeof m.height_m === 'number' ? String(m.height_m).replace('.', ',') : '', m.method, m.status, m.taken].map(q).join(';'));
+  const lines = ['punkt;mål;fra;til;værdi;enhed;højde_m;metode;status;tidspunkt;foto'];
+  for (const e of r.entries) for (const m of e.measurements) lines.push([e.item_id, m.label, m.from || '', m.to || '', typeof m.value === 'number' ? String(m.value).replace('.', ',') : m.value, m.unit, typeof m.height_m === 'number' ? String(m.height_m).replace('.', ',') : '', m.method, m.status, m.taken, m.photo || ''].map(q).join(';'));
   return '﻿' + lines.join('\r\n') + '\r\n';
 }
 const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
@@ -746,7 +872,7 @@ async function exportFiles(withPhotos) {
   const json = JSON.stringify(result, null, 1);
   if (!withPhotos) return { blob: new Blob([json], { type: 'application/json' }), name: `${safeName(p.package_id)}_resultat_${stamp()}.json`, result };
   const files = [{ name: 'resultat.json', data: json }, { name: 'maalinger.csv', data: csvOf(result) },
-    { name: 'LAESMIG.txt', data: `Opmålingsresultat for ${p.object.name} (${p.package_id})\nEksporteret ${new Date().toLocaleString('da-DK')} af app ${APP_VERSION}.\n\nresultat.json  alle punkter, mål og fotooplysninger (format survey-result/1)\nmaalinger.csv  målene som tabel (semikolon, dansk decimalkomma)\nphotos/        fotos navngivet efter punkt-id\n` }];
+    { name: 'LAESMIG.txt', data: `Opmålingsresultat for ${p.object.name} (${p.package_id})\nEksporteret ${new Date().toLocaleString('da-DK')} af app ${APP_VERSION}.\n\nresultat.json  alle punkter, mål og fotooplysninger (format survey-result/1)\nmaalinger.csv  målene som tabel (semikolon, dansk decimalkomma)\nphotos/        fotos navngivet efter punkt-id. Fotos taget ved en måling har målets nøgle og laserprikkens placering (0-1 fra øverste venstre hjørne) i resultat.json\n` }];
   for (const pf of photoFiles) { const rec = await dbGet('photos', pf.id); if (rec) files.push({ name: pf.file, data: rec.blob }); }
   return { blob: await makeZip(files), name: `${safeName(p.package_id)}_resultat_${stamp()}.zip`, result };
 }
@@ -835,7 +961,7 @@ setInterval(renderChip, 15000);
   try { if (window.claude && window.claude.use) S.downloads = await window.claude.use('downloads'); } catch (e) {}
 })();
 
-window.__opm = { parseBosch, makeZip, crc32, buildResult, simulate, S };
+window.__opm = { parseBosch, makeZip, crc32, buildResult, simulate, findLaserSpot, CAM, S };
 }
 </script>
 </body>
