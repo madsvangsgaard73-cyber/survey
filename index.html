@@ -82,10 +82,6 @@ main{padding:16px 0 24px}
 .cam{position:relative;margin:10px 0;background:#000;aspect-ratio:16/9;overflow:hidden}
 .cam video,.cam canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cam .camst{position:absolute;left:0;right:0;bottom:0;padding:6px 10px;font-size:13px;color:#fff;background:rgba(0,0,0,.55)}.cam .camst b{color:#7CFC8A}
-.ft{position:relative;margin:10px 0;background:#000;aspect-ratio:16/9;overflow:hidden}.ft video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ft .x{position:absolute;left:50%;top:50%;width:36px;height:36px;margin:-18px 0 0 -18px;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 2px rgba(0,0,0,.5);pointer-events:none}
-.ft .rd{position:absolute;left:0;right:0;bottom:0;padding:6px 10px;color:#fff;background:rgba(0,0,0,.6);font-size:13px}.ft .rd b{font-size:26px;font-stretch:112%;display:block;font-variant-numeric:tabular-nums}
-table.ftl{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums;margin-top:8px}table.ftl td,table.ftl th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:right}table.ftl th{color:var(--mut);font-weight:700}
 .phwrap{position:relative}.phwrap img{display:block;width:100%}.ring{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border:2px solid #7CFC8A;border-radius:50%;box-shadow:0 0 0 2px rgba(0,0,0,.6);pointer-events:none}
 .filebtn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:2px solid var(--ink);font-weight:700;cursor:pointer}
 .filebtn.pri{background:var(--ink);color:var(--bg)}
@@ -127,7 +123,7 @@ table.ftl{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeri
 <script type="application/json" data-pakke="HUS-KLD">{"format":"survey-package/1","package_id":"HUS-KLD","version":"4","created":"2026-11-19","description":"Prøveopmåling af huset som 'skib 0', startende i kælderen. Modelværdier er aflæst på byggesagen fra 1954 (tegn. 804/216, maj 1953, mål 1:100). Opmålingen viser, hvad der stemmer, og hvad der er ændret.","object":{"id":"HUS","name":"Huset (skib 0)","kind":"building","model_file":"hus_model.json"},"reference":{"origin":{"id":"CRP","name":"Kælderens nordligste hjørne","description":"Indvendigt hjørne ved gulv i viktualierummet, mellem nordøst- og nordvestvæggen. Bekræftet af ejeren 19-11-2026 (foto med grøn markering). Mærk det fast, fx tape med kryds."},"axes":{"x":"langs nordøstvæggen mod sydøst (mod vejen) – væggen til venstre, når du står i CRP med ryggen mod hjørnet","y":"langs nordvestvæggen mod sydvest – væggen til højre","z":"op fra kældergulvet ved CRP"},"note":"Samme orientering som skibenes system: x 'fremad', y til højre, z op. Huset er 8,40 m langs y og 9,84 m langs x udvendigt; kælderens ydervægge er 31 cm beton (1954)."},"locator_fields":[{"key":"niveau","label":"Niveau","options":["Kælder","Stue","1. sal","Tagetage","Udenfor"]},{"key":"rum","label":"Rum"},{"key":"flade","label":"Væg/flade"}],"group_by":"niveau","statuses":["bekræftet","aflæst","antaget"],"default_status":"bekræftet","items":[{"id":"H-000","title":"Mærk CRP og akserne","why":"Alle andre mål regnes fra dette punkt. Tag foto af hjørnet med mærket, og ét foto langs hver akse. Står der hylder i viktualierummet, så mærk hjørnet så tæt på gulvet som muligt.","locator":{"niveau":"Kælder","rum":"Viktualier"},"photos_wanted":3,"measurements":[]},{"id":"H-001","title":"Viktualierummet (CRP-rummet)","why":"Rummet hvor nulpunktet sidder. x og y er kontrolmålt af ejeren 19-11-2026 og stemmer med tegningen inden for ±2 cm. Mangler: diagonalen og et foto af hjørnet.","locator":{"niveau":"Kælder","rum":"Viktualier"},"measurements":[{"key":"lx","label":"Langs x (nordøstvæggen)","unit":"m","from":"CRP","to":"skillevæg mod gang","model_value":2.49,"model_status":"bekræftet","model_source":"Kælderplan 1954; kontrolmålt 19-11-2026 (±2 cm)","height_m":0.1},{"key":"ly","label":"Langs y (nordvestvæggen)","unit":"m","from":"CRP","to":"skillevæg mod vaskerum","model_value":3.46,"model_status":"bekræftet","model_source":"Kælderplan 1954; kontrolmålt 19-11-2026 (±2 cm)","height_m":0.1},{"key":"diag","label":"Diagonal fra CRP","unit":"m","model_value":4.263,"model_status":"antaget","model_source":"Beregnet af 2,49 og 3,46","height_m":0.1}],"state":"partial"},{"id":"H-002","title":"Vaske- og tørrerummet","why":"Kælderens største rum (vest for viktualierummet).","locator":{"niveau":"Kælder","rum":"Vaske- og tørrerum"},"photos_wanted":1,"measurements":[{"key":"lx","label":"Længde i x-retningen","unit":"m","model_value":5.53,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"ly","label":"Længde i y-retningen","unit":"m","model_value":4.2,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":6.944,"model_status":"antaget","model_source":"Beregnet","height_m":0.1}]},{"id":"H-003","title":"Fyrrummet","why":"Rummet i syd/vest-hjørnet mod vejen.","locator":{"niveau":"Kælder","rum":"Fyrrum"},"photos_wanted":1,"measurements":[{"key":"lx","label":"Længde i x-retningen","unit":"m","model_value":3.57,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"ly","label":"Længde i y-retningen","unit":"m","model_value":4.66,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":5.87,"model_status":"antaget","model_source":"Beregnet","height_m":0.1}]},{"id":"H-004","title":"Disponibelt rum","why":"Rummet i østhjørnet mod vejen.","locator":{"niveau":"Kælder","rum":"Disp."},"photos_wanted":1,"measurements":[{"key":"lx","label":"Længde i x-retningen","unit":"m","model_value":3.57,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"ly","label":"Længde i y-retningen","unit":"m","model_value":3.0,"model_status":"aflæst","model_source":"Kælderplan 1954","height_m":0.1},{"key":"diag","label":"Diagonal","unit":"m","model_value":4.663,"model_status":"antaget","model_source":"Beregnet","height_m":0.1}]},{"id":"H-005","title":"Loftshøjde","why":"Svarer til dækshøjde på skibet. Mål ved CRP og midt i vaskerummet; mål til loftet, ikke til bjælker eller rør.","locator":{"niveau":"Kælder"},"measurements":[{"key":"h_crp","label":"Gulv til loft ved CRP","unit":"m","model_value":2.2,"model_status":"aflæst","model_source":"Snit 1954"},{"key":"h_vask","label":"Gulv til loft midt i vaskerummet","unit":"m","model_value":2.2,"model_status":"aflæst","model_source":"Snit 1954"}]},{"id":"H-006","title":"Kældertrapperne","why":"Svarer til lejdere mellem dæk. Den indvendige trappe går op til stuen; den udvendige ligger ved nordøstvæggen.","locator":{"niveau":"Kælder","rum":"Gang"},"photos_wanted":2,"measurements":[{"key":"ind_bredde","label":"Indvendig trappe: bredde","unit":"m"},{"key":"ind_trin","label":"Indvendig trappe: antal trin","unit":"stk"},{"key":"etage","label":"Kældergulv til stuegulv (etagehøjde)","unit":"m"},{"key":"udv_bredde","label":"Udvendig trappe: bredde","unit":"m"},{"key":"udv_trin","label":"Udvendig trappe: antal trin","unit":"stk"}]},{"id":"H-007","title":"Kældervinduer","why":"Øvelse i at stedfæste åbninger i en væg – som vinduer i et dækshus. Tegningen har ét vindue mod nordvest (vaskerum) og to lyskasser mod sydøst. Opret ét punkt pr. vindue med afstand fra nærmeste hjørne.","locator":{"niveau":"Kælder"},"photos_wanted":1,"measurements":[{"key":"fra_hjoerne","label":"Fra nærmeste hjørne til vinduets kant","unit":"m"},{"key":"bredde","label":"Lysningens bredde","unit":"m"},{"key":"hoejde","label":"Lysningens højde","unit":"m","model_value":0.5,"model_status":"aflæst","model_source":"Snit 1954"},{"key":"brystning","label":"Gulv til underkant lysning","unit":"m","model_value":1.7,"model_status":"aflæst","model_source":"Snit 1954"},{"key":"vaeg","label":"Vægtykkelse i lysningen","unit":"mm","model_value":310,"model_status":"aflæst","model_source":"Beskrivelse 1954: 31 cm beton"}]},{"id":"H-008","title":"Kontrol af måleren mod båndmål","why":"Samme tre afstande med laser og med båndmål. Viser målerens reference (bagkant/forkant) og om vi kan stole på den.","locator":{"niveau":"Kælder"},"measurements":[{"key":"k1_laser","label":"Kort afstand (ca. 1 m) – laser","unit":"m"},{"key":"k1_baand","label":"Kort afstand – båndmål","unit":"m"},{"key":"k2_laser","label":"Mellem afstand (ca. 3 m) – laser","unit":"m"},{"key":"k2_baand","label":"Mellem afstand – båndmål","unit":"m"},{"key":"k3_laser","label":"Lang afstand (vaskerummets diagonal) – laser","unit":"m"},{"key":"k3_baand","label":"Lang afstand – båndmål","unit":"m"}]},{"id":"H-009","title":"Fotoserie til 3D-forsøg","why":"Vælg en genstand med kendte mål (fx en reol). Tag 20–40 overlappende fotos hele vejen rundt, og mål én kant med laser som målestok.","locator":{"niveau":"Kælder"},"photos_wanted":20,"measurements":[{"key":"skala","label":"Kendt kant (målestok)","unit":"m"}]}],"tolerance_mm":20}</script>
 <script>
 {
-const APP_VERSION = '0.2.1';
+const APP_VERSION = '0.2.2';
 const BOSCH = { svc: '02a6c0d0-0451-4000-b000-fb3210111989', chr: '02a6c0d1-0451-4000-b000-fb3210111989', sync: [0xC0, 0x55, 0x02, 0x01, 0x00, 0x1A] };
 const METHODS = [['laser-ble','Laser (Bluetooth)'],['laser-manuel','Laser, aflæst'],['baand','Båndmål'],['tommestok','Tommestok'],['skoen','Skøn'],['andet','Andet']];
 const UNITS = ['m','mm','deg','stk','tekst'];
@@ -227,7 +223,7 @@ async function activate(id) {
 
 /* ---------- visning ---------- */
 const view = $('#view');
-function setTab(t) { S.tab = t; if (t !== 'item') { S.armed = null; camStop(); } if (t !== 'meter') ftStop(); render(); window.scrollTo(0, 0); }
+function setTab(t) { S.tab = t; if (t !== 'item') { S.armed = null; camStop(); } render(); window.scrollTo(0, 0); }
 function render() {
   const p = pkg();
   $('#hdrObj').textContent = p ? p.object.name + ' · ' + p.package_id : 'Ingen pakke valgt';
@@ -435,7 +431,6 @@ async function applyReading(item, spec, rd) {
 /* ---------- laserdata ind ---------- */
 async function onReading(rd) {
   S.last = rd; renderChip();
-  if (FT.stream) ftLog(rd.m);
   try { navigator.vibrate && navigator.vibrate(40); } catch (e) {}
   if (S.tab === 'item' && S.armed) {
     const item = itemById(S.itemId); const rows = rowsFor(item);
@@ -560,12 +555,6 @@ function renderMeter() {
   <label class="f" for="lcol">Laserfarve (bruges til at finde prikken i billedet)</label>
   <select id="lcol"><option value="groen"${S.settings.laserColor !== 'roed' ? ' selected' : ''}>Grøn (GLM 50-27 CG)</option><option value="roed"${S.settings.laserColor === 'roed' ? ' selected' : ''}>Rød</option></select>
   <p class="note">Hold telefonen fast sammen med måleren, så kameraet ser det, laseren rammer. Prikken findes bedst indendørs og på kort afstand. Fotoet gemmes også, når prikken ikke findes.</p>
-  <h3 style="margin-top:20px">Forsøg: telefonens fokusafstand</h3>
-  <p class="note">Viser, hvor langt væk kameraet har stillet skarpt (sigt med ringen midt i billedet). Kun til forsøg; tallet bruges ikke i målingerne. Hold telefonen sammen med måleren: hver lasermåling gemmer en linje med begge tal. Uden måler: sigt mod noget, du har målt med båndmål, og tryk Gem aflæsning.</p>
-  <div id="ftSlot"></div>
-  ${FT.err ? `<div class="warnbox">${esc(FT.err)}</div>` : ''}
-  <div class="row">${FT.stream ? `<button class="pri" id="ftSave">Gem aflæsning</button><button class="ghost" id="ftStop">Stop</button>` : `<button id="ftGo">Start fokustest</button>`}${FT.log.length ? `<button class="ghost" id="ftCopy">Kopiér</button><button class="ghost" id="ftClr">Ryd</button>` : ''}</div>
-  ${FT.log.length ? `<table class="ftl"><tr><th>Tid</th><th>Fokus</th><th>Laser</th><th>Afvigelse</th></tr>${FT.log.slice().reverse().map(r => `<tr><td>${new Date(r.t).toLocaleTimeString('da-DK')}</td><td>${r.fd === null ? '–' : esc(ftFmt(r.fd))}</td><td>${r.laser === null ? '–' : esc(fmtNum(r.laser, 'm')) + ' m'}</td><td>${r.fd !== null && r.laser !== null && Number.isFinite(r.fd) ? esc(fmtNum(Math.round((r.fd - r.laser) / r.laser * 1000) / 10, 'deg')) + ' %' : ''}</td></tr>`).join('')}</table>` : ''}
   <label class="f" for="ref">Målerens referencekant (som den er stillet på måleren)</label>
   <select id="ref">${REFS.map(([k, l]) => `<option value="${k}"${S.settings.meterRef === k ? ' selected' : ''}>${l}</option>`).join('')}</select>
   <label class="chk"><input type="checkbox" id="ka" ${S.settings.keepAlive ? 'checked' : ''}> Hold måleren vågen (sender sync hvert 4. minut)</label>
@@ -582,65 +571,11 @@ function renderMeter() {
   if ($('#simBtn')) $('#simBtn').onclick = simulate;
   $('#ref').onchange = e => { S.settings.meterRef = e.target.value; saveSettings(); };
   $('#hdef').onchange = e => { const v = parseNum(e.target.value); if (v === null) { toast('Skriv højden i meter, fx 0,10'); return; } S.settings.heightDefault = v; saveSettings(); };
-  ftMount();
-  if ($('#ftGo')) $('#ftGo').onclick = ftStart;
-  if ($('#ftStop')) $('#ftStop').onclick = () => { ftStop(); renderMeter(); };
-  if ($('#ftSave')) $('#ftSave').onclick = () => ftLog(S.last && Date.now() - S.last.t < 15000 ? S.last.m : null);
-  if ($('#ftClr')) $('#ftClr').onclick = () => { FT.log = []; renderMeter(); };
-  if ($('#ftCopy')) $('#ftCopy').onclick = async () => { try { await navigator.clipboard.writeText(ftText()); toast('Kopieret – sæt det ind i chatten'); } catch (e) { toast('Kopiering blev afvist'); } };
   $('#camOn').onchange = e => { S.settings.camOnReading = e.target.checked; saveSettings(); };
   $('#lcol').onchange = e => { S.settings.laserColor = e.target.value; saveSettings(); };
   $('#ka').onchange = e => { S.settings.keepAlive = e.target.checked; saveSettings(); startKeepAlive(); };
   $('#sim').onchange = e => { S.meter.sim = e.target.checked; dbPut('kv', 'sim', S.meter.sim); renderMeter(); renderChip(); };
   $('#hb').onchange = e => { S.settings.showHeartbeat = e.target.checked; saveSettings(); };
-}
-
-/* ---------- forsøg: telefonens fokusafstand ---------- */
-const FT = { stream: null, track: null, box: null, timer: null, cur: null, log: [], err: '', seen: null, caps: null };
-function ftFmt(fd) { return fd === undefined || fd === null ? '–' : Number.isFinite(fd) ? fmtNum(Math.round(fd * 1000) / 1000, 'm') + ' m' : '∞'; }
-async function ftStart() {
-  FT.err = '';
-  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { FT.err = 'Kameraet kan ikke bruges i denne browser.'; renderMeter(); return; }
-  try {
-    const st = await navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } } });
-    if (S.tab !== 'meter') { st.getTracks().forEach(t => t.stop()); return; }
-    FT.stream = st; FT.track = st.getVideoTracks()[0]; FT.seen = null;
-    try { await FT.track.applyConstraints({ advanced: [{ focusMode: 'continuous' }] }); } catch (e) {}
-    FT.caps = FT.track.getCapabilities ? FT.track.getCapabilities() : {};
-    if (!FT.box) {
-      FT.box = document.createElement('div'); FT.box.className = 'ft';
-      FT.box.innerHTML = '<video muted playsinline autoplay></video><span class="x"></span><div class="rd" aria-live="off"><b>–</b><span></span></div>';
-      FT.box.querySelector('video').onclick = ev => { const r = ev.target.getBoundingClientRect(); const x = (ev.clientX - r.left) / r.width, y = (ev.clientY - r.top) / r.height; FT.track && FT.track.applyConstraints({ advanced: [{ pointsOfInterest: [{ x, y }] }] }).catch(() => {}); };
-    }
-    const v = FT.box.querySelector('video'); v.srcObject = st; v.play().catch(() => {});
-    clearInterval(FT.timer); FT.timer = setInterval(ftRead, 250);
-  } catch (e) { FT.err = e.name === 'NotAllowedError' ? 'App\'en har ikke adgang til kameraet. Tillad kamera for siden i Chrome og prøv igen.' : 'Kameraet kunne ikke startes: ' + e.message; }
-  renderMeter();
-}
-function ftStop() { clearInterval(FT.timer); FT.timer = null; if (FT.stream) FT.stream.getTracks().forEach(t => t.stop()); FT.stream = null; FT.track = null; if (FT.box) FT.box.remove(); }
-function ftMount() { const slot = $('#ftSlot'); if (slot && FT.box && FT.stream) slot.appendChild(FT.box); }
-function ftRead() {
-  if (!FT.track || !FT.box) return;
-  const s = FT.track.getSettings(), c = FT.caps || {};
-  const fd = typeof s.focusDistance === 'number' ? s.focusDistance : null;
-  FT.cur = { fd, mode: s.focusMode || '' };
-  if (fd !== null && Number.isFinite(fd)) FT.seen = FT.seen ? [Math.min(FT.seen[0], fd), Math.max(FT.seen[1], fd)] : [fd, fd];
-  const big = FT.box.querySelector('.rd b'), small = FT.box.querySelector('.rd span');
-  if (fd === null) { big.textContent = 'Ingen fokusafstand'; small.textContent = c.focusDistance ? 'Telefonen oplyser området, men ikke den aktuelle afstand' : 'Chrome får ikke fokusafstanden fra denne telefon'; return; }
-  big.textContent = ftFmt(fd);
-  const range = c.focusDistance ? `område ${ftFmt(c.focusDistance.min)}–${ftFmt(c.focusDistance.max)}` : 'område ukendt';
-  small.textContent = `${s.focusMode || 'fokus ?'} · ${range}${FT.seen ? ' · set ' + ftFmt(FT.seen[0]) + '–' + ftFmt(FT.seen[1]) : ''}`;
-}
-function ftLog(laser) {
-  if (!FT.stream) return;
-  ftRead();
-  FT.log.push({ t: Date.now(), fd: FT.cur ? FT.cur.fd : null, laser: laser ?? null });
-  if (S.tab === 'meter') renderMeter();
-}
-function ftText() {
-  const c = FT.caps || {};
-  const head = `Fokustest ${new Date().toLocaleString('da-DK')} · ${navigator.userAgent}\nfocusDistance-område: ${c.focusDistance ? JSON.stringify(c.focusDistance) : 'ikke oplyst'} · fokustilstande: ${(c.focusMode || []).join(', ') || 'ikke oplyst'}\n`;
-  return head + 'tid;fokus_m;laser_m\n' + FT.log.map(r => [new Date(r.t).toLocaleTimeString('da-DK'), r.fd === null ? '' : String(r.fd).replace('.', ','), r.laser === null ? '' : String(r.laser).replace('.', ',')].join(';')).join('\n');
 }
 
 /* ---------- foto ved måling (telefonens kamera) ---------- */
@@ -744,7 +679,7 @@ async function addShot(item, spec, rd, shot) {
   const m = en.measurements.find(x => x.key === spec.key); if (m) m.photo_id = id;
   en.updated = nowIso(); await saveRes();
 }
-document.addEventListener('visibilitychange', () => { if (document.hidden) { camStop(); if (FT.stream) { ftStop(); if (S.tab === 'meter') renderMeter(); } } else if (camWanted()) renderItem(); });
+document.addEventListener('visibilitychange', () => { if (document.hidden) camStop(); else if (camWanted()) renderItem(); });
 
 /* ---------- fotos ---------- */
 async function processPhoto(file) {
@@ -1026,7 +961,7 @@ setInterval(renderChip, 15000);
   try { if (window.claude && window.claude.use) S.downloads = await window.claude.use('downloads'); } catch (e) {}
 })();
 
-window.__opm = { parseBosch, makeZip, crc32, buildResult, simulate, findLaserSpot, CAM, FT, S };
+window.__opm = { parseBosch, makeZip, crc32, buildResult, simulate, findLaserSpot, CAM, S };
 }
 </script>
 </body>
